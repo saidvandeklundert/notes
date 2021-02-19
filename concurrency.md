@@ -149,6 +149,146 @@ if __name__ == '__main__':
 
 # Multiprocessing
 
+Instead of starting _threads_, multiprocessing starts new _processes_.
+
+Multiple threads that belong to 1 process are subject to the GIL. For IO-bound operations, this is fine. For CPU-bound operations, this is not good because you cannot utilize multiple cores.
+
+With multiprocessing, each process is running in it's own Python intepreter which is subject to it's own GIL.
+
+
+
+```python
+# On windows, this needs to run under main
+import concurrent.futures
+from concurrent.futures import ProcessPoolExecutor
+import threading
+import time
+from os import getpid
+
+def io_bound_function(parameter):
+    """
+    Simulates an IO-bound function using time.sleep(3).
+    """
+    print(f"io_bound_function called with argument {parameter} using PID {getpid()}")
+    time.sleep(3)
+    print(f"io_bound_function with argument {parameter} using PID {getpid()} ended")
+    return parameter
+
+
+def example_process_pool():
+    executor = ProcessPoolExecutor(max_workers=3)
+    task1 = executor.submit(io_bound_function, ('a'))
+    task2 = executor.submit(io_bound_function, ('b'))
+    task3 = executor.submit(io_bound_function, ('c'))
+```
+The above `example_process_pool()` outputs the following (on Linux):
+
+```
+>>> example_process_pool()    
+>>> io_bound_function called with argument a using PID 10873
+io_bound_function called with argument b using PID 10875
+io_bound_function called with argument c using PID 10874
+io_bound_function with argument a using PID 10873 ended
+io_bound_function with argument c using PID 10874 ended
+io_bound_function with argument b using PID 10875 ended
+```
+
+```python
+# On windows, this needs to run under main
+from concurrent.futures import ProcessPoolExecutor
+import time
+from os import getpid
+
+def io_bound_function(parameter):
+    """
+    Simulates an IO-bound function using time.sleep(3).
+    """
+    print(f"io_bound_function called with argument {parameter} using PID {getpid()}")
+    time.sleep(3)
+    print(f"io_bound_function with argument {parameter} using PID {getpid()} ended")
+    return parameter
+
+
+def example_process_pool():
+    ppe = ProcessPoolExecutor(max_workers=5)
+    futures = []
+    for i in range(1,11):
+        futures.append(ppe.submit(io_bound_function, i))
+    print([future.result() for future in futures])        
+    return futures
+
+if __name__ == '__main__':
+    futures = example_process_pool()
+    for item in futures:
+        print(item.result())
+```
+
+The above outputs the following:
+
+```
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+
+We can also use the context manager:
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+import time
+from os import getpid
+
+def io_bound_function(parameter_1, parameter_2):
+    """
+    Simulates an IO-bound function using time.sleep(3).
+    """
+    print(f"io_bound_function called with arguments {parameter_1, parameter_2} using PID {getpid()}")
+    time.sleep(3)
+    print(f"io_bound_function with arguments {parameter_1, parameter_2} using PID {getpid()} ended")
+    return parameter_1, parameter_2
+
+def example_process_pool_simple():    
+    with ProcessPoolExecutor(max_workers=10) as executor:              
+        executor.submit(io_bound_function, 'a', 'a')
+        executor.submit(io_bound_function, 'b', 'b')
+        executor.submit(io_bound_function, 'c', 'c')
+
+def example_process_pool_args(): 
+    arguments = [('a', 'b'), ('c', 'd'), ('e', 'f'), ]   
+    with ProcessPoolExecutor(max_workers=10) as executor:              
+        for arg in arguments:
+            executor.submit(io_bound_function, *arg)
+
+def example_process_pool_args_unpacked(): 
+    arguments = [
+            {'parameter_1' : 1, 'parameter_2' : 2},
+            {'parameter_1' : 3, 'parameter_2' : 4} 
+        ]        
+    futures = []  
+    with ProcessPoolExecutor(max_workers=10) as executor:              
+        for arg in arguments:
+            futures.append(
+                executor.submit(io_bound_function, **arg)
+                )
+    return futures        
+
+if __name__ == '__main__':
+    example_process_pool_simple()
+    example_process_pool_args()
+    futures = example_process_pool_args_unpacked()
+    for item in futures:
+        print(item.result())
+```
+
+
 # asyncio uses cooperative multitasking
 
 
