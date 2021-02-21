@@ -21,6 +21,7 @@ y = 0, [ 1, 2,], 'sad', 1.9
 from collections import namedtuple
 Router = namedtuple('router', ['name', 'role', 'ipv4', 'os']) 
 spine01 = Router('spine01', 'spine', '192.168.1.1', 'eos')
+
 # Object can be accessed by index and by name:
 >>> [ x for x in spine01]
 ['spine01', 'spine', '192.168.1.1', 'eos']
@@ -28,4 +29,23 @@ spine01 = Router('spine01', 'spine', '192.168.1.1', 'eos')
 'eos'
 >>> spine01.ipv4
 '192.168.1.1'
+
+# iterate tuple:
+t = tuple('tuple')
+for i in t: print(i)
+
+# Repeat tuple
+t * 3
+>>> ('t', 'u', 'p', 'l', 'e', 't', 'u', 'p', 'l', 'e', 't', 'u', 'p', 'l', 'e')
+# Concatenate tuple:
+t + t
+>>> ('t', 'u', 'p', 'l', 'e', 't', 'u', 'p', 'l', 'e')
+
+# several sequence operations:
+len(t)
+start = 1; stop = 3 ; step = 1 
+t[start:stop:step]
+>>> ('u', 'p')
+sorted(t) # returns a list
+t.count('u')
 ```
