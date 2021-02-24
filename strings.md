@@ -105,8 +105,6 @@ Multine strings.
 'router----'
 >>> string.center(10, '-')
 '--router--'
-
-
 ```
 
 Escape characters:
@@ -117,3 +115,5 @@ Escape characters:
 "\n"             # newline
 "\\"              # Backslash
 ```
+
+String slicing examples are found [here](https://github.com/saidvandeklundert/python/blob/main/lists.md#list-and-string-slicing-examples).

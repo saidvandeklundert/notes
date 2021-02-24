@@ -174,3 +174,7 @@ list_in_reverse =  x[::-1]          # [10, 9, 8, 7, 7, 6, 5, 4, 3, 2, 1]
 
 x[start:end:step] 			   # list slicing syntax
 ```
+
+Notes:
+- the step is applied to the slice
+- the lower bound is inclusive and the upper bound is non-inclusive
