@@ -159,17 +159,18 @@ c r
 d s
 ```
 
-List slicing example:
+## List and string slicing examples:
+
 ```python
 x = [ 1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10 ]
 
-First_Two = x[:2]                   # [ 1, 2,]
-Four_to_Ten = x[3:]                 # [ 4, 5, 6, 7, 7, 8, 9, 10 ]
-Two_to_Five = x[1:5]                # [ 2, 3, 4, 5]
-Last_Three = x[-3:]                 # [ 8, 9, 10]
-No_First_and_Last = x[1:-1]         # [ 2, 3, 4, 5, 6, 7, 7, 8, 9]
-Copy_of_Entire_List = x[:]          # [ 1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10 ]
-
+first_two = x[:2]                   # [ 1, 2,]
+four_to_last = x[3:]                # [ 4, 5, 6, 7, 7, 8, 9, 10 ]
+two_to_five = x[1:5]                # [ 2, 3, 4, 5]
+last_three = x[-3:]                 # [ 8, 9, 10]
+skip_first_and_last = x[1:-1]       # [ 2, 3, 4, 5, 6, 7, 7, 8, 9]
+copy_of_complete_list = x[:]        # [ 1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10 ]
+list_in_reverse =  x[::-1]          # [10, 9, 8, 7, 7, 6, 5, 4, 3, 2, 1]
 
 x[start:end:step] 			   # list slicing syntax
 ```
