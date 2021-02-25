@@ -118,6 +118,13 @@ y = list(reversed([1, 2]))
 x = [None] * 1000
 
 # List comprehension
+
+values = [ expression 
+           for item in collection
+           if condition
+           ]
+
+
 devices = ['S1', 'S2', 'R1', 'R2',]
 routers = [device for device in devices if 'R' in device]
 >>> routers
