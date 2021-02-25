@@ -9,6 +9,7 @@ Repo used as summary and as a lazydog to copy-paste from.
 - [lists](https://github.com/saidvandeklundert/python/blob/main/lists.md)
 - [tuples](https://github.com/saidvandeklundert/python/blob/main/tuples.md)
 - [dictionaries](https://github.com/saidvandeklundert/python/blob/main/dictionaries.md)
+- [operators and booleans](https://github.com/saidvandeklundert/python/blob/main/operators_and_booleans.md)
 - [functions](https://github.com/saidvandeklundert/python/blob/main/functions.md)
 
 
