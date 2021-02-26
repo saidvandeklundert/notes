@@ -8,6 +8,8 @@ When a function is called, the caller stops untill the function is finished and 
 
 Variables assigned outside functions are global variables. Variables in a function are local variables. When the function returns, the local scope variables are destroyed/forgotten.
 
+**LEGB** rule: Local, Enclosing functions, Global and Built-in. Exceptions are comprehension variables and variables local to an exception clause.
+
 When functions are passed mutable objects (lists and dicts for instance), in place operations live on after the function is completed:
 
 ```python

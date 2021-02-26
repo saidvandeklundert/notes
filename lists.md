@@ -164,6 +164,12 @@ a p
 b q
 c r
 d s
+
+# Convert something to a single list without looping:
+x = [ 'a', 'b', ['c', 'd'], ['e', 'f'], [],]
+import itertools 
+list(itertools.chain.from_iterable(x))
+>>> ['a', 'b', 'c', 'd', 'e', 'f']
 ```
 
 ## List and string slicing examples:
