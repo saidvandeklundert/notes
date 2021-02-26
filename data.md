@@ -88,3 +88,21 @@ Mutable object examples:
 | Frozenset          | set       | no            |
 | bytearray          | sequence  | yes           |
 
+### Assigning values
+
+```python
+a = 'a'
+b = a
+```
+In the above, both variables now reference the same object. The variable 'b' does nto reference variable 'a'. Variables cannot be linked together in Python.
+
+
+### Callable types:
+
+- user defined functions
+- built-in functions (example is `len()`)
+- built-in methods (`dict.get()`)
+- methods defined in a class
+- classes
+- class instances
+- generator functions; functions or methods that use the yield keyword. 
