@@ -73,3 +73,12 @@ is # compares the identity
 | -------------- |:---------------------------------------:|
 | x ^ y          |	Bitwise XOR, set symmetric difference      |
 | x & y          |	Bitwise AND, set intersection       |
+
+
+| Augmented assignment | Equivalanent |
+| -------------------- |:------------:|
+| x = x + 1            | x += 1       |
+| x = x – 1            | x -= 1       |
+| x = x * 1            | x *= 1       |
+| x = x / 1            | x /= 1       |
+| x = x % 1            | x %= 1       |

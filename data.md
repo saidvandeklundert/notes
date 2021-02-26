@@ -68,3 +68,23 @@ Mutable object examples:
 - dictionaries
 - sets
 
+### Object flexibility:
+- Lists, dictionaries and tuples can hold any object
+- Sets can contain immutable objects
+- Lists, dictionaries, and tuples can be nested
+- Lists, dictionaries and sets can grow and shrink
+
+### Object categories
+
+| Object type        | Category  | Mutable yes/no|
+| ------------------ |:---------:|:-------------:|
+| Numbers            | numeric   | no            |
+| Strings            | sequence  | no            |
+| Lists              | sequence  | yes           |
+| Dictionaries       | mapping   | yes           |
+| Tuples             | sequence  | no            |
+| Files              | extension | n/a           |
+| Sets               | set       | yes           |
+| Frozenset          | set       | no            |
+| bytearray          | sequence  | yes           |
+
