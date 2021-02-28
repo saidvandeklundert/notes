@@ -17,5 +17,5 @@ Repo used as summary and as a lazydog to copy-paste from.
 
 - [functions](https://github.com/saidvandeklundert/python/blob/main/functions.md)
 - [decorators](https://github.com/saidvandeklundert/python/blob/main/decorators.md)
-
+- [classes](https://github.com/saidvandeklundert/python/blob/main/classes.md)
 - [debugging](https://github.com/saidvandeklundert/python/blob/main/debugging.md)
