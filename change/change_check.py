@@ -33,17 +33,24 @@ class NodeTester:
 
         return diff_d
 
-    def bgp_test(self,):
-        """Execute the bgp_v4_test check"""
+    def ez_test(self,):
+        """Execute the ex check"""
         test_pre_d, test_post_d = self._load_test(test_name='bgp')
         diff = self._dict_diff(test_pre_d, test_post_d)
-        
+        bgp_result = {}
+
         if len(diff.keys()) == 0:
             print('BGP PASSED')
+            bgp_result['result'] = 'PASSED'
         else:
             print('BGP FAILED')
+            bgp_result['result'] = 'FAILED'
+            for peer, state in diff.items():
+                print(f"{peer} changed from {state[0]} to {state[1]}")
+                bgp_result[peer] = f"{peer} changed from {state[0]} to {state[1]}"
+                
 
-        return test_pre_d, test_post_d
+        return bgp_result
 
 
 
@@ -51,6 +58,6 @@ class NodeTester:
 if __name__ == "__main__":
     # debug purposes
     x = NodeTester(hostname = 'router1', path ='C:\\dev-container\\python\\change')
-    x.bgp_test()
-    d1, d2 = x.bgp_test()
+    x.ez_test()
+    d1, d2 = x.ez_test()
     x._dict_diff(d1, d2)
