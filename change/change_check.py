@@ -28,16 +28,21 @@ class NodeTester:
         # record change in keys: 
         for key in all_keys_set:
             if test_pre_d.get(key) != test_post_d.get(key):
-                diff_d[key] = [ { 'pre' : test_pre_d.get(key) }, {'post' : test_post_d.get(key)}]
-        # record change in nested dictionary:
+                diff_d[key] = [ test_pre_d.get(key), test_post_d.get(key)]
+        
 
         return diff_d
 
     def bgp_test(self,):
         """Execute the bgp_v4_test check"""
         test_pre_d, test_post_d = self._load_test(test_name='bgp')
-        print(test_pre_d.keys())
-        print(test_post_d.keys())
+        diff = self._dict_diff(test_pre_d, test_post_d)
+        
+        if len(diff.keys()) == 0:
+            print('BGP PASSED')
+        else:
+            print('BGP FAILED')
+
         return test_pre_d, test_post_d
 
 
