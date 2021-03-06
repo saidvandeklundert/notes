@@ -64,5 +64,11 @@
         "peer-description": "",
         "peer-state": "established",
         "peer-uptime": 6177600
-    }
+    },
+    "192.168.28.2": {
+        "peer-as": "401",
+        "peer-description": "",
+        "peer-state": "established",
+        "peer-uptime": 344
+    }    
 }

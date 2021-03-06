@@ -21,10 +21,11 @@ class NodeTester:
         return test_pre_d, test_post_d
     
     def _dict_diff(self, test_pre_d, test_post_d):
-        """Diff a dict toplevel"""
+        """Diff a dict"""
         diff_d = {}
         all_keys_set = test_pre_d.keys() | test_post_d.keys()
-
+        
+        # record change in keys: 
         for key in all_keys_set:
             if test_pre_d.get(key) != test_post_d.get(key):
                 diff_d[key] = [ { 'pre' : test_pre_d.get(key) }, {'post' : test_post_d.get(key)}]
