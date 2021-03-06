@@ -1,4 +1,10 @@
 {
+    "192.168.192.1": {
+        "peer-as": "6514",
+        "peer-description": "yolo",
+        "peer-state": "established",
+        "peer-uptime": 9309600
+    },    
     "192.168.192.100": {
         "peer-as": "4201064840",
         "peer-description": "radiusdal1001",

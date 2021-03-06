@@ -20,10 +20,15 @@ class NodeTester:
             test_post_d = load(f)
         return test_pre_d, test_post_d
     
-    def _dict_diff(test_pre_d, test_post_d):
+    def _dict_diff(self, test_pre_d, test_post_d):
         """Diff a dict toplevel"""
-        all_keys = test_pre_d.items() | test_post_d.()
-        return all_keys
+        diff_d = {}
+        all_keys_set = test_pre_d.keys() | test_post_d.keys()
+
+        for key in all_keys_set:
+            if test_pre_d.get(key) != test_post_d.get(key):
+                diff_d[key] = [ { 'pre' : test_pre_d.get(key) }, {'post' : test_post_d.get(key)}]
+        return diff_d
 
     def bgp_v4_test(self,):
         """Execute the bgp_v4_test check"""
@@ -40,3 +45,4 @@ if __name__ == "__main__":
     x = NodeTester(hostname = 'router1', path ='C:\\dev-container\\python\\change')
     x.bgp_v4_test()
     d1, d2 = x.bgp_v4_test()
+    x._dict_diff(d1, d2)
