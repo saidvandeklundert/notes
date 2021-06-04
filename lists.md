@@ -6,6 +6,23 @@ Index and slice assignments are in-place changes. This means the list is modifie
 
 When a list is assigned to a variable, the reference to the list is assigned to that variable. 
 
+Example showing this by looking at the memory address:
+```python
+>>> x = [ 1,2,3]
+>>> y = x
+>>> id(x)
+140150413486976
+>>> id(y)
+140150413486976
+>>> id(x[0])
+140150440708000
+>>> id(y[0])
+140150440708000
+>>> 
+```
+
+Example with values:
+
 ```python
 x = ['a', 'b', 'c' ]    # define a list
 y = x                   # copy reference to list to y variable
