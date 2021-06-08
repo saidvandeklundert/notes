@@ -2,6 +2,8 @@
 
 Lists are mutable, ordered sequences that can contain any object. The list value refers to the list itself, not the values inside the list.
 
+When compared to other languages, it is worth noting that the Python list is a dynamic array.
+
 Index and slice assignments are in-place changes. This means the list is modified instead of generating a new list.
 
 When a list is assigned to a variable, the reference to the list is assigned to that variable. 
