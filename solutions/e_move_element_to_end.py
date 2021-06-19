@@ -6,7 +6,6 @@ tests = [
 
 
 def moveElementToEnd(array, toMove):
-    # Write your code here.
     z = array.copy()
     counter = 0
 

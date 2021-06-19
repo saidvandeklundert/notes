@@ -4,7 +4,6 @@ tests = [
 
 
 def findThreeLargestNumbers(array):
-    # Write your code here.
     largestNumbers = [array[0]]
 
     for i in array[1::]:

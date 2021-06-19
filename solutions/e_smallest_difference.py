@@ -4,7 +4,6 @@ tests = [
 
 
 def smallestDifference(arrayOne, arrayTwo):
-    # Write your code here.
 
     results = []
 

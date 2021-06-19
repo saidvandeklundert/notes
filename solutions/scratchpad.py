@@ -1,54 +1,58 @@
-from typing import Tuple
+array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+array = [
+    0,
+    1,
+    2,
+    3,
+]
 
 
-def parse(d: dict, l: list) -> Tuple[bool, str]:
-    l.append(d)
-    x = False
-    y = "string"
-    return x, y
+# While loop to traverse the entire array:
+i = 0
+while i < len(array):
+    print(array[i])
+    i += 1
+"""
+0
+1
+2
+3
+"""
+# While loop stopping at the second to last item:
+i = 0
+while i < len(array) - 1:
+    print(array[i])
+    i += 1
+"""
+0
+1
+2
+"""
+# While loop over an array doing something in case it did not break:
+i = 0
+while i < len(array):
+    print(array[i])
+    i += 1
+else:
+    print("traversed the whole thing")
+"""
+0
+1
+2
+3
+traversed the whole thing
+"""
+# While loop over an array in reverse order:
+print("--")
+i = len(array) - 1
 
-
-class Person:
-    def __init__(
-        self,
-        attribute_1,
-        attribute_2,
-    ):
-        self.attribute_1 = attribute_1
-        self.attribute_2 = attribute_2
-
-    def multiples(self):
-        return self.attribute_1 * self.attribute_2
-
-
-dave = Person("Dave", 16)
-
-
-def printPerson(p: Person):
-    print(p.multiples())
-
-
-printPerson("dave")
-printPerson(dave)
-parse("s", 1092)
-a, b = parse(
-    {
-        "a": 1,
-    },
-    [0, 1, 2],
-)
-y = "a" + a
+while i >= 0:
+    print(array[i])
+    i -= 1
 
 """
-
-
-
-def add(i: int) -> int:
-    x = 2 + i
-    return x
-
-
-add(3)
-add("2")
-
+3
+2
+1
+0
 """

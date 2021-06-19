@@ -2,20 +2,22 @@
 tests = [
     [8, 5, 2, 9, 5, 6, 3],
     [1, 3, 2],
+    [-4, 5, 10, 8, -10, -6, -24, -2, -5, 3, 5, -4, -5, -1, 11, 6, -7, -6, -7, 8],
 ]
 
-
+# O(n^2) time
+# O(1) space due to in place operation of the array
 def selectionSort(array):
-    # Write your code here.
-    currentIdx = 0
+    index = 0
 
-    while currentIdx < len(array) - 1:
-        smallestIdx = currentIdx
-        for i in range(currentIdx + 1, len(array)):
-            if array[smallestIdx] > array[i]:
-                smallestIdx = i
-        swap(currentIdx, smallestIdx, array)
-        currentIdx += 1
+    # len(array) - 1 bc when we reach the final number, the unsorted sublist is only 1 item so we can skip it
+    while index < len(array) - 1:
+        indexSmallest = index
+        for i in range(index + 1, len(array)):
+            if array[indexSmallest] > array[i]:
+                indexSmallest = i
+        swap(index, indexSmallest, array)
+        index += 1
 
     return array
 
@@ -24,28 +26,9 @@ def swap(i, j, array):
     array[i], array[j] = array[j], array[i]
 
 
-def selectSort(array):
-    i = 0
-
-    while i < len(array) - 1:
-        smallest = i
-        for i in range(i + 1, len(array)):
-            if array[i] > array[smallest]:
-                smallest = i
-            swap(smallest, i, array)
-    return array
-
-
 if __name__ == "__main__":
-    print("num1")
-    i = 0
-    for test in tests:
-        i += 1
-        print(f"Test number {i}")
+
+    for index, test in enumerate(tests):
+
+        print(f"Test number {index +1}")
         print(selectionSort(test))
-    print("num2")
-    i = 0
-    for test in tests:
-        i += 1
-        print(f"Test number {i}")
-        print(selectSort(test))

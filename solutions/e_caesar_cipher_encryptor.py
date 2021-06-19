@@ -8,7 +8,6 @@ tests = [
 
 
 def caesarCipherEncryptor(string: str, key: int):
-    # Write your code here.
     new_string = []
     for c in string:
         a = key % 26 + ord(c)
@@ -20,7 +19,6 @@ def caesarCipherEncryptor(string: str, key: int):
 
 
 def caesarCipherEncryptor2(string: str, key: int):
-    # Write your code here.
     new_string = []
     key = key % 26
     for c in string:
@@ -39,7 +37,6 @@ def caesarCipherEncryptor2(string: str, key: int):
 
 
 def caesarCipherEncryptor3(string: str, key: int):
-    # Write your code here.
     byPc = {n + 1: x for n, x in enumerate("abcdefghijklmnopqrstuvwxyz")}
     byCh = {x: n + 1 for n, x in enumerate("abcdefghijklmnopqrstuvwxyz")}
     key = key % 26

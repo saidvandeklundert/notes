@@ -13,7 +13,7 @@ def nonRepeating(s):
             seen[c] = len(s) + 1
         else:
             seen[c] = i
-    # print(seen)
+
     lowest = min(seen.values())
 
     if lowest > len(s):

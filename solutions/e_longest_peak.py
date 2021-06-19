@@ -4,7 +4,6 @@ tests = [
 
 
 def longestPeak(array):
-    # Write your code here.
 
     longesPeakLength = 0
     i = 1
