@@ -3,13 +3,16 @@ import copy
 tests = [
     [8, 5, 2, 9, 5, 6, 3],
 ]
+# from biglists import tests
 
 
 def insertionSort(array):
-    # Write your code here.
-    for i in range(len(array) - 1):
-        if array[i] > array[i + 1]:
-            swap(i, i + 1, array)
+
+    for i in range(1, len(array)):
+        j = i
+        while j > 0 and array[j] < array[j - 1]:
+            swap(j, j - 1, array)
+            j -= 1
 
     return array
 
