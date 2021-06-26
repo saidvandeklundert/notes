@@ -1,4 +1,10 @@
-The array module offers a 'list' that is more efficient then a list or tuple. The elements are more tightly packed. Tradeoff is that you can only store elements of the same type.
+The array module is a thin wrapper on C arrays. It can hold only homogeneous data but it is more efficient then a list or tuple. Lists in Python use a lot more space than C arrays, in part because each item in the list requires the construction of an individual Python object.
+
+In an array, the elements are more tightly packed. Tradeoff is that you can only store elements of the same type.
+
+
+
+
 
 ```python
 >>> arr

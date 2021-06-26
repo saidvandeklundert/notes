@@ -11,7 +11,30 @@ It runs in logarithmic time, aka log time or O(log n).
 
 #### Selection sort:
 
-O(n * n) or O(n<sup>2</sup>)
+Repeatedly finding a minimum element in an unsorted array and swapping it with the left most element. This process continues on and on by moving the unsorted array boundary by one element each time after traversing the unsorted remainder. Example in Python [here](https://github.com/saidvandeklundert/python/blob/main/solutions/e_selection_sort.py).
+
+This runs in  O(n * n) or O(n<sup>2</sup>).
+
+#### Bubble sort:
+
+Iterate an array multiple times and perform swaps to place the numbers in their correct order. If a swap occurs during an iteration, it means the array is not fully in order and it is iterated again. If there were no swaps during an iteration, the array is considered sorted.
+
+Buble sort runs in O(n * n) or O(n<sup>2</sup>).
+
+If you use in-place swaps on the array, the space complexity can be O(1). 
+
+
+#### Insertion sort:
+
+Create 2 sub-arrays out of an array where the left subarray is the sorted array and the right array is the unsorted array. You iterate the unsorted array and, for every value, insert it in the sorted array. After inserting it, you compare the value and possibly swap it so that the sorted array remains sorted.
+
+Runs in O(n<sup>2</sup>) time and O(1) space.
+
+#### Timsort
+
+Timsort is a sorting algorithm invented by Tim. It is used in Python.
+
+[wiki](https://en.wikipedia.org/wiki/Timsort)
 
 ### Complexity analysis
 
@@ -35,10 +58,12 @@ Function that iterates a list and sums up all the items: time complexity will ch
 
 Function that iterates a list and for each number, traverse the entire list again to perform an operation: The time complexity is O of n squared, aka Quadratic and written as O(n2).
 
+
+
 List of Big O notations:
 ```
-Constant:       O(1)
-Logarithmic:    O(log(n))
+Constant:       O(1)                // Array or dict lookup
+Logarithmic:    O(log(n))           // Binary search
 Linear:         O(n)                // touching every element in a list
 Log-linear:     O(nlog(n))
 Quadratic:      O(n2)
@@ -103,3 +128,8 @@ When a function has O(log(n)) efficiency, it means the following:
 - the amount of steps to complete the operations is incremented only by 1
 
 Compare this to a linear complexity algorithm. In that case, when the input doubles, the amount of operations also double.
+
+
+
+
+[bigo cheat sheet](https://www.bigocheatsheet.com/)

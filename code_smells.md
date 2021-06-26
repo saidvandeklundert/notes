@@ -3,7 +3,11 @@ List of code-smells:
 - Useless code
 - Dead code
 - Inappropriate naming 
-- Duplicated code 
+- Duplicated code, deduplicate it 
 - Non-modularized code
 - Classes that should just be functions
 - Empty Except blocks and poor error messages
+
+
+- Avoid ITM: Initialize Then Modify
+    Talk: Conor Hoekstra - Beautiful Python Refactoring

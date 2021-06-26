@@ -189,6 +189,13 @@ x = [ 'a', 'b', ['c', 'd'], ['e', 'f'], [],]
 import itertools 
 list(itertools.chain.from_iterable(x))
 >>> ['a', 'b', 'c', 'd', 'e', 'f']
+
+# Combine two lists:
+a = [1,2,3]
+b = [4,5,6]
+c = list(chain.from_iterable(zip(a,b)))
+c
+>>> [1, 4, 2, 5, 3, 6]
 ```
 
 ## List and string slicing examples:
@@ -210,3 +217,7 @@ x[start:end:step] 			   # list slicing syntax
 Notes:
 - the step is applied to the slice
 - the lower bound is inclusive and the upper bound is non-inclusive
+
+List implementation in Python 3.10: https://github.com/python/cpython/blob/3.10/Objects/listobject.c
+
+Deepdive on the list implementation in Python: http://www.laurentluce.com/posts/python-list-implementation/

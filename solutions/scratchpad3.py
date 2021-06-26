@@ -1,29 +1,19 @@
 import copy
 
-tests = [
-    [[0, 1, 21, 33, 45, 45, 61, 71, 72, 73], 33],
-    [[1, 5, 23, 111], 112],
-    [[0, 1, 21, 33, 45, 45, 61, 71, 72, 73, 355], 355],
-    [[0, 1, 21, 33, 45, 45, 61, 71, 72, 73, 355], 0],
-]
+tests = [[[3, 5, -4, 8, 11, 1, -1, 6], 10]]
 # from biglists import tests
-def binarySearch(array, target):
-    return binSearchHelper(array, target, 0, len(array) - 1)
 
 
-def binSearchHelper(array, target, left, right):
-    m = (left + right) // 2
-    mv = array[m]
+def twoNumberSum(array, targetSum):
+    for index, value in enumerate(array):
+        for i2, v2 in enumerate(array):
+            if i2 == index:
+                continue
 
-    if left > right:
-        return -1
+            elif targetSum - (value + v2) == 0:
+                return [value, v2]
 
-    if target == mv:
-        return m
-    elif target > mv:
-        return binSearchHelper(array, target, m + 1, right)
-    else:
-        return binSearchHelper(array, target, left, m - 1)
+    return []
 
 
 if __name__ == "__main__":
@@ -32,4 +22,4 @@ if __name__ == "__main__":
     for test in tests:
         i += 1
         print(f"Test number {i}")
-        print(binarySearch(test[0], test[1]))
+        print(twoNumberSum(test[0], test[1]))
