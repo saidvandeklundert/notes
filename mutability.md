@@ -57,8 +57,13 @@ In the previous, when you create `x`, the following happens:
 2. the PyObject has it's field set accordingly:
   - type is set to integer
   - value is set to `0`
-
 3. a <b>NAME</b> is created, `x`
 4. `x` is set to point to the PyObject and the reference count to that object is set to 1
 
 ![Python name](/img/python_variable_is_a_name.png "Python name")
+
+A PyObject is the C implementation of the Python object, implemented in a struct. Every Python object is represented as a PyObject in memory.
+
+
+
+![Python change variable name](/img/python_change_var_name.png "Python change variable name")
