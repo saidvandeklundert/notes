@@ -106,7 +106,7 @@ This will
 
 Note: The PyObject is not the same as Python’s object. It’s specific to CPython and represents the base structure for all Python objects.
 
-PyObject is defined as a C struct, so if you’re wondering why you can’t call typecode or refcount directly, its because you don’t have access to the structures directly. Method calls like sys.getrefcount() can help get some internals.
+PyObject is defined as a C struct, so if you’re wondering why you can’t call typecode or refcount directly, its because you don’t have access to the structures directly. Method calls like `sys.getrefcount()` can help get some internals.
 
 
 If the refcount of a PyObject is 0, the garbage collector can clean it up.

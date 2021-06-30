@@ -93,7 +93,7 @@ class DoublyLinkedList:
         return node is not None
 
     def removeNodeBindings(self, node):
-        """remove a node by having the pointers of adjacent nodes point to each other"""
+
         if node.prev is not None:
             node.prev.next = node.next
 
@@ -137,5 +137,3 @@ if __name__ == "__main__":
     node_e = Node("e")
     dll.insertAfter(node_a, node_e)
     print(f"afer inserting e\n {dll}")
-    dll.removeNodeBindings(node_b)
-    print(f"afer removeNodeBindings for node_b\n {dll}")

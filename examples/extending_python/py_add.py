@@ -1,3 +1,14 @@
+"""
+Ensure the add.c is present and you are on a system that can run gcc.
+
+Then compile the C programm:
+
+gcc -c -fpic add.c
+gcc -shared -o libadd1.so add.o
+
+After having done this, you can execute the py_add.py script.
+"""
+
 import ctypes
 
 add_lib = ctypes.CDLL("./libadd1.so")
