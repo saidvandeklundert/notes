@@ -53,3 +53,23 @@ if __name__ == "__main__":
     futures = example_process_pool_args_unpacked()
     for item in futures:
         print(item.result())
+"""
+io_bound_function called with arguments ('a', 'a') using PID 380
+io_bound_function called with arguments ('b', 'b') using PID 13400
+io_bound_function called with arguments ('c', 'c') using PID 29092
+io_bound_function with arguments ('b', 'b') using PID 13400 ended
+io_bound_function with arguments ('a', 'a') using PID 380 ended  
+io_bound_function with arguments ('c', 'c') using PID 29092 ended
+io_bound_function called with arguments ('a', 'b') using PID 13752
+io_bound_function called with arguments ('c', 'd') using PID 15456
+io_bound_function called with arguments ('e', 'f') using PID 15396
+io_bound_function with arguments ('c', 'd') using PID 15456 ended
+io_bound_function with arguments ('a', 'b') using PID 13752 ended
+io_bound_function with arguments ('e', 'f') using PID 15396 ended
+io_bound_function called with arguments (1, 2) using PID 30052
+io_bound_function called with arguments (3, 4) using PID 1212
+io_bound_function with arguments (3, 4) using PID 1212 ended
+io_bound_function with arguments (1, 2) using PID 30052 ended
+(1, 2)
+(3, 4)
+"""
