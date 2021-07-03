@@ -49,14 +49,35 @@ Some (very) rough comparisons that can be used to describe latency (using Intetl
 - 150ms     ping US from Europe     15 million kilometer ( 10% between earth and the sun)
 
 Alternatively:
-
-1 instruction is 1 second
-reference memory is 2 hours and 47 minutes
-disk seek is 6 years and 4 months
-disk seek and read 1MB is 8 years and 11 months
-ping US is 475 years
+- 1 instruction is 1 second
+- reference memory is 2 hours and 47 minutes
+- disk seek is 6 years and 4 months
+- disk seek and read 1MB is 8 years and 11 months
+- ping US is 475 years
 
 All the previous numbers are to convey the following: most likely your program is IO-bound and not CPU bound. Just the amount of time to talk to peripherals gives you IO constraints.
+
+### Concurrency components
+
+Oftentimes, the following concurrency components are identified:
+- producer: part that produces data
+- workder: component that does the work
+- consumer: component that consumes data
+
+### Challenges that come with concurrency
+
+When you are trying to implement concurrency, the following topics require some thought:
+- memory allocation
+- scheduling
+- throughput
+- distribution
+- deadlocks
+- execution coordination
+- resource starvation
+
+### GIL: Global Interpreter lock
+
+A Mutex that ensures only one thread controls that interpreter at a time. This is severely limiting to muti-threaded applications. It does prevent race conditions with memory and reference allocations without the programmer having to put a mutex (mutual exclusion) in place everywhere.
 ## Multithreading
 
 Multithreading can offer performance improvements for I/O intensive workloads. For instance, if some I/O has high latency (like reaching out to network devices), the more beneficial it is for the CPU to do something else in the mean time.
@@ -77,7 +98,17 @@ With multiprocessing, each process is running in it's own Python intepreter whic
 Code examples are found [here](https://github.com/saidvandeklundert/python/blob/main/examples/concurrency/).
 ## asyncio uses cooperative multitasking
 
+Asyncio is Python specific and does not depend on the OS threading mechanism.
+
+Asyncio uses event loops and coroutines. Concurrency achieved with async io relies on tasks giving up their turns and letting other tasks run.
+
+Keywords used:
+- `async`: indicates the code is to be run asynchrounously 
+- `await`: indicates the corouting is willing to give up execution control
 
 
+Asyncio's concurrency is managed by Python and has less overhead associated with it when compared to threads.
+
+A big downside is the age and the robustness of asyncio as it is still relatively new.
 
 ## Subinterpreters
