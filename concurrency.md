@@ -98,9 +98,15 @@ With multiprocessing, each process is running in it's own Python intepreter whic
 Code examples are found [here](https://github.com/saidvandeklundert/python/blob/main/examples/concurrency/).
 ## asyncio uses cooperative multitasking
 
-Asyncio is Python specific and does not depend on the OS threading mechanism.
+Asyncio is Python specific and does not depend on the OS threading mechanism. It is suited to speeding up IO-bound tasks.
 
 Asyncio uses event loops and coroutines. Concurrency achieved with async io relies on tasks giving up their turns and letting other tasks run.
+
+![Asyncio](/img/event_loop.png "From https://eng.paxos.com/python-3s-killer-feature-asyncio")
+
+```
+picture from From https://eng.paxos.com/python-3s-killer-feature-asyncio
+```
 
 Keywords used:
 - `async`: indicates the code is to be run asynchrounously 
