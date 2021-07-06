@@ -10,6 +10,7 @@ def bar(s: str):
     lib.bar.restype = c_char_p
     a = lib.bar(s)
     print(a)
+    return a
 
 
 start = time.time()
