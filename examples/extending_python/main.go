@@ -1,3 +1,4 @@
+// go build -buildmode=c-shared -o main.so main.go
 package main
 
 import (
@@ -7,19 +8,16 @@ import (
 )
 
 //export bar
-func bar(a string, b *C.char) *C.char {
-	c := a
-	d := C.GoString(b)
+func bar(a string) string {
+
+	s := "Go says " + a
 	go func() {
 		for {
 			time.Sleep(time.Second)
-			fmt.Println("a:", a)
-			fmt.Println("b:", C.GoString(b))
-			fmt.Println("c:", c)
-			fmt.Println("d:", d)
+			fmt.Println(s)
 		}
 	}()
-	return C.CString("hello from go")
+	return s
 }
 
 func main() {}
