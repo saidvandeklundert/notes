@@ -8,7 +8,7 @@ lib = cdll.LoadLibrary("./main.so")
 
 def bar(s: str):
     lib.bar.restype = c_char_p
-    a = lib.bar(s)
+    a = lib.bar(s.encode("utf-8"))
     print(a)
     return a
 
@@ -16,5 +16,6 @@ def bar(s: str):
 start = time.time()
 for x in range(100):
     bar(str(x))
+
 end = time.time()
 print(end - start)
