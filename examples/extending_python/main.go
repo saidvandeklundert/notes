@@ -12,7 +12,7 @@ func bar(StringFromPython *C.char) *C.char {
 
 	fmt.Println(s)
 
-	return "Go says hi!"
+	return C.CString("Go says hi!")
 }
 
 func main() {}
