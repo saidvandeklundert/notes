@@ -3,21 +3,16 @@ package main
 
 import (
 	"C"
-	"fmt"
-	"time"
 )
+import "fmt"
 
-//export bar
-func bar(a string) string {
+//export verify
+func bar(StringFromPython *C.char) *C.char {
+	s := C.GoString(StringFromPython)
 
-	s := "Go says " + a
-	go func() {
-		for {
-			time.Sleep(time.Second)
-			fmt.Println(s)
-		}
-	}()
-	return s
+	fmt.Println(s)
+
+	return "Go says hi!"
 }
 
 func main() {}
