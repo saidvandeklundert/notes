@@ -6,7 +6,7 @@ import (
 )
 import "fmt"
 
-//export verify
+//export bar
 func bar(StringFromPython *C.char) *C.char {
 	s := C.GoString(StringFromPython)
 
