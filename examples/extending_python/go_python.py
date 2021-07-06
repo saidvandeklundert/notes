@@ -3,19 +3,20 @@ from ctypes import cdll
 import time
 
 
-lib = cdll.LoadLibrary("./main.so")
+go_lib = cdll.LoadLibrary("./main.so")
+free = go_lib.free
 
 
-def bar(s: str):
-    lib.bar.restype = c_char_p
-    a = lib.bar(s.encode("utf-8"))
+def goprint(s: str):
+    go_lib.goPrint.restype = c_char_p
+    a = go_lib.goPrint(s.encode("utf-8"))
     print(a)
     return a
 
 
 start = time.time()
 for x in range(100):
-    bar(str(x))
+    goprint(str(x))
 
 end = time.time()
 print(end - start)

@@ -7,7 +7,7 @@ import (
 import "fmt"
 
 //export bar
-func bar(StringFromPython *C.char) *C.char {
+func goPrint(StringFromPython *C.char) *C.char {
 	s := C.GoString(StringFromPython)
 
 	fmt.Println(s)
