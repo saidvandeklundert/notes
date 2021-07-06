@@ -6,7 +6,7 @@ import (
 )
 import "fmt"
 
-//export bar
+//export goPrint
 func goPrint(StringFromPython *C.char) *C.char {
 	s := C.GoString(StringFromPython)
 
