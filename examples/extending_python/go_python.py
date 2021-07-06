@@ -12,6 +12,8 @@ def bar(s: str):
     print(a)
 
 
-bar("haha")
-bar("hoho")
-time.sleep(100)
+start = time.time()
+for x in range(100):
+    bar(str(x))
+end = time.time()
+print(end - start)
