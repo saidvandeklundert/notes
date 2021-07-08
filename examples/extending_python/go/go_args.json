@@ -1,0 +1,1 @@
+{"str": "string", "int": 100, "float": 1.2, "mapping": {"a": "a"}, "slice": ["a", "b", "c"]}
