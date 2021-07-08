@@ -4,3 +4,5 @@ __pycache__/
 private
 *hosts.txt
 *lazy.md
+*.exe
+*.so
