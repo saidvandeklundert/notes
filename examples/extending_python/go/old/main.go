@@ -34,6 +34,16 @@ func goPrintSeveralStrings(s1, s2, s3, s4 *C.char) {
 
 }
 
+//export goSeveralStrings
+func goSeveralStrings(s1, s2, s3, s4 *C.char) {
+	string1 := C.GoString(s1)
+	string2 := C.GoString(s2)
+	string3 := C.GoString(s3)
+	string4 := C.GoString(s4)
+
+	_ = string1 + string2 + string3 + string4
+}
+
 //export goPrintInt
 func goPrintInt(IntFromPython C.longlong) {
 	go_int64 := int64(IntFromPython)
@@ -86,6 +96,28 @@ func goFuncUsingJsonArg(FileName *C.char) {
 	JSONargs := new(PythonArgs)
 	_ = json.Unmarshal(byteValue, &JSONargs)
 	fmt.Printf("%v\n", JSONargs)
+
+}
+
+//export goFuncUsingJsonArgSilent
+func goFuncUsingJsonArgSilent(FileName *C.char) {
+	filename := C.GoString(FileName)
+	jsonFile, _ := os.Open(filename)
+	defer jsonFile.Close()
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	JSONargs := new(PythonArgs)
+	_ = json.Unmarshal(byteValue, &JSONargs)
+
+}
+
+//export goFuncUsingJsonArgSilentNoArg
+func goFuncUsingJsonArgSilentNoArg() {
+
+	jsonFile, _ := os.Open("go_args.json")
+	defer jsonFile.Close()
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	JSONargs := new(PythonArgs)
+	_ = json.Unmarshal(byteValue, &JSONargs)
 
 }
 
