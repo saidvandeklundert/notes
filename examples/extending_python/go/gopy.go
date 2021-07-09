@@ -22,8 +22,6 @@ type PyGo struct {
 	StringMapping map[string]string `json:"mapping"`
 }
 
-// Generates a data object for Python.
-//
 //export goDoStuff
 func goDoStuff(py2go_info *C.char) C.struct_PyGo {
 
@@ -31,9 +29,11 @@ func goDoStuff(py2go_info *C.char) C.struct_PyGo {
 	s := C.GoString(py2go_info)
 	Py2GoArgs := new(PyGo)
 	_ = json.Unmarshal([]byte(s), &Py2GoArgs)
+
 	if Py2GoArgs.String == "print" {
 		fmt.Printf("Message from the Go runtime:\n%v\n\n-----------\n", Py2GoArgs)
 	}
+
 	// Prepare JSON that is going to be returned:
 	var result C.struct_PyGo
 	Go2Py := new(PyGo)
@@ -42,7 +42,6 @@ func goDoStuff(py2go_info *C.char) C.struct_PyGo {
 	Go2Py_returnArgs := string(Go2Py_return)
 
 	// Place the data in the C struct so we can communicate to the Python universe
-	//  and, later on, remove the memory allocation.
 	result.py2go = C.CString(s)
 	result.go2py = C.CString(Go2Py_returnArgs)
 
@@ -55,7 +54,6 @@ func gcPyGo(py2go_info C.struct_PyGo) {
 		This function will garbage collect the struct that was used
 		 to facilitate communications between Python and Go.
 	*/
-
 	C.free(unsafe.Pointer(py2go_info.py2go))
 	C.free(unsafe.Pointer(py2go_info.go2py))
 }

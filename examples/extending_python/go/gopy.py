@@ -3,7 +3,6 @@ import time
 import os
 import psutil
 import json
-from pydantic import BaseModel
 
 
 class PyGo(ctypes.Structure):
@@ -20,6 +19,7 @@ class PyGo(ctypes.Structure):
         gcPyGo(self)
 
 
+# import the Go library:
 lib = ctypes.CDLL("./gopy.so")
 goDoStuff = lib.goDoStuff
 goDoStuff.argtypes = [ctypes.c_char_p]
@@ -28,56 +28,42 @@ gcPyGo = lib.gcPyGo
 gcPyGo.argtypes = [PyGo]
 
 
-## info that is send into Go:
-args_d_1 = {
+## Example information that will be send to Go:
+args_d = {
     "str": "print",
     "int": 100,
     "float": 1.2,
     "mapping": {"a": "a"},
     "slice": ["a", "b", "c"],
 }
-jsonString = json.dumps(args_d_1).encode("utf8")
-
-args_d_2 = {
-    "str": "noprint",
-    "int": 100,
-    "float": 1.2,
-    "mapping": {"a": "a"},
-    "slice": ["a", "b", "c"],
-}
-jsonString2 = json.dumps(args_d_2).encode("utf8")
+goArgs = json.dumps(args_d).encode("utf8")
+args_d["str"] = "noprint"
+goArgs_2 = json.dumps(args_d).encode("utf8")
 
 
-def work_work():
-    PyGo_data = goDoStuff(jsonString)
+def goDoStuffandPrint():
+    """Call GoDoStuff and have the Go runtime print the arguments to screen"""
+    PyGo_data = goDoStuff(goArgs)
     py2go_str = PyGo_data.py2go.decode()
     go2py_json = json.loads(PyGo_data.go2py.decode())
     print(f"send py2go\t: {py2go_str}\nreceived go2py\t: {go2py_json}\n\n------------")
 
 
-def work_work_silent():
-    PyGo_data = goDoStuff(jsonString2)
+def goDoStuffInSilence():
+    """Call GoDoStuff"""
+    _ = goDoStuff(goArgs_2)
 
 
 if __name__ == "__main__":
-    # run the go func once:
-    print("running")
-    work_work()
-    # run the fun many times and see if how the memory is:
+    goDoStuffandPrint()
+    
+    # run the func endlessly to check for a memory leak:
     n = 0
-    """"""
-
-    while n < 10000000:
-        # arg = json.dumps(rand_args()).encode("utf8")
-
+    while n < 10000000000:
         start = time.time()
-
-        work_work_silent()
-        # go_lib.goFuncUsingJsonArg("go_args.json".encode("utf8"))
-        # go_lib.goFuncUsingJsonArgSilent()
+        goDoStuffInSilence()
         end = time.time()
         mem_usage = psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2
-
         if n % 10000 == 0:
             print(
                 f"memory usage is {round(mem_usage,2)}\t go func took {round(end - start, 5)}\t n is {n}"

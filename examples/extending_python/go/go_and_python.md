@@ -1,16 +1,21 @@
+## Installing Go
+
 ```
 yum install wget
-git clone https://github.com/saidvandeklundert/python.git
 wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz
 rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 go version
 yum install gcc
 go build -buildmode=c-shared -o main.so main.go
+```
 
 go_python.py will asume these files are in the same directory.
-```    
+git clone https://github.com/saidvandeklundert/python.git
 
+## Compiling Go
+
+Instead of 
 `-buildmode=c-shared` will output two file:
 - a shared object binary file (.so) exposing Go functions as a C-style APIs
 - a C header file, defines C types mapped to Go compatible types
@@ -23,104 +28,12 @@ from ctypes import cdll
 go_lib = cdll.LoadLibrary("./main.so")
 ```
 
-When the Python code is executed, it calls the Go functions in the shared object.
+## Useful resources
 
-An easy way of going about things is reading/writing JSON between Python and Go.
-
-A faster way is 
-
-| Go      |  C       | Python  |
-|---------|----------|---------|
-| string  | *C.char  | string  |
-|         |          |         |
-|         |          |         |
-|         |          |         |
-|         |          |         |
-
-
-
-## C Types in Go
-
-
-### char
-
-```go
-type C.char
-type C.schar (signed char)
-type C.uchar (unsigned char)
-```
-
-### short
-
-```go
-type C.short
-type C.ushort (unsigned short)
-```
-
-### int
-
-```go
-type C.int
-type C.uint (unsigned int)
-```
-
-### long
-
-```go
-type C.long
-type C.ulong (unsigned long)
-```
-
-### longlong
-
-```go
-type C.longlong (long long)
-type C.ulonglong (unsigned long long)
-```
-
-### float
-
-```go
-type C.float  
-```
-
-### double
-
-```go
-type C.double
-```
-
-## Access to C structs
-
-
-As in `C.struct_stat`
-
-### struct
-
-```go
-type C.struct_***
-```
-### union
-
-```go
-type C.union_***
-```
-
-### enum
-
-```go
-type C.enum_***
-```
-
-### void*
-
-```go
-func unsafe.Pointer() *ArbitraryType
-```
-https://golang.org/pkg/unsafe/
-
-
-
-Usefulll:
-
+Learning Go by Jon Bodner
 https://fluhus.github.io/snopher/
+https://www.ardanlabs.com/blog/2020/06/python-go-grpc.html
+https://www.ardanlabs.com/blog/2020/07/extending-python-with-go.html
+https://www.ardanlabs.com/blog/2020/08/packaging-python-code.html
+https://www.ardanlabs.com/blog/2020/09/using-python-memory.html
+https://blog.golang.org/cgo
