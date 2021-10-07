@@ -133,3 +133,20 @@ Compare this to a linear complexity algorithm. In that case, when the input doub
 
 
 [bigo cheat sheet](https://www.bigocheatsheet.com/)
+
+
+### Call stack
+
+LIFO queue of functions calls. Typically, when a programm crashses, the stack trace is generated. This will provide information on the call stack:
+- includes filenames and line numbers of the code that caused the exception/error
+- top of the stack contains the last call that caused the error
+- bottom of the stack contains the first call that started the chain of calls to cause the error
+
+
+
+### Heap memory:
+
+Unordered, variable-size, unordered and slower.
+### Stack memory:
+
+Stored in order, values are fixed-size, LIFO, Fast retrieval.

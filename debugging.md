@@ -54,7 +54,9 @@ l       list the lines of code around the current line
 a       print the args of the current function
 ```
 
+### pdbr for prettier debugging and extra's
 
+https://github.com/cansarigol/pdbr
 
 Some info came from Kapeli/cheatsheets, right [here](https://github.com/Kapeli/cheatsheets/tree/master/cheatsheets).
 Visit the [page](https://kapeli.com/cheat_sheets/Python_Debugger.docset/Contents/Resources/Documents/index).

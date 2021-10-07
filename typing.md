@@ -88,3 +88,4 @@ Found 3 errors in 1 file (checked 1 source file)
 
 From pycon:
 [Talk: Dustin Ingram - Static Typing in Python](https://www.youtube.com/watch?v=ST33zDM9vOE)
+[TALK / Maggie Moss / Gradual Typing in Practice](https://youtu.be/Lj_9TyT3V98)
