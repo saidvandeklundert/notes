@@ -32,8 +32,7 @@ async def delay(delay_seconds: int) -> int:
 
 
 @async_timed()
-async def fetch_status(session: ClientSession, url: str) -> int:
-    ten_millis = aiohttp.ClientTimeout(total=100)
-
-    async with session.get(url, timeout=ten_millis) as result:
+async def fetch_status(session: ClientSession, url: str, delay: int = 1) -> int:
+    await asyncio.sleep(delay)
+    async with session.get(url, timeout=3000) as result:
         return result.status

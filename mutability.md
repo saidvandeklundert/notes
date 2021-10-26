@@ -73,7 +73,7 @@ The previous value now has the reference count set to 0 and it can be cleaned up
 When we change a mutable type, like a list for instance, Python does not need to create a new PyObject. Instead, it can just update the value of the fields in the PyObject.
 
 
-## Pass by value vs pass by reference (vs pass by assignment??)
+## Pass by value vs pass by reference vs pass by assignment
 
 Pass by value:
 - value is copied to receiving function

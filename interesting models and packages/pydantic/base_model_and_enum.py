@@ -21,3 +21,4 @@ class Human(BaseModel):
 
 if __name__ == "__main__":
     x = Human(**{"name": "jan", "property": "nozem"})
+    x = Human(**{"name": "jan", "property": "bag"})
