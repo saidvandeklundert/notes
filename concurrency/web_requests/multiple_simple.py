@@ -26,4 +26,5 @@ async def main():
         print(status_codes)
 
 
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 asyncio.run(main())
