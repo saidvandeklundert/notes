@@ -119,6 +119,7 @@ Keywords used:
 - `await`: runs the coroutine that follows
 
 
-
+Some resources:
+- https://www.youtube.com/channel/UCRF82wX0EPwqvKMBwvB4fQg Łukasz Langa videos
 
 ## Subinterpreters
