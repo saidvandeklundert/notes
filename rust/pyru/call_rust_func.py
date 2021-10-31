@@ -41,8 +41,8 @@ print(f"Rust return: {rust_return}")
 pyru.free_rust_mem_from_python(rust_return)
 
 rust_return = None
-# run indefinitely:
-while True:
+i = 0
+while i < 10000000:
     marie = Person(name="Marie", age=2)
     marie_json_str = marie.json(indent=2).encode("utf-8")
     rust_return_marie = pyru.python_to_rust(marie_json_str)
@@ -52,10 +52,12 @@ while True:
     if rust_return_string:
         rust_return_string = rust_return_string.decode("utf-8")
 
-    print(rust_return_string)
-    print(f"Rust return: {rust_return}")
+    if i % 1000 == 0:
+        print(rust_return_string)
+        print(f"Rust return: {rust_return}")
     pyru.free_rust_mem_from_python(rust_return_marie)
     marie = None
     rust_return = None
     rust_return_bytes = None
     rust_return_marie = None
+    i += 1
