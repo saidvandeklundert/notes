@@ -36,7 +36,7 @@ if rust_return_string:
     rust_return_string = rust_return_string.decode("utf-8")
 
 print(rust_return_string)
-
+print(f"Rust return: {rust_return}")
 # Using the library (send a string as bytes that are encoded as utf-8):
 pyru.free_rust_mem_from_python(rust_return)
 
