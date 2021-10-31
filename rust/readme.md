@@ -37,20 +37,17 @@ A Rust function exported to C can be loaded into Python using the following:
 ```python
 import ctypes
 library_name = "target/release/libpyru.so"
-# load the library:
+# load the library as 'pyru':
 pyru = ctypes.CDLL(library_name)
 # call the 'python_person_to_rust' from the pyru library:
 pyru.python_person_to_rust(argument)
 ```
 
-Be mindful of the arguments used when calling Rust functions.
-
-A nice way to do this (in my opinion):
-- use a Python dataclass as input to Rust
-- send the argument to the C function like so:
+Be mindful of the arguments used when calling Rust functions. A nice way to do this (in my opinion):
+- use a Python dataclass as input to Rust and send the argument to the C function like so:
   - output the dataclass as a JSON string
   - encode the JSON string as as bytes 
-- in Rust, read the bytes as a string, and serialize the JSON string into a struct to work with
+- in Rust, read the bytes as a string, and deserialize the JSON-string into a struct that you can work with
 
 In case you want the Rust function to return a value to Python, do the opposite. Serialize a struct to JSON, output it as a string and send the C-string into Python. Then, inside the Python runtime, read the C-string using `c_char_p` and transform it into a dataclass again.
 
