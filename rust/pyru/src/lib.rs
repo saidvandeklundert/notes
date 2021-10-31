@@ -22,6 +22,9 @@ pub extern "C" fn free_rust_mem_from_python(c: *mut c_char) {
     // it will be automatically dropped immediately
     unsafe {
         CString::from_raw(c);
+        let c_value = unsafe { CStr::from_ptr(c).to_bytes() };
+        let python_string = str::from_utf8(c_value);
+        println!("{}", python_string.unwrap())
     }
     println!("Rust memory freed from Python!");
 }
