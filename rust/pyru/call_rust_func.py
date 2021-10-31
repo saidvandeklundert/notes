@@ -58,9 +58,9 @@ while i < loops:
         print(f"Rust return: {rust_return}")
         percent_done = str(int(i / loops * 100))
         print(f"percent done: {percent_done}")
-    pyru.free_rust_mem_from_python(rust_return_marie)
-    marie = None
-    rust_return = None
-    rust_return_bytes = None
-    rust_return_marie = None
+    # pyru.free_rust_mem_from_python(rust_return_marie)
+    # marie = None
+    # rust_return = None
+    # rust_return_bytes = None
+    # rust_return_marie = None
     i += 1
