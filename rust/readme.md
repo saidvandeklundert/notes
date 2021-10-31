@@ -2,17 +2,15 @@ I love Python and I love Rust.
 
 Python + Rust, omg!
 
-1. pull down this repo
-2. `cargo build --release` in substring_count
-3. run `/rust/substring_count/testing.py`
-
 Steps to using Rust inside Python:
 
-1. create a new Cargo library project
+1. create a new Cargo library project:
 2. modify the Cargo.toml and specify we are building a shared library
 3. write a FFI in Rust that is compatible with C
 4. build the library using the regular `cargo build --release`
 5. Create a Python program that loads the library and calls the function. On Linux, load the `.so` file.
+
+This is how I made the example [pyru](https://github.com/saidvandeklundert/python/tree/main/rust/pyru) library.
 
 Some pointers:
 
@@ -57,10 +55,11 @@ pyru.python_person_to_rust(argument)
 Be mindful of the arguments used when calling Rust functions.
 
 A nice way to go in my opinion is this:
-- use a Python dataclass as input argument
+- use a Python dataclass as input to Rust
 - send the argument to the C function like so:
   - output the dataclass as a JSON string
   - encode the JSON string as as bytes 
+
 
 ```python
 from pydantic import BaseModel
