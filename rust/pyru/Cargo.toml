@@ -1,0 +1,11 @@
+[package]
+name = "stringtools"
+version = "0.0.1"
+authors = ["Said van de Klundert"]
+
+[lib]
+name = "pyru"
+crate-type = ["dylib"]
+
+[dependencies]
+libc = "~0.2"
