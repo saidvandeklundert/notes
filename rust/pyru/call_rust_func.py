@@ -42,7 +42,7 @@ pyru.free_rust_mem_from_python(rust_return)
 
 rust_return = None
 i = 0
-loops = 100000
+loops = 1000000
 while i < loops:
     marie = Person(name="Marie", age=2)
     marie_json_str = marie.json(indent=2).encode("utf-8")
@@ -53,7 +53,7 @@ while i < loops:
     if rust_return_string:
         rust_return_string = rust_return_string.decode("utf-8")
 
-    if i % 1000 == 0:
+    if i % 10000 == 0:
         print(rust_return_string)
         print(f"Rust return: {rust_return}")
         percent_done = str(int(i / loops * 100))
