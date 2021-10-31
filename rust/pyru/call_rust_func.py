@@ -12,6 +12,7 @@ class Person(BaseModel):
 
 jan = Person(name="Jan", age=6)
 
+# output the model as JSON string, then convert to bytes encoded a utf-8:
 json_json_str = jan.json(indent=2).encode("utf-8")
 """Part 2"""
 import ctypes
@@ -22,5 +23,5 @@ library_name = "target/release/libpyru.so"
 pyru = ctypes.CDLL(library_name)
 
 
-# Using the library:
-print(pyru.python_to_rust(json_json_str, b"na"))
+# Using the library (send a string as bytes that are encoded as utf-8):
+print(pyru.python_to_rust(json_json_str))
