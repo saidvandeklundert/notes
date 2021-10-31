@@ -53,6 +53,7 @@ while True:
         rust_return_string = rust_return_string.decode("utf-8")
 
     print(rust_return_string)
+    print(f"Rust return: {rust_return}")
     pyru.free_rust_mem_from_python(rust_return)
     marie = None
     rust_return = None
