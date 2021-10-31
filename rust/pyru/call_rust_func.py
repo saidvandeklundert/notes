@@ -39,3 +39,18 @@ print(rust_return_string)
 
 # Using the library (send a string as bytes that are encoded as utf-8):
 pyru.free_rust_mem_from_python(rust_return)
+
+
+# run indefinitely:
+while True:
+    marie = Person(name="Marie", age=2)
+    marie_json_str = marie.json(indent=2).encode("utf-8")
+    rust_return_marie = pyru.python_to_rust(marie_json_str)
+    rust_return_bytes = ctypes.c_char_p(rust_return_marie)
+    rust_return_string = rust_return_bytes.value
+
+    if rust_return_string:
+        rust_return_string = rust_return_string.decode("utf-8")
+
+    print(rust_return_string)
+    pyru.free_rust_mem_from_python(rust_return)
