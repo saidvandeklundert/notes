@@ -31,7 +31,7 @@ import ctypes
 rust_return_bytes = ctypes.c_char_p(rust_return)
 rust_return_string = rust_return_bytes.value
 
-if rust_return_bytes:
-    rust_return_bytes = rust_return_bytes.decode("utf-8")
+if rust_return_string:
+    rust_return_string = rust_return_string.decode("utf-8")
 
 print(rust_return_string)
