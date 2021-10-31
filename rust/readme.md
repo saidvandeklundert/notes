@@ -76,6 +76,13 @@ pub extern "C" fn python_person_to_rust(value: *const c_char) {
     let person: Person = serde_json::from_str(&python_string).unwrap();
     println!("{} says hello in Rust", person.name);
 }
+
+#[derive(Debug, Deserialize, Serialize)]
+struct Person {
+    name: String,
+    age: usize,
+}
+
 ```
 
 In the function signature, we recieve the bytes as a `*const c_char`. Using `CStr::from_ptr`, we take the pointer to the C string, and read the bytes. After that, we use `str::from_utf8` to read the bytes as utf8 and then.
