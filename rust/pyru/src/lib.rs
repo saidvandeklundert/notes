@@ -1,12 +1,12 @@
 extern crate libc;
-
+extern crate serde;
+extern crate serde_json;
 use libc::c_char;
+use serde::de::{Deserialize, Serialize};
+use serde::serde_json::json;
 use std::ffi::CStr;
 use std::ffi::CString;
 use std::str;
-
-use serde::{Deserialize, Serialize};
-use serde_json::json;
 
 /// Receive data from the Python universe and use it in Rust.
 #[no_mangle]
