@@ -9,9 +9,12 @@ use std::str;
 #[no_mangle]
 pub extern "C" fn python_to_rust(value: *const c_char) -> *mut c_char {
     let c_value = unsafe { CStr::from_ptr(value).to_bytes() };
-    let python_string = str::from_utf8(c_value);
-    println!("Python string: {}", python_string.unwrap());
-    let s = CString::new("Hello from Rust!").unwrap().into_raw();
+    let python_string = str::from_utf8(c_value).unwrap();
+    //println!("Python string: {}", python_string.unwrap());
+
+    let s = CString::new(format!("Hello from Rust!\n{}", python_string))
+        .unwrap()
+        .into_raw();
     return s;
 }
 
