@@ -40,7 +40,7 @@ print(f"Rust return: {rust_return}")
 # Using the library (send a string as bytes that are encoded as utf-8):
 pyru.free_rust_mem_from_python(rust_return)
 
-
+rust_return = None
 # run indefinitely:
 while True:
     marie = Person(name="Marie", age=2)
