@@ -5,25 +5,16 @@ Python + Rust, omg!
 Steps to using Rust inside Python:
 
 1. create a new Cargo library project:
-2. modify the Cargo.toml and specify we are building a shared library
+2. modify the Cargo.toml and specify we are building a shared library, example [here](https://github.com/saidvandeklundert/python/blob/main/rust/pyru/Cargo.toml)
 3. write a FFI in Rust that is compatible with C
 4. build the library using the regular `cargo build --release`
 5. Create a Python program that loads the library and calls the function. On Linux, load the `.so` file.
 
-This is how I made the example [pyru](https://github.com/saidvandeklundert/python/tree/main/rust/pyru) library.
+An example library made by me is [pyru](https://github.com/saidvandeklundert/python/tree/main/rust/pyru).
 
-Some pointers:
-
-# set the crate type:
-
-```
-crate-type = ["dylib"]
-```
-
-# Creat the FFI:
+## Note on Creating the FFI:
 
 The `extern` keywork facilitates the creation of an FFI (Foreign Function Interface). It can be used to call functions in other languages or to create an interface that allows other languages to call Rust functions.
-# ensure the compiler retains the function name
 
 From the book of Rust:
 ```
@@ -39,9 +30,9 @@ pub extern "C" fn call_from_c() {
 }
 ```
 
-# Loading the library in Python
+## Loading the library in Python
 
-You can load the exported C function in Python by using the following:
+A Rust function exported to C can be loaded into Python using the following:
 
 ```python
 import ctypes
@@ -54,12 +45,16 @@ pyru.python_person_to_rust(argument)
 
 Be mindful of the arguments used when calling Rust functions.
 
-A nice way to go in my opinion is this:
+A nice way to do this (in my opinion):
 - use a Python dataclass as input to Rust
 - send the argument to the C function like so:
   - output the dataclass as a JSON string
   - encode the JSON string as as bytes 
+- in Rust, read the bytes as a string, and serialize the JSON string into a struct to work with
 
+In case you want the Rust function to return a value to Python, do the opposite. Serialize a struct to JSON, output it as a string and send the C-string into Python. Then, inside the Python runtime, read the C-string using `c_char_p` and transform it into a dataclass again.
+
+## Python example, calling the Rust python_person_to_rust function:
 
 ```python
 from pydantic import BaseModel
@@ -72,6 +67,8 @@ jan = Person(name="Jan", age=6)
 json_json_str = jan.json(indent=2).encode("utf-8")
 pyru.python_person_to_rust(json_json_str)
 ```
+## Example Rust function, that was previously called from Python:
+
 In Rust, you can receive this as a `*const c_char`: 
 
 ```rust
