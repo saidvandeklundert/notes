@@ -54,3 +54,5 @@ while True:
 
     print(rust_return_string)
     pyru.free_rust_mem_from_python(rust_return)
+    marie = None
+    rust_return = None
