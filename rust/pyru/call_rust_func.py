@@ -38,4 +38,4 @@ if rust_return_string:
 print(rust_return_string)
 
 # Using the library (send a string as bytes that are encoded as utf-8):
-rust_return = pyru.free_rust_mem_from_python(rust_return)
+pyru.free_rust_mem_from_python(rust_return)
