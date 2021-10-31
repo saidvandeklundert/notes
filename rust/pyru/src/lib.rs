@@ -10,4 +10,5 @@ pub extern "C" fn python_to_rust(value: *const c_char, substr: *const c_char) ->
     let c_value = unsafe { CStr::from_ptr(value).to_bytes() };
     let python_string = str::from_utf8(c_value);
     println!("Python string: {}", python_string.unwrap());
+    return 1;
 }
