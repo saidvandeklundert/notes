@@ -5,3 +5,157 @@ Python + Rust, omg!
 1. pull down this repo
 2. `cargo build --release` in substring_count
 3. run `/rust/substring_count/testing.py`
+
+Steps to using Rust inside Python:
+
+1. create a new Cargo library project
+2. modify the Cargo.toml and specify we are building a shared library
+3. write a FFI in Rust that is compatible with C
+4. build the library using the regular `cargo build --release`
+5. Create a Python program that loads the library and calls the function. On Linux, load the `.so` file.
+
+Some pointers:
+
+# set the crate type:
+
+```
+crate-type = ["dylib"]
+```
+
+# Creat the FFI:
+
+The `extern` keywork facilitates the creation of an FFI (Foreign Function Interface). It can be used to call functions in other languages or to create an interface that allows other languages to call Rust functions.
+# ensure the compiler retains the function name
+
+From the book of Rust:
+```
+We also need to add a #[no_mangle] annotation to tell the Rust compiler not to mangle the name of this function. Mangling is when a compiler changes the name we’ve given a function to a different name that contains more information for other parts of the compilation process to consume but is less human readable. Every programming language compiler mangles names slightly differently, so for a Rust function to be nameable by other languages, we must disable the Rust compiler’s name mangling.
+```
+
+Example function that can be called from C:
+
+```
+#[no_mangle]
+pub extern "C" fn call_from_c() {
+    println!("Just called a Rust function from C!");
+}
+```
+
+# Loading the library in Python
+
+You can load the exported C function in Python by using the following:
+
+```python
+import ctypes
+library_name = "target/release/libpyru.so"
+# load the library:
+pyru = ctypes.CDLL(library_name)
+# call the 'python_person_to_rust' from the pyru library:
+pyru.python_person_to_rust(argument)
+```
+
+Be mindful of the arguments used when calling Rust functions.
+
+A nice way to go in my opinion is this:
+- use a Python dataclass as input argument
+- send the argument to the C function like so:
+  - output the dataclass as a JSON string
+  - encode the JSON string as as bytes 
+
+```python
+from pydantic import BaseModel
+
+class Person(BaseModel):
+    name: str
+    age: int
+
+jan = Person(name="Jan", age=6)
+json_json_str = jan.json(indent=2).encode("utf-8")
+pyru.python_person_to_rust(json_json_str)
+```
+In Rust, you can receive this as a `*const c_char`: 
+
+```rust
+#[no_mangle]
+pub extern "C" fn python_person_to_rust(value: *const c_char) {
+    let c_value = unsafe { CStr::from_ptr(value).to_bytes() };
+    let python_string = str::from_utf8(c_value).unwrap();
+    let person: Person = serde_json::from_str(&python_string).unwrap();
+    println!("{} says hello in Rust", person.name);
+}
+```
+In the function signature, we recieve the bytes as a `*const c_char`. Using `CStr::from_ptr`, we take the pointer to the C string, and read the bytes. After that, we use `str::from_utf8` to read the bytes as utf8 and then.
+
+After that, we use serde to read the JSON string into Person.
+
+If we want to return something from Rust to Python, we could do something like this:
+```rust
+#[no_mangle]
+pub extern "C" fn rust_function(value: *const c_char) -> *mut c_char {
+    let c_value = unsafe { CStr::from_ptr(value).to_bytes() };
+    let string = str::from_utf8(c_value).unwrap();    
+
+    let s = CString::new(format!("Hello from Rust!\n{}", string))
+        .unwrap()
+        .into_raw();
+    return s;
+}
+```
+
+In the above function, we receive and read bytes into a variable called `string`. Then, we use `CString::new` to create a C compatible string. After that, `into_raw` is used to transfer ownership to C.
+
+
+In Python, we can use `ctypes.c_char_p()` to read this return:
+
+```python
+import ctypes
+library_name = "target/release/libpyru.so"
+pyru = ctypes.CDLL(library_name)
+
+rust_return = pyru.rust_function(argument)
+
+rust_return_bytes = ctypes.c_char_p(rust_return)
+string = rust_return_bytes.value
+```
+
+Sending bytes from the Python runtime to Rust makes it easy to reason about the data exchange between the two. Using JSON on both sides, we can marshal the bytes into a struct or a data class and treat the struct/data class as output and input between the two worlds.
+
+
+Rust does not have a GC, so we need to release memory on the Rust side in case we let Rust return a value. This could look something like so:
+
+```rust
+#[no_mangle]
+pub extern "C" fn free_rust_mem_from_python(c: *mut c_char) {
+    // convert the pointer back to `CString`
+    // it will be automatically dropped immediately
+    //println!("Rust memory freed from Python!");
+    unsafe {
+        CString::from_raw(c);
+    }
+}
+```
+
+We call the function on the Python side after we are done with the Rust return. It could look something like so:
+
+```python
+import ctypes
+from pydantic import BaseModel
+
+library_name = "target/release/libpyru.so"
+pyru = ctypes.CDLL(library_name)
+rust_return = pyru.python_to_rust(json_json_str)
+
+class Person(BaseModel):
+    name: str
+    age: int
+marie = Person(name="Marie", age=2)
+marie_json_str = marie.json(indent=2).encode("utf-8")
+
+rust_return_marie = pyru.python_to_rust(marie_json_str)
+rust_return_bytes = ctypes.c_char_p(rust_return_marie)
+rust_return_string = rust_return_bytes.value
+
+pyru.free_rust_mem_from_python(rust_return_marie)
+```
+
+Using this pattern, reasoning about the calls from Python into Rust is not too difficult in my opinion.
