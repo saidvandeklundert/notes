@@ -24,4 +24,4 @@ pyru = ctypes.CDLL(library_name)
 
 
 # Using the library (send a string as bytes that are encoded as utf-8):
-print(pyru.python_to_rust(json_json_str))
+rust_resturn = pyru.python_to_rust(json_json_str)
