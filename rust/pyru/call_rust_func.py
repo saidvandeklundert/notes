@@ -54,8 +54,7 @@ while i < loops:
         rust_return_string = rust_return_string.decode("utf-8")
 
     if i % 10000 == 0:
-        print(rust_return_string)
-        print(f"Rust return: {rust_return}")
+        print(f"Rust return: {rust_return_string}")
         percent_done = str(int(i / loops * 100))
         print(f"percent done: {percent_done}")
     pyru.free_rust_mem_from_python(rust_return_marie)
