@@ -54,7 +54,7 @@ while True:
 
     print(rust_return_string)
     print(f"Rust return: {rust_return}")
-    pyru.free_rust_mem_from_python(rust_return)
+    pyru.free_rust_mem_from_python(rust_return_marie)
     marie = None
     rust_return = None
     rust_return_bytes = None
