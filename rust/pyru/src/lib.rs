@@ -14,3 +14,14 @@ pub extern "C" fn python_to_rust(value: *const c_char) -> *mut c_char {
     let s = CString::new("Hello from Rust!").unwrap().into_raw();
     return s;
 }
+
+/// Ensure that a value is released from memory
+#[no_mangle]
+pub extern "C" fn free_rust_mem_from_python(c: *mut c_char) {
+    // convert the pointer back to `CString`
+    // it will be automatically dropped immediately
+    unsafe {
+        CString::from_raw(c);
+    }
+    println!("Rust memory freed from Python!");
+}
