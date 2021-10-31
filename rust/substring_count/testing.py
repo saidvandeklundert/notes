@@ -6,3 +6,7 @@ library_name = "target/release/libstringtools.so"
 stringtools = ctypes.CDLL(library_name)
 # Using the library:
 print(stringtools.count_substrings(b"banana", b"na"))
+
+
+while True:
+    print(stringtools.count_substrings(b"banana", b"na"))
