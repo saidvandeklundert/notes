@@ -17,4 +17,4 @@ if __name__ == "__main__":
     pyru.rust_says_hello()
     end = timer()
     print(end - start)
-    print(timeit("test()"))
+    print(timeit("pyru.rust_says_hello()"))
