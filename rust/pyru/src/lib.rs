@@ -10,9 +10,9 @@ use std::str;
 
 /// Receive data from the Python universe and use it in Rust.
 #[no_mangle]
-pub extern "C" fn python_to_rust(value: *const c_char) -> *mut c_char {
-    let c_value = unsafe { CStr::from_ptr(value).to_bytes() };
-    let python_string = str::from_utf8(c_value).unwrap();
+pub extern "C" fn python_to_rust(c_string_ptr: *const c_char) -> *mut c_char {
+    let bytes = unsafe { CStr::from_ptr(c_string_ptr).to_bytes() };
+    let python_string = str::from_utf8(bytes).unwrap();
     //println!("Python string: {}", python_string.unwrap());
 
     let s = CString::new(format!("Hello from Rust!\n{}", python_string))
@@ -43,10 +43,10 @@ struct Person {
 }
 
 #[no_mangle]
-pub extern "C" fn person_in_rust_says_hello(value: *const c_char) {
-    let c_value = unsafe { CStr::from_ptr(value).to_bytes() };
-    let python_string = str::from_utf8(c_value).unwrap();
-    let person: Person = serde_json::from_str(&python_string).unwrap();
+pub extern "C" fn person_in_rust_says_hello(c_string_ptr: *const c_char) {
+    let bytes = unsafe { CStr::from_ptr(c_string_ptr).to_bytes() };
+    let string_from_python = str::from_utf8(bytes).unwrap();
+    let person: Person = serde_json::from_str(&string_from_python).unwrap();
     println!("{} says hello in Rust", person.name);
 }
 

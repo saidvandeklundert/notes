@@ -54,7 +54,7 @@ pyru.call_rust_from_python()
 ```
 
 
-The previous example function did not take any arguments. Sending arguments into Rust can be a bittricky. In Python, you need to translate all the types used as arguments to the function to their counterpart in C. Then, in Rust, you need to translate the C-types into valid Rust types.
+The previous example function did not take any arguments. Sending arguments into Rust can be a bit tricky. In Python, you need to translate all the types used as arguments to the function to their counterpart in C. Then, in Rust, you need to translate the C-types into valid Rust types.
 
 When you are returning something from a Rust function to the Python runtime, you have to go about it the other way around: Rust -> C - > Python.
 
@@ -126,10 +126,10 @@ On the Rust side, we have the following code:
 
 ```rust
 #[no_mangle]
-pub extern "C" fn person_in_rust_says_hello(value: *const c_char) {
-    let c_value = unsafe { CStr::from_ptr(value).to_bytes() };
-    let python_string = str::from_utf8(c_value).unwrap();
-    let person: Person = serde_json::from_str(&python_string).unwrap();
+pub extern "C" fn person_in_rust_says_hello(c_string_ptr: *const c_char) {
+    let bytes = unsafe { CStr::from_ptr(c_string_ptr).to_bytes() };
+    let string_from_python = str::from_utf8(bytes).unwrap();
+    let person: Person = serde_json::from_str(&string_from_python).unwrap();
     println!("{} says hello in Rust", person.name);
 }
 
@@ -142,7 +142,9 @@ struct Person {
 
 ```
 
-In the function signature for `person_in_rust_says_hello`, we recieve the bytes as a `*const c_char`. Using `CStr::from_ptr`, we take the pointer to the C string, and read the bytes. After that, we use `str::from_utf8` to read the bytes as utf8. Then we serialize the JSON string into a struct.
+In the function signature for `person_in_rust_says_hello`, we recieve the bytes as a `*const c_char`. This is a raw pointer to a C char value. Dereferencing a raw pointer must be done in an unsafe block, so on the next line, enter an unsafe block using `unsafe { ..}`. Inside the unsafe block, we pass the raw pointer to `CStr::from_ptr`. This function `will wrap the provided 'ptr' with a 'CStr' wrapper, which allows inspection and interoperation of non-owned C strings.` It returns a `CStr` on which we then call `.to_bytes()`, which will essentially convert the C string to a byte slice. Once the expression is run, the `bytes` variable will contain a `&[u8]` value. 
+
+The `bytes` variable is fed to `str::from_utf8`, and after that happened, `string_from_python` contains the string we send from Python as an `&str`. We then proceed to use `serde_json::from_str` to marshal the string into a struct.
 
 ## Calling a Rust function that takes an argument and returns a value from Python:
 
