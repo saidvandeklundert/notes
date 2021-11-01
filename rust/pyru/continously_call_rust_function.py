@@ -1,7 +1,3 @@
-# script that calls a rust function from the pyru library.
-# first part creates a pydantic basemodel class.
-## second part loads the Rust function and sends over the pydantic model.
-"""Part 1"""
 from pydantic import BaseModel
 import ctypes
 

@@ -23,7 +23,7 @@ We also need to add a #[no_mangle] annotation to tell the Rust compiler not to m
 
 Example function that can be called from C:
 
-```
+```rust
 #[no_mangle]
 pub extern "C" fn call_from_c() {
     println!("Just called a Rust function from C!");
@@ -32,22 +32,43 @@ pub extern "C" fn call_from_c() {
 
 ## Loading the library in Python
 
-A Rust function exported to C can be loaded into Python using the following:
+A Rust function exported to C can be loaded into Python using the `CDLL` class located in `ctypes`. From the `CDLL` docstring:
+
+```
+An instance of this class represents a loaded dll/shared
+ library, exporting functions using the standard C calling
+ convention (named 'cdecl' on Windows).
+
+The exported functions can be accessed as attributes, or by
+ indexing with the function name.
+```
+
+The following is an example where `CDLL` us used to load the functions from `target/release/libpyru.so`. After loading the file, the `call_rust_from_python` function is called:
 
 ```python
 import ctypes
 library_name = "target/release/libpyru.so"
-# load the library as 'pyru':
+
 pyru = ctypes.CDLL(library_name)
-# call the 'python_person_to_rust' from the pyru library:
-pyru.python_person_to_rust(argument)
+pyru.call_rust_from_python()
 ```
 
-Be mindful of the arguments used when calling Rust functions. A nice way to do this (in my opinion):
-- use a Python dataclass as input to Rust and send the argument to the C function like so:
-  - output the dataclass as a JSON string
-  - encode the JSON string as as bytes 
-- in Rust, read the bytes as a string, and deserialize the JSON-string into a struct that you can work with
+
+The previous example function did not take any arguments. Sending arguments into Rust can be a bittricky. In Python, you need to translate all the types used as arguments to the function to their counterpart in C. Then, in Rust, you need to translate the C-types into valid Rust types.
+
+When you are returning something from a Rust function to the Python runtime, you have to go about it the other way around: Rust -> C - > Python.
+
+In my opinion, a nice way to do this is by using a data class on the Python side and a struct on the Rust side.
+
+From Python to Rust:
+- output the dataclass as a JSON string
+- convert the JSON string to bytes
+- send the bytes over to the Rust function
+
+Then, in Rust:
+- build a C-string from the values passed in from Python (via C) by reading the bytes
+- after reading the bytes, use `str::from_utf8` to turn it into a string
+- then, deserialize the JSON-string into a struct that you can work with
 
 In case you want the Rust function to return a value to Python, do the opposite. Serialize a struct to JSON, output it as a string and send the C-string into Python. Then, inside the Python runtime, read the C-string using `c_char_p` and transform it into a dataclass again.
 
