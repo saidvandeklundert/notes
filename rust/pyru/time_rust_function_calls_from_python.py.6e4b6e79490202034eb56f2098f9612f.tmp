@@ -27,6 +27,6 @@ if __name__ == "__main__":
         timeit(
             "time_rust_function_calls_from_python()",
             setup="from __main__ import time_rust_function_calls_from_python",
-            number=1000000
+            number=10000
         )
     )
