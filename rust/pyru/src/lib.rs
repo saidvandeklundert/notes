@@ -49,3 +49,8 @@ pub extern "C" fn python_person_to_rust(value: *const c_char) {
     let person: Person = serde_json::from_str(&python_string).unwrap();
     println!("{} says hello in Rust", person.name);
 }
+
+#[no_mangle]
+pub extern "C" fn rust_says_hello() {
+    println!("Hello from the Rust universe!");
+}

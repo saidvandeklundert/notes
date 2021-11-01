@@ -19,7 +19,7 @@ import ctypes
 
 # following is where the Rust library should be located:
 library_name = "target/release/libpyru.so"
-# loaing the library:
+# loading the library:
 pyru = ctypes.CDLL(library_name)
 
 
