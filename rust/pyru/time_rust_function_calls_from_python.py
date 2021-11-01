@@ -11,6 +11,11 @@ library_path = "target/release/libpyru.so"
 # loading the library:
 pyru = ctypes.CDLL(library_path)
 
+
+def time_rust_function_calls_from_python():
+    pyru.rust_says_hello()
+
+
 if __name__ == "__main__":
     # calling the Rust function:
     start = timer()
@@ -18,7 +23,9 @@ if __name__ == "__main__":
     end = timer()
     print(end - start)
 
-    def time_rust_function_calls_from_python():
-        pyru.rust_says_hello()
-
-    print(timeit("time_rust_function_calls_from_python()"))
+    print(
+        timeit(
+            "time_rust_function_calls_from_python()",
+            setup="from __main__ import time_rust_function_calls_from_python",
+        )
+    )
