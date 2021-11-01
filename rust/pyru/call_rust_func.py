@@ -12,7 +12,7 @@ class Person(BaseModel):
 
 jan = Person(name="Jan", age=6)
 
-# output the model as JSON string, then convert to bytes encoded a utf-8:
+# output Person instance as JSON string, then convert it to bytes, encoded as utf-8:
 json_json_str = jan.json(indent=2).encode("utf-8")
 """Part 2"""
 import ctypes

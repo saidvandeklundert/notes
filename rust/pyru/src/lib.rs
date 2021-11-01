@@ -43,7 +43,7 @@ struct Person {
 }
 
 #[no_mangle]
-pub extern "C" fn python_person_to_rust(value: *const c_char) {
+pub extern "C" fn person_in_rust_says_hello(value: *const c_char) {
     let c_value = unsafe { CStr::from_ptr(value).to_bytes() };
     let python_string = str::from_utf8(c_value).unwrap();
     let person: Person = serde_json::from_str(&python_string).unwrap();

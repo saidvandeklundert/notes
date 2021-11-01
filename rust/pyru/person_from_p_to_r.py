@@ -23,7 +23,7 @@ library_name = "target/release/libpyru.so"
 pyru = ctypes.CDLL(library_name)
 
 # Using the library (send a string as bytes that are encoded as utf-8):
-pyru.python_person_to_rust(json_json_str)
+pyru.person_in_rust_says_hello(json_json_str)
 
 if __name__ == "__main__":
     import sys
@@ -31,4 +31,4 @@ if __name__ == "__main__":
     # Make infinite function calls and monitor mem usage
     if len(sys.argv) > 1:
         while True:
-            pyru.python_person_to_rust(json_json_str)
+            pyru.person_in_rust_says_hello(json_json_str)

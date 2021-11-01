@@ -1,5 +1,5 @@
 [package]
-name = "stringtools"
+name = "pyru"
 version = "0.0.1"
 authors = ["Said van de Klundert"]
 
