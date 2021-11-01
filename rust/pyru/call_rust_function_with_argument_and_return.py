@@ -19,4 +19,4 @@ if __name__ == "__main__":
     print(f"Rust returned the following:\n{rust_return_string}")
 
     # free the memory allocated by Rust:
-    pyru.free_rust_string(rust_return)
+    pyru.free_rust_mem(rust_return)

@@ -25,7 +25,7 @@ pub extern "C" fn python_to_rust(value: *const c_char) -> *mut c_char {
 /// The value passed to this function is the 'CString::new' returned from a Rust function
 ///  called in the Python-verse.
 #[no_mangle]
-pub extern "C" fn free_rust_mem_from_python(c: *mut c_char) {
+pub extern "C" fn free_rust_mem(c: *mut c_char) {
     // convert the pointer back to `CString`
     // it will be automatically dropped immediately
     //println!("Rust memory freed from Python!");
