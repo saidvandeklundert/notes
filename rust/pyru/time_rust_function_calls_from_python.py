@@ -1,5 +1,6 @@
 import ctypes
 from timeit import default_timer as timer
+from timeit import timeit
 
 # pointer to the file containing the rust function:
 library_path = "target/release/libpyru.so"
@@ -16,3 +17,4 @@ if __name__ == "__main__":
     pyru.rust_says_hello()
     end = timer()
     print(end - start)
+    print(timeit("test()"))
