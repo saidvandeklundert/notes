@@ -19,6 +19,4 @@ pub extern "C" fn print_string(c_string_ptr: *const c_char) {
 pub extern "C" fn print_int(c_int_ptr: *const c_int) {
     let int_ptr = unsafe { c_int_ptr.as_ref().unwrap() };
     println!("Python gave us number {}", int_ptr);
-    let double = int_ptr * 2;
-    println!("If we double the number, we get {}", double);
 }
