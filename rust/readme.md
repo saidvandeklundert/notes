@@ -2,10 +2,12 @@ I love Python and I love Rust.
 
 Python + Rust, omg!
 
-Steps to using Rust inside Python:
+## Steps to using Rust inside Python:
 
-1. create a new Cargo library project:
-2. modify the Cargo.toml and specify we are building a shared library, example [here](https://github.com/saidvandeklundert/python/blob/main/rust/pyru/Cargo.toml)
+In this example, we will be making use of Rust's `libc` and Python's `ctypes`.
+
+1. create a new Cargo library project
+2. modify the `Cargo.toml` and specify we are building a dynamic Rust library using `#[crate_type = "dylib"]` (example is [here](https://github.com/saidvandeklundert/python/blob/main/rust/pyru/Cargo.toml))
 3. write a FFI in Rust that is compatible with C
 4. build the library using the regular `cargo build --release`
 5. Create a Python program that loads the library and calls the function. On Linux, load the `.so` file.

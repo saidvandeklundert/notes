@@ -1,0 +1,15 @@
+[package]
+name = "rust_from_python"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+[lib]
+name = "pyru"
+crate-type = ["dylib"]
+
+[dependencies]
+libc = "~0.2"
+
