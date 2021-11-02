@@ -17,11 +17,6 @@ def time_rust_function_calls_from_python():
 
 if __name__ == "__main__":
     # calling the Rust function:
-    start = datetime.now()
-    pyru.rust_says_hello()
-    end = datetime.now()
-    print(end - start)
-
     i = 10_000
     n = i
     start = datetime.now()
@@ -30,3 +25,12 @@ if __name__ == "__main__":
         i -= 1
     end = datetime.now()
     print(f"called the Rust func {n} times in {end - start}")
+
+"""
+...
+Hello from the Rust universe!
+Hello from the Rust universe!
+called the Rust func 10000 times in 0:00:00.063125
+
+
+"""
