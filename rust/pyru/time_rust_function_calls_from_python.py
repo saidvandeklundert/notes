@@ -23,9 +23,10 @@ if __name__ == "__main__":
     print(end - start)
 
     i = 100_000
+    n = i
     start = timer()
     while i > 0:
         pyru.rust_says_hello()
         i -= 1
     end = timer()
-    print(end - start)
+    print(f"called the Rust func {n} times in {end - start}")
