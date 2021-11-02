@@ -5,7 +5,7 @@ authors = ["Said van de Klundert"]
 
 
 [lib]
-name = "pyru"
+name = "rust_lib"
 crate-type = ["dylib"]
 
 [dependencies]
