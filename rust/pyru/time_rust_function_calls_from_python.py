@@ -1,5 +1,5 @@
 import ctypes
-from timeit import default_timer as timer
+from datetime import datetime
 
 # pointer to the file containing the rust function:
 library_path = "target/release/libpyru.so"
@@ -17,16 +17,16 @@ def time_rust_function_calls_from_python():
 
 if __name__ == "__main__":
     # calling the Rust function:
-    start = timer()
+    start = datetime.now()
     pyru.rust_says_hello()
-    end = timer()
+    end = datetime.now()
     print(end - start)
 
     i = 100_000
     n = i
-    start = timer()
+    start = datetime.now()
     while i > 0:
         pyru.rust_says_hello()
         i -= 1
-    end = timer()
+    end = datetime.now()
     print(f"called the Rust func {n} times in {end - start}")
