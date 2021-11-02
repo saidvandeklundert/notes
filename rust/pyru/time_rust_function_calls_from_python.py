@@ -22,7 +22,7 @@ if __name__ == "__main__":
     end = datetime.now()
     print(end - start)
 
-    i = 100_000
+    i = 10_000
     n = i
     start = datetime.now()
     while i > 0:
