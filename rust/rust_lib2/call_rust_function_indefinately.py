@@ -41,6 +41,5 @@ if __name__ == "__main__":
 
         if returned_bytes:
             returned_model = RustResult.parse_raw(returned_bytes)
-        hosts = None
 
         # rust.free_string(ptr)
