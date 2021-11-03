@@ -27,6 +27,9 @@ if __name__ == "__main__":
     ptr = rust.start_procedure(some_bytes)
 
     returned_bytes = ctypes.c_char_p(ptr).value
+
     if returned_bytes:
         returned_model = RustResult.parse_raw(returned_bytes)
         print(returned_model.json(indent=2))
+
+    rust.free_string(ptr)
