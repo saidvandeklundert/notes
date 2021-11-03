@@ -1,7 +1,6 @@
 import ctypes
 from pydantic import BaseModel
 from typing import List
-import random
 
 rust = ctypes.CDLL("target/release/librust_lib2.so")
 
@@ -26,8 +25,8 @@ if __name__ == "__main__":
     i = 10000
 
     while i > 0:
-        random_number = random.randint(10000, 20000)
-        hosts = [f"server-{x}" for x in range(1, random_number)]
+
+        hosts = [f"server-{x}" for x in range(1, 100)]
         model = PythonModel(
             timeout=10,
             retries=3,
