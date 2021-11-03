@@ -7,7 +7,8 @@ if __name__ == "__main__":
     if len(argv) != 2:
         print("Usage: ./print_string_reversed.py <string>")
         exit(1)
-    rust_return_ptr = rust.reverse_string("Hello, World!".encode("utf-8"))
+    string_to_reverse = argv[1]
+    rust_return_ptr = rust.reverse_string(string_to_reverse.encode("utf-8"))
     rust_return_bytes = ctypes.c_char_p(rust_return_ptr).value
     if rust_return_bytes:
         rust_return_string = rust_return_bytes.decode("utf-8")
