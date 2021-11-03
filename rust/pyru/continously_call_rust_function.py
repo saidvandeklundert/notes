@@ -13,7 +13,7 @@ pyru = ctypes.CDLL(library_name)
 
 if __name__ == "__main__":
     i = 0
-    loops = 1000000
+    loops = 1000000000000000
     while i < loops:
         marie = Person(name="Marie", age=2)
         marie_json_str = marie.json(indent=2).encode("utf-8")
