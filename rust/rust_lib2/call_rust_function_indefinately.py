@@ -11,9 +11,11 @@ class PythonModel(BaseModel):
     retries: int
     host_list: List[str]
     action: str
+    job_id: int
 
 
 class RustResult(BaseModel):
+    job_id: int
     result: str
     message: str
     failed_hosts: List[str]
@@ -31,6 +33,7 @@ if __name__ == "__main__":
             retries=3,
             action="reboot",
             host_list=hosts,
+            job_id=f"job-{i}",
         )
         some_bytes = model.json().encode("utf-8")
 

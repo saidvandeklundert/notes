@@ -14,6 +14,7 @@ struct PythonModel {
     retries: u8,
     host_list: Vec<String>,
     action: String,
+    job_id: i32,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -21,6 +22,7 @@ struct RustResult {
     result: String,
     message: String,
     failed_hosts: Vec<String>,
+    job_id: i32,
 }
 
 #[no_mangle]
@@ -52,6 +54,7 @@ fn long_running_task(model: PythonModel) -> RustResult {
         result: "success".to_string(),
         message: "1 host failed".to_string(),
         failed_hosts: vec!["server1".to_string()],
+        job_id: model.job_id,
     };
     return result;
 }
