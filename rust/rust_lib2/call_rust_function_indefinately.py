@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     while i > 0:
         random_number = random.randint(100, 1000)
-        hosts = [f"server-{x}" for x in range(1, 500000)]
+        hosts = [f"server-{x}" for x in range(1, random_number)]
         model = PythonModel(
             timeout=10,
             retries=3,
