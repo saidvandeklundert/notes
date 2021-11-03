@@ -44,12 +44,6 @@ pub extern "C" fn free_string(c_string_ptr: *mut c_char) {
 }
 
 fn long_running_task(model: PythonModel) -> RustResult {
-    //println!(
-    //    "Starting long_running_task in Rust using following arguments:\n{:?} {:?} {:?}",
-    //    model.retries, model.timeout, model.action
-    //);
-    //println!("No GIL here. Lot's of possibilities to speed up Python.");
-    //println!("Make sure to release the memory though!");
     let result = RustResult {
         result: "success".to_string(),
         message: "1 host failed".to_string(),

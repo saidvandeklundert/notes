@@ -44,5 +44,3 @@ if __name__ == "__main__":
 
         if returned_bytes:
             returned_model = RustResult.parse_raw(returned_bytes)
-        x = rust.python_to_rust(some_bytes)
-        # rust.free_string(ptr)
