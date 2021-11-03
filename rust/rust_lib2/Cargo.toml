@@ -1,0 +1,15 @@
+[package]
+name = "rust_lib2"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rust_lib2"
+crate-type = ["dylib"]
+
+
+[dependencies]
+libc = "~0.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
