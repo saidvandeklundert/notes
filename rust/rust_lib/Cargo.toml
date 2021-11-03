@@ -8,6 +8,5 @@ authors = ["Said van de Klundert"]
 name = "rust_lib"
 crate-type = ["dylib"]
 
-[dependencies]
-libc = "~0.2"
+
 
