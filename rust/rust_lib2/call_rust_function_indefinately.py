@@ -35,12 +35,10 @@ if __name__ == "__main__":
             host_list=hosts,
             job_id=i,
         )
-        some_bytes = model.json().encode("utf-8")
 
-        ptr = rust.start_procedure(some_bytes)
+        ptr = rust.start_procedure(model.json().encode("utf-8"))
 
         returned_bytes = ctypes.c_char_p(ptr).value
 
-        if returned_bytes:
-            returned_model = RustResult.parse_raw(returned_bytes)
-            print(returned_model)
+        returned_model = RustResult.parse_raw(returned_bytes)
+        print(returned_model)
