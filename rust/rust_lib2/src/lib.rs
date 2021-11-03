@@ -7,7 +7,6 @@ use serde::{Deserialize, Serialize};
 use std::ffi::CStr;
 use std::ffi::CString;
 use std::str;
-use std::{thread, time::Duration};
 
 #[derive(Debug, Serialize, Deserialize)]
 struct PythonModel {
@@ -47,7 +46,6 @@ fn long_running_task(model: PythonModel) -> RustResult {
         "Starting long_running_task in Rust using following arguments:\n{:?}",
         model
     );
-    thread::sleep(Duration::from_secs(3));
     let result = RustResult {
         result: "success".to_string(),
         message: "1 host failed".to_string(),
