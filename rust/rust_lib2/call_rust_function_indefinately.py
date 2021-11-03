@@ -23,7 +23,7 @@ if __name__ == "__main__":
     i = 10000
 
     while i > 0:
-        hosts = [f"server-{x}" for x in range(1, 5000)]
+        hosts = [f"server-{x}" for x in range(1, 500000)]
         model = PythonModel(
             timeout=10,
             retries=3,
