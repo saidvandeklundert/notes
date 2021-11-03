@@ -36,13 +36,6 @@ pub extern "C" fn start_procedure(c_string_ptr: *const c_char) -> *mut c_char {
     c_string.into_raw()
 }
 
-#[no_mangle]
-pub extern "C" fn free_string(c_string_ptr: *mut c_char) {
-    unsafe {
-        CString::from_raw(c_string_ptr);
-    }
-}
-
 fn long_running_task(model: PythonModel) -> RustResult {
     let result = RustResult {
         result: "success".to_string(),
