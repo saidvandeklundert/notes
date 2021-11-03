@@ -29,15 +29,7 @@ struct RustResult {
 pub extern "C" fn start_procedure(c_string_ptr: *const c_char) -> *mut c_char {
     let bytes = unsafe { CStr::from_ptr(c_string_ptr).to_bytes() };
     let string = str::from_utf8(bytes).unwrap();
-    let model1: PythonModel = serde_json::from_str(string).unwrap();
-    println!("{:?}", model1.job_id);
-    let model: PythonModel = PythonModel {
-        timeout: 10,
-        retries: 3,
-        host_list: vec!["s1".to_string(), "s2".to_string()],
-        action: "action".to_string(),
-        job_id: 1,
-    };
+    let model: PythonModel = serde_json::from_str(string).unwrap();
     let result = long_running_task(model);
     let result_json = serde_json::to_string(&result).unwrap();
     let c_string = CString::new(result_json).unwrap();
@@ -52,10 +44,10 @@ pub extern "C" fn free_string(c_string_ptr: *mut c_char) {
 }
 
 fn long_running_task(model: PythonModel) -> RustResult {
-    println!(
-        "Starting long_running_task in Rust using following arguments:\n{:?} {:?} {:?}",
-        model.retries, model.timeout, model.action
-    );
+    //println!(
+    //    "Starting long_running_task in Rust using following arguments:\n{:?} {:?} {:?}",
+    //    model.retries, model.timeout, model.action
+    //);
     //println!("No GIL here. Lot's of possibilities to speed up Python.");
     //println!("Make sure to release the memory though!");
     let result = RustResult {
