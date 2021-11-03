@@ -1,9 +1,7 @@
-extern crate libc;
-
-use libc::c_char;
-use libc::c_int;
 use std::ffi::CStr;
 use std::ffi::CString;
+use std::os::raw::c_char;
+use std::os::raw::c_int;
 use std::str;
 
 /// Turn a C-string into a string slice and print to console:
