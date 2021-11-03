@@ -42,7 +42,10 @@ pub extern "C" fn free_string(c_string_ptr: *mut c_char) {
 }
 
 fn long_running_task(model: PythonModel) -> RustResult {
-    println!("Taking action using following input:\n{:?}", model);
+    println!(
+        "Starting long_running_task in Rust using following arguments:\n{:?}",
+        model
+    );
     let result = RustResult {
         result: "success".to_string(),
         message: "1 host failed".to_string(),
