@@ -21,6 +21,7 @@ class RustResult(BaseModel):
 if __name__ == "__main__":
 
     i = 10000
+
     while i > 0:
         hosts = [f"server-{x}" for x in range(1, 5000)]
         model = PythonModel(
@@ -37,5 +38,6 @@ if __name__ == "__main__":
 
         if returned_bytes:
             returned_model = RustResult.parse_raw(returned_bytes)
+        hosts = None
 
         # rust.free_string(ptr)
