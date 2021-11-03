@@ -46,8 +46,8 @@ fn long_running_task(model: PythonModel) -> RustResult {
     //    "Starting long_running_task in Rust using following arguments:\n{:?}",
     //    model
     //);
-    println!("No GIL here. Lot's of possibilities to speed up Python.");
-    println!("Make sure to release the memory though!");
+    //println!("No GIL here. Lot's of possibilities to speed up Python.");
+    //println!("Make sure to release the memory though!");
     let result = RustResult {
         result: "success".to_string(),
         message: "1 host failed".to_string(),

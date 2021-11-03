@@ -20,7 +20,7 @@ class RustResult(BaseModel):
 
 if __name__ == "__main__":
 
-    i = 1_000
+    i = 10000
     while i > 0:
         hosts = [f"server-{x}" for x in range(1, 5000)]
         model = PythonModel(
