@@ -29,7 +29,8 @@ struct RustResult {
 pub extern "C" fn start_procedure(c_string_ptr: *const c_char) -> *mut c_char {
     let bytes = unsafe { CStr::from_ptr(c_string_ptr).to_bytes() };
     let string = str::from_utf8(bytes).unwrap();
-    //let model: PythonModel = serde_json::from_str(string).unwrap();
+    let model1: PythonModel = serde_json::from_str(string).unwrap();
+    println!("{:?}", model1.job_id);
     let model: PythonModel = PythonModel {
         timeout: 10,
         retries: 3,
