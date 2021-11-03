@@ -33,7 +33,7 @@ if __name__ == "__main__":
             retries=3,
             action="reboot",
             host_list=hosts,
-            job_id=f"job-{i}",
+            job_id=i,
         )
         some_bytes = model.json().encode("utf-8")
 
