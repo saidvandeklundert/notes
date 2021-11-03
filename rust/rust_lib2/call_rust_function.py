@@ -12,9 +12,20 @@ class PythonModel(BaseModel):
     action: str
 
 
+class RustResult(BaseModel):
+    result: str
+    message: str
+    failed_hosts: List[str]
+
+
 if __name__ == "__main__":
     model = PythonModel(
         timeout=10, retries=3, action="reboot", host_list=["server1", "server2"]
     )
     some_bytes = model.json().encode("utf-8")
-    print(rust.start_procedure(some_bytes))
+
+    ptr = rust.start_procedure(some_bytes)
+
+    returned_bytes = ctypes.c_char_p(ptr).value
+    if returned_bytes:
+        returned_model = RustResult.parse_raw(returned_bytes)
