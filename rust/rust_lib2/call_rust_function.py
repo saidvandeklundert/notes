@@ -22,7 +22,11 @@ class RustResult(BaseModel):
 
 if __name__ == "__main__":
     model = PythonModel(
-        timeout=10, retries=3, action="reboot", host_list=["server1", "server2"]
+        timeout=10,
+        retries=3,
+        action="reboot",
+        host_list=["server1", "server2"],
+        job_id=1,
     )
     some_bytes = model.json().encode("utf-8")
 
