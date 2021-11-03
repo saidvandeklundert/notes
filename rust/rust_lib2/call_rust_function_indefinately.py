@@ -19,10 +19,13 @@ class RustResult(BaseModel):
 
 
 if __name__ == "__main__":
-    i = 1_000_000
+    i = 1_000
     while i > 0:
         model = PythonModel(
-            timeout=10, retries=3, action="reboot", host_list=["server1", "server2"]
+            timeout=10,
+            retries=3,
+            action="reboot",
+            host_list=[f"server-{x}" for x in range(1, 5000)],
         )
         some_bytes = model.json().encode("utf-8")
 
