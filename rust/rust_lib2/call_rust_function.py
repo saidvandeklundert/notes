@@ -29,3 +29,4 @@ if __name__ == "__main__":
     returned_bytes = ctypes.c_char_p(ptr).value
     if returned_bytes:
         returned_model = RustResult.parse_raw(returned_bytes)
+        print(returned_model.json(indent=2))
