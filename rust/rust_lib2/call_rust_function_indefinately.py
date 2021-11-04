@@ -25,7 +25,7 @@ class RustResult(BaseModel):
 
 if __name__ == "__main__":
 
-    i = 10000
+    i = 10000000
 
     while i > 0:
 
