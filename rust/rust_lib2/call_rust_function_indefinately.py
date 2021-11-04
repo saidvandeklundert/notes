@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
     while i > 0:
 
-        hosts = [f"server-{x}" for x in range(1, 10000)]
+        hosts = ["server-1", "server-2", "server-3", "server-4"]
         model = PythonModel(
             timeout=10,
             retries=3,
