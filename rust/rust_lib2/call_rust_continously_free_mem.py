@@ -35,7 +35,6 @@ if __name__ == "__main__":
     while True:
         ptr = rust.start_procedure(procedure_input.json().encode("utf-8"))
         returned_bytes = ctypes.c_char_p(ptr).value
-        rust.free_mem(ptr)
         procedure_output = ProcedureOutput.parse_raw(returned_bytes)
         print(procedure_output)
         rust.free_mem(ptr)
