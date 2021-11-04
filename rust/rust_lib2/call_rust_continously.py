@@ -24,19 +24,16 @@ class ProcedureOutput(BaseModel):
 
 
 if __name__ == "__main__":
+    procedure_input = ProcedureInput(
+        timeout=10,
+        retries=3,
+        action="reboot",
+        host_list=["server1", "server2"],
+        job_id=1,
+    )
 
     while True:
-        procedure_input = ProcedureInput(
-            timeout=10,
-            retries=3,
-            action="reboot",
-            host_list=["server1", "server2"],
-            job_id=1,
-        )
-
         ptr = rust.start_procedure(procedure_input.json().encode("utf-8"))
-
         returned_bytes = ctypes.c_char_p(ptr).value
-
         procedure_output = ProcedureOutput.parse_raw(returned_bytes)
         print(procedure_output.json(indent=2))
