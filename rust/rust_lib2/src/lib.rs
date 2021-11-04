@@ -44,3 +44,8 @@ fn long_running_task(model: PythonModel) -> RustResult {
     };
     return result;
 }
+
+#[no_mangle]
+pub extern "C" fn free_mem(c_string_ptr: *mut c_char) {
+    unsafe { CString::from_raw(c_string_ptr) };
+}
