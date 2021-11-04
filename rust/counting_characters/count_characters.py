@@ -1,10 +1,13 @@
 import time
+import sys
+
 
 character_dict = {}
 
 if __name__ == "__main__":
+    file_name = sys.argv[1]
     start_time = time.time()
-    with open("/var/tmp/random.txt", "r") as file:
+    with open(file_name, "r") as file:
         for line in file:
             for char in line:
                 if char in character_dict:
