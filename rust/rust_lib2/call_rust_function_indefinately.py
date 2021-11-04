@@ -1,3 +1,6 @@
+"""
+Same as call_rust_function.py, just showing that there is no memmory leak when run indefinately.
+"""
 import ctypes
 from pydantic import BaseModel
 from typing import List

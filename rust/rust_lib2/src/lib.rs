@@ -1,11 +1,10 @@
-extern crate libc;
 extern crate serde;
 extern crate serde_json;
 
-use libc::c_char;
 use serde::{Deserialize, Serialize};
 use std::ffi::CStr;
 use std::ffi::CString;
+use std::os::raw::c_char;
 use std::str;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -44,16 +43,4 @@ fn long_running_task(model: PythonModel) -> RustResult {
         job_id: model.job_id,
     };
     return result;
-}
-
-#[no_mangle]
-pub extern "C" fn python_to_rust(c_string_ptr: *const c_char) -> *mut c_char {
-    let bytes = unsafe { CStr::from_ptr(c_string_ptr).to_bytes() };
-    let python_string = str::from_utf8(bytes).unwrap();
-    //println!("Python string: {}", python_string.unwrap());
-
-    let s = CString::new(format!("Hello from Rust!\n{}", python_string))
-        .unwrap()
-        .into_raw();
-    return s;
 }
