@@ -44,4 +44,4 @@ if __name__ == "__main__":
 
         returned_model = RustResult.parse_raw(returned_bytes)
         print(returned_model)
-        rust.free_rust_mem(ptr)
+        rust.free_mem(ptr)
