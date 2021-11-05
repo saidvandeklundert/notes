@@ -16,4 +16,8 @@ if __name__ == "__main__":
                     character_dict[char] = 1
 
     print(character_dict)
-    print("--- %s seconds ---" % (time.time() - start_time))
+    print("Using Python: %s seconds" % (time.time() - start_time))
+    import pandas as pd
+
+    phrase = "Mary had a little lamb"
+    print(pd.Series(list(phrase)).value_counts())
