@@ -24,6 +24,14 @@ fn list_printer(a: Vec<String>) {
     }
 }
 
+/// Print every item in an array to console:
+#[pyfunction]
+fn array_printer(a: [String; 8]) {
+    for string in a {
+        println!("{}", string)
+    }
+}
+
 /// Formats the sum of two numbers as string.
 #[pyfunction]
 fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
@@ -39,5 +47,6 @@ fn pyo3_examples(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(multiply, m)?)?;
     m.add_function(wrap_pyfunction!(list_sum, m)?)?;
     m.add_function(wrap_pyfunction!(list_printer, m)?)?;
+    m.add_function(wrap_pyfunction!(array_printer, m)?)?;
     Ok(())
 }

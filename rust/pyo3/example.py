@@ -9,3 +9,14 @@ if __name__ == "__main__":
     print(pyo3_examples.list_sum([10, 10, 10, 10, 10, 5]))
     words_list = ["apple", "banana", "orange", "pear", "grape"]
     print(pyo3_examples.list_printer(words_list))
+    array_of_strings = [
+        "apple",
+        "banana",
+        "orange",
+        "pear",
+        "grape",
+        "potato",
+        "avocado",
+        "sushi",
+    ]
+    print(pyo3_examples.array_printer(array_of_strings))
