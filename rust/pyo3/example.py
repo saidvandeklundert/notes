@@ -7,3 +7,5 @@ if __name__ == "__main__":
     x = pyo3_examples.multiply(5, 20)
     print(x)
     print(pyo3_examples.list_sum([10, 10, 10, 10, 10, 5]))
+    words_list = ["apple", "banana", "orange", "pear", "grape"]
+    print(pyo3_examples.list_printer(words_list))
