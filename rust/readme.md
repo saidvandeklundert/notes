@@ -20,7 +20,7 @@ apt-get install python3-venv
 python3  -m venv .env
 source .env/bin/activate
 pip install maturin
-cd string_sum/
+cd rust_lib/
 maturin develop
 (.env) root@rust:/var/tmp/rust_from_python/string_sum# python3 
 Python 3.9.2 (default, Feb 28 2021, 17:03:44)

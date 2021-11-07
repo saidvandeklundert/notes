@@ -16,6 +16,14 @@ fn list_sum(a: Vec<isize>) -> PyResult<isize> {
     Ok(sum)
 }
 
+/// Print every item in a list to console:
+#[pyfunction]
+fn list_printer(a: Vec<String>) {
+    for string in a {
+        println!("{}", string)
+    }
+}
+
 /// Formats the sum of two numbers as string.
 #[pyfunction]
 fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
@@ -30,5 +38,6 @@ fn pyo3_examples(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     m.add_function(wrap_pyfunction!(multiply, m)?)?;
     m.add_function(wrap_pyfunction!(list_sum, m)?)?;
+    m.add_function(wrap_pyfunction!(list_printer, m)?)?;
     Ok(())
 }
