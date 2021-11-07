@@ -19,4 +19,4 @@ if __name__ == "__main__":
         "avocado",
         "sushi",
     ]
-    print(pyo3_examples.array_printer(array_of_strings))
+    print(pyo3_examples.array_printer(array_of_strings[0:6]))
