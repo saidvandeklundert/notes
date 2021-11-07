@@ -1,6 +1,6 @@
 use pyo3::prelude::*;
 
-/// Multiply two numbers.
+/// Multiply two numbers:
 #[pyfunction]
 fn multiply(a: isize, b: isize) -> PyResult<isize> {
     Ok(a * b)
