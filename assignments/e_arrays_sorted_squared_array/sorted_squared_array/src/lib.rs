@@ -1,9 +1,14 @@
 use pyo3::prelude::*;
 
-/// Multiply two numbers:
 #[pyfunction]
-fn sorted_squared_array(a: isize, b: isize) -> PyResult<isize> {
-    Ok(a * b)
+fn sorted_squared_array(vec: Vec<isize>) -> PyResult<Vec<isize>> {
+    let mut new_vec: Vec<isize> = Vec::new();
+
+    for nr in vec {
+        let square: isize = nr * nr;
+        new_vec.push(square);
+    }
+    Ok(new_vec)
 }
 
 /// A Python module implemented in Rust. The name of this function must match
