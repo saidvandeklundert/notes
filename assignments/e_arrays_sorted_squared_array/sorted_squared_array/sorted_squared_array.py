@@ -20,6 +20,8 @@ def sortedSquaredArray(array):
     return new_array
 
 
+# O(n) time bc we need to loop through array
+# O(n) space as we need to create 1 new array
 def sorted_squared_array_optimized(array):
     new_array = [0 for _ in array]
     start_index = 0
