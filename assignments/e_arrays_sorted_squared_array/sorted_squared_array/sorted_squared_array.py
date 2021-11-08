@@ -17,19 +17,21 @@ def sortedSquaredArray(array):
 
 
 def sorted_squared_array_optimized(array):
-    new_array = []
+    new_array = [0 for i in array]
     start = 0
     end = len(array) - 1
 
     while True:
-        if array[end] ** 2 > array[start] ** 2:
-            new_array.append(array[end] ** 2)
+        start_v = array[start] ** 2
+        end_v = array[end] ** 2
+        if end_v > start_v:
+            new_array[end] = end_v
             end -= 1
-        elif array[start] ** 2 > array[end] ** 2:
-            new_array.append(array[start] ** 2)
+        elif start_v > end_v:
+            new_array[start] = start_v
             start += 1
-        elif array[end] == array[start]:
-            new_array.append(array[start] ** 2)
+        elif end_v == start_v:
+            new_array[end] = end_v
             return new_array
 
 
