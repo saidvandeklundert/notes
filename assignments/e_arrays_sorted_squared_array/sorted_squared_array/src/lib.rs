@@ -14,7 +14,7 @@ fn sorted_squared_array(vec: Vec<isize>) -> PyResult<Vec<isize>> {
 
 #[pyfunction]
 fn sorted_squared_array_optimized(vec: Vec<isize>) -> PyResult<Vec<isize>> {
-    let mut new_vec: Vec<isize> = vec![0; vec.len() - 1];
+    let mut new_vec: Vec<isize> = vec![0; vec.len()];
 
     let mut start_index = 0;
     let mut end_index = vec.len() - 1;
