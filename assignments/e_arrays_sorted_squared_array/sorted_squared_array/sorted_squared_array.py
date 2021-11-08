@@ -18,5 +18,4 @@ def sortedSquaredArray(array):
 if __name__ == "__main__":
     for test in inputs:
         print("Python", sortedSquaredArray(test))
-    for test in inputs:
         print("Rust", ssa.sorted_squared_array(test))
