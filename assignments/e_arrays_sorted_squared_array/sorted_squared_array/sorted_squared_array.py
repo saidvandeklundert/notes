@@ -22,10 +22,10 @@ def sorted_squared_array_optimized(array):
     end = len(array) - 1
 
     while True:
-        if array[end] > array[start]:
+        if array[end] ** 2 > array[start] ** 2:
             new_array.append(array[end] ** 2)
             end -= 1
-        elif array[start] > array[end]:
+        elif array[start] ** 2 > array[end] ** 2:
             new_array.append(array[start] ** 2)
             start += 1
         elif array[end] == array[start]:
