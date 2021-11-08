@@ -31,5 +31,6 @@ fn sorted_squared_array_optimized(vec: Vec<isize>) -> PyResult<Vec<isize>> {
 #[pymodule]
 fn ssa(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sorted_squared_array, m)?)?;
+    m.add_function(wrap_pyfunction!(sorted_squared_array_optimized, m)?)?;
     Ok(())
 }
