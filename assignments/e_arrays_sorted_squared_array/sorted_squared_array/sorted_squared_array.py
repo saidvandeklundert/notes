@@ -1,3 +1,5 @@
+import ssa
+
 inputs = [
     [1, 2, 3, 5, 6, 8, 9],
 ]
@@ -14,3 +16,5 @@ def sortedSquaredArray(array):
 if __name__ == "__main__":
     for test in inputs:
         print(sortedSquaredArray(test))
+    for test in inputs:
+        print(ssa.sorted_squared_array(test))
