@@ -8,6 +8,7 @@ fn sorted_squared_array(vec: Vec<isize>) -> PyResult<Vec<isize>> {
         let square: isize = nr * nr;
         new_vec.push(square);
     }
+    new_vec.sort();
     Ok(new_vec)
 }
 

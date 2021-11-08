@@ -12,7 +12,7 @@ def sortedSquaredArray(array):
 
     for i in array:
         new_array.append(i ** 2)
-    return new_array
+    return new_array.sort()
 
 
 if __name__ == "__main__":
