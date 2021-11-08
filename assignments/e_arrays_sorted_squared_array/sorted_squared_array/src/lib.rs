@@ -19,8 +19,17 @@ fn sorted_squared_array_optimized(vec: Vec<isize>) -> PyResult<Vec<isize>> {
     let mut start_index = 0;
     let mut end_index = vec.len() - 1;
 
-    for (idx, value) in vec.iter().enumerate().rev() {
-        println!("{} {}", idx, value)
+    for (idx, _) in vec.iter().enumerate().rev() {
+        //println!("{} {}", idx, value);
+        let start_v = vec[start_index];
+        let end_v = vec[end_index];
+        if start_v.abs() > end_v.abs() {
+            new_vec[idx] = start_v * start_v;
+            start_index += 1
+        } else {
+            new_vec[idx] = end_v * end_v;
+            end_index += 1
+        }
     }
     Ok(new_vec)
 }
