@@ -28,7 +28,7 @@ def sorted_squared_array_optimized(array):
             new_array[end] = end_v
             end -= 1
         elif start_v > end_v:
-            new_array[start] = start_v
+            new_array[end] = start_v
             start += 1
         elif end_v == start_v:
             new_array[end] = end_v
