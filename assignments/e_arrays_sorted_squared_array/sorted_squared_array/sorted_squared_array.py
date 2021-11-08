@@ -21,14 +21,14 @@ def sorted_squared_array_optimized(array):
     start = 0
     end = len(array) - 1
 
-    while end > start:
-        if end > start:
+    while True:
+        if array[end] > array[start]:
             new_array.append(array[end] ** 2)
             end -= 1
-        elif start > end:
+        elif array[start] > array[end]:
             new_array.append(array[start] ** 2)
             start += 1
-        elif start == end:
+        elif array[end] == array[start]:
             new_array.append(array[start] ** 2)
             return new_array
 
