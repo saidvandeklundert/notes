@@ -28,7 +28,7 @@ fn sorted_squared_array_optimized(vec: Vec<isize>) -> PyResult<Vec<isize>> {
             start_index += 1
         } else {
             new_vec[idx] = end_v * end_v;
-            end_index += 1
+            end_index -= 1
         }
     }
     Ok(new_vec)
