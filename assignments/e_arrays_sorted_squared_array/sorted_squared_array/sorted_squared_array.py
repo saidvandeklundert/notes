@@ -1,4 +1,7 @@
-import ssa
+try:
+    import ssa
+except:
+    pass
 
 inputs = [
     [1, 2, 3, 5, 6, 8, 9],
@@ -6,7 +9,8 @@ inputs = [
     [-7, -3, 1, 9, 22, 30],
 ]
 
-
+# O(nlogn) time (we iterate the array and in the end, we also sort it)
+# O(n) space: we need to create a new array
 def sortedSquaredArray(array):
     new_array = []
 
@@ -17,26 +21,29 @@ def sortedSquaredArray(array):
 
 
 def sorted_squared_array_optimized(array):
-    new_array = [0 for i in array]
-    start = 0
-    end = len(array) - 1
+    new_array = [0 for _ in array]
+    start_index = 0
+    end_index = len(array) - 1
 
-    while True:
-        start_v = array[start] ** 2
-        end_v = array[end] ** 2
-        if end_v > start_v:
-            new_array[end] = end_v
-            end -= 1
-        elif start_v > end_v:
-            new_array[end] = start_v
-            start += 1
-        elif end_v == start_v:
-            new_array[end] = end_v
-            return new_array
+    for idx in reversed(range(len(array))):
+
+        start_v = array[start_index]
+        end_v = array[end_index]
+
+        if abs(start_v) > abs(end_v):
+            new_array[idx] = start_v * start_v
+            start_index += 1
+        else:  # needs to be else, otherwise we skip the value where start_index and end_index meet.
+            new_array[idx] = end_v * end_v
+            end_index -= 1
+    return new_array
 
 
 if __name__ == "__main__":
     for test in inputs:
         print("Python:", sortedSquaredArray(test))
-        print("Rust:", ssa.sorted_squared_array(test))
+        try:
+            print("Rust:", ssa.sorted_squared_array(test))
+        except:
+            pass
         print("Python optimized:", sorted_squared_array_optimized(test))
