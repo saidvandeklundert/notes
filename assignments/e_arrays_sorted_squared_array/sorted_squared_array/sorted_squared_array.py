@@ -48,6 +48,6 @@ if __name__ == "__main__":
             pass
         print("Python optimized:", sorted_squared_array_optimized(test))
         try:
-            print("Rust:", ssa.sorted_squared_array_optimized(test))
+            print("Rustoptimized:", ssa.sorted_squared_array_optimized(test))
         except:
             pass
