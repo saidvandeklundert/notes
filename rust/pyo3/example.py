@@ -24,4 +24,5 @@ if __name__ == "__main__":
     now = datetime.datetime.now()
     print(pyo3_examples.array_printer(array_of_strings))
     duration = datetime.datetime.now() - now
+
     print(f"Calling Rust took: {duration}")
