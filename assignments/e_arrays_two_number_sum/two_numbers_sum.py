@@ -44,3 +44,4 @@ if __name__ == "__main__":
         print(twoNumberSum(**test))
         print(twoNumberSum(**test))
         print(rust.two_number_sum(**test))
+        print(50 * "_")
