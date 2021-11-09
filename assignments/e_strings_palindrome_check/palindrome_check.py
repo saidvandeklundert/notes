@@ -1,3 +1,5 @@
+import rust
+
 inputs = [
     {"string": "abcdcba"},
     {"string": "a"},
@@ -64,3 +66,4 @@ if __name__ == "__main__":
         print(isPalindromeSlow(**test))
         print(isPalindrome_recursion(**test))
         print(isPalindrome(**test))
+        print(rust.is_palindrome_slow(**test))
