@@ -67,3 +67,4 @@ if __name__ == "__main__":
         print(isPalindrome_recursion(**test))
         print(isPalindrome(**test))
         print(rust.is_palindrome_slow(**test))
+        print(50 * "_")
