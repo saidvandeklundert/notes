@@ -1,3 +1,5 @@
+import rust
+
 inputs = [
     {"array": [3, 5, -4, 8, 11, 1, -1, 6], "targetSum": 10},  # [-1. 11]
     {"array": [4, 6], "targetSum": 10},
@@ -41,3 +43,5 @@ if __name__ == "__main__":
     for test in inputs:
         print(twoNumberSum_slow(**test))
         print(twoNumberSum(**test))
+        print(twoNumberSum(**test))
+        print(rust.two_number_sum(**test))
