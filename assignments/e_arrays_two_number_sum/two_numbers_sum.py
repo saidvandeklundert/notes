@@ -29,7 +29,7 @@ def twoNumberSum_slow(array, targetSum):
 # O(n) space (we create a hashtable)
 def twoNumberSum(array, targetSum):
     seen = {}
-    seen[array.pop()] = True
+
     for v in array:
         if targetSum - v in seen:
             return [v, (targetSum - v)]
