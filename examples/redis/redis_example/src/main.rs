@@ -75,7 +75,7 @@ fn do_atomic_increment_lowlevel(con: &mut redis::Connection) -> redis::RedisResu
     println!("Run low-level atomic increment:");
 
     // set the initial value so we have something to test with.
-    redis::cmd("SET").arg(key).arg(42).query(con)?;
+    redis::cmd("SET").arg(key).arg(69).query(con)?;
 
     loop {
         // we need to start watching the key we care about, so that our
