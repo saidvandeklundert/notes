@@ -79,7 +79,8 @@ def getNthFib_rec(number):
 def python_fib(number):
     start = timer()
     for _ in range(10000):
-        result = getNthFib(number)
+        getNthFib(number)
+    print(getNthFib(number))
     elapsed = timer() - start
     # print(f"Python got {result} in {elapsed}.")
     print(f"Python  in {elapsed}.")
@@ -88,7 +89,8 @@ def python_fib(number):
 def rust_fib(number):
     start = timer()
     for _ in range(10000):
-        result = rust.get_fibonacci(number)
+        rust.get_fibonacci(number)
+    print(rust.get_fibonacci(number))
     elapsed = timer() - start
     # print(f"Rust got {result} in {elapsed}.")
     print(f"Rust in {elapsed}.")
