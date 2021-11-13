@@ -111,13 +111,13 @@ def run_once():
     print(rust.get_fibonacci_big(2000))
     elapsed = timer() - start
 
-    print(f"Rust in {elapsed}.")
+    print("Rust with completed in {:.2f} seconds.".format(elapsed))
 
     start = timer()
     print(getNthFib(1000))
     elapsed = timer() - start
 
-    print(f"Python in {elapsed}.")
+    print("Python completed in {:.2f} seconds.".format(elapsed))
 
 
 if __name__ == "__main__":
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     for test in inputs:
         python_fib(**test)
         rust_fib(**test)
-        # rust_fib_big(**test)
+        rust_fib_big(**test)
         print(50 * "-")
 
     run_once()
