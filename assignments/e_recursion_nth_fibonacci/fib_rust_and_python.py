@@ -115,7 +115,7 @@ def run_once():
     print(f"Rust in {elapsed}.")
 
     start = timer()
-    print(getNthFib(250))
+    print(getNthFib(1000))
     elapsed = timer() - start
 
     print(f"Rust in {elapsed}.")
