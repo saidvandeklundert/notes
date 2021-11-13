@@ -1,6 +1,7 @@
 use num_bigint::BigUint;
 use num_traits::{One, Zero};
 use pyo3::prelude::*;
+use std::mem::replace;
 
 #[pyfunction]
 fn fib_in_rust_recursive(number: u32) -> PyResult<u32> {
@@ -41,19 +42,14 @@ fn get_fibonacci_big(number: u128) -> PyResult<String> {
     } else if number == 2 {
         return Ok("2".to_string());
     }*/
-    let mut sum: BigUint = Zero::zero();
-    let mut last: BigUint = Zero::zero();
-    let mut curr: BigUint = One::one();
-    let mut ret: BigUint = Zero::zero();
-    for i in 1..number {
-        sum = last + &curr;
-        last = curr;
-        curr = sum;
-        if i == number {
-            ret = curr.clone()
-        }
+    let mut f0: BigUint = Zero::zero();
+    let mut f1: BigUint = One::one();
+    for _ in 1..number {
+        let f2 = f0 + &f1;
+        // This is a low cost way of swapping f0 with f1 and f1 with f2.
+        f0 = replace(&mut f1, f2);
     }
-    let ret = format!("{}", ret);
+    let ret = format!("{}", f0);
     Ok(ret)
 }
 
