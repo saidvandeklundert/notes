@@ -35,12 +35,12 @@ fn get_fibonacci(number: u128) -> PyResult<u128> {
 }
 
 #[pyfunction]
-fn get_fibonacci_big(number: u128) -> PyResult<String> {
-    if number == 1 {
+fn get_fibonacci_big(number: u128) {
+    /*if number == 1 {
         return Ok("1".to_string());
     } else if number == 2 {
         return Ok("2".to_string());
-    }
+    }*/
     let mut sum: BigUint = Zero::zero();
     let mut last: BigUint = Zero::zero();
     let mut curr: BigUint = One::one();
@@ -50,8 +50,8 @@ fn get_fibonacci_big(number: u128) -> PyResult<String> {
         last = curr;
         curr = sum.clone();
     }
-    let ret = format!("{}", sum);
-    Ok(ret)
+    //    let ret = format!("{}", sum);
+    //Ok(ret)
 }
 
 #[pymodule]
