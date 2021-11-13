@@ -7,11 +7,11 @@ inputs = [
 ]
 
 
-def getNthFib(n):
-    n -= 1
+def getNthFib(number):
+    number -= 1
     fib_seq = [0]
-    while n > 0:
-        n -= 1
+    while number > 0:
+        number -= 1
         if len(fib_seq) == 1:
             fib_seq.append(1)
         else:
@@ -34,6 +34,7 @@ def getNthFib_rec(number):
 if __name__ == "__main__":
     for test in inputs:
         print(f"input argument: {test}")
+        print("Python recursive:", getNthFib(**test))
         print("Python recursive:", getNthFib_rec(**test))
         print("Rust non-recursive:", rust.get_fibonacci(**test))
         print("Rust recursive:", rust.fib_in_rust_recursive(**test))
