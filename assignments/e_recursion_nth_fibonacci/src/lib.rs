@@ -6,6 +6,7 @@ fn fib_in_rust(n: isize) -> PyResult<isize> {
 }
 
 fn get_nth_fib(number: isize) -> isize {
+    println!("{}", number);
     match number {
         1 => return number,
         2 => return number,
