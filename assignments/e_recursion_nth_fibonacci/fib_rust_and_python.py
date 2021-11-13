@@ -81,9 +81,10 @@ def python_fib(number):
     for _ in range(200000):
         getNthFib(number)
     print(getNthFib(number))
+
     elapsed = timer() - start
     # print(f"Python got {result} in {elapsed}.")
-    print(f"Python  in {elapsed}.")
+    print("Python  in {:.2f}.".format(elapsed))
 
 
 def rust_fib(number):

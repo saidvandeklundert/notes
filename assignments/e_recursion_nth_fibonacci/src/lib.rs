@@ -4,11 +4,11 @@ use pyo3::prelude::*;
 use std::mem::replace;
 
 #[pyfunction]
-fn fib_in_rust_recursive(number: u32) -> PyResult<u32> {
+fn fib_in_rust_recursive(number: u128) -> PyResult<u128> {
     Ok(get_nth_fib(number))
 }
 
-fn get_nth_fib(number: u32) -> u32 {
+fn get_nth_fib(number: u128) -> u128 {
     match number {
         1 => return number,
         2 => return number,
@@ -17,7 +17,7 @@ fn get_nth_fib(number: u32) -> u32 {
 }
 
 #[pyfunction]
-fn get_fibonacci(number: u128) -> PyResult<u128> {
+fn get_fibonacci(number: isize) -> PyResult<u128> {
     if number == 1 {
         return Ok(1);
     } else if number == 2 {
@@ -36,12 +36,7 @@ fn get_fibonacci(number: u128) -> PyResult<u128> {
 }
 
 #[pyfunction]
-fn get_fibonacci_big(number: u128) -> PyResult<String> {
-    /*if number == 1 {
-        return Ok("1".to_string());
-    } else if number == 2 {
-        return Ok("2".to_string());
-    }*/
+fn get_fibonacci_big(number: isize) -> PyResult<String> {
     let mut f0: BigUint = Zero::zero();
     let mut f1: BigUint = One::one();
     for _ in 1..number {
