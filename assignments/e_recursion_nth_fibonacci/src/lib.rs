@@ -34,6 +34,7 @@ fn get_fibonacci(number: u128) -> PyResult<u128> {
     Ok(sum)
 }
 
+#[pyfunction]
 fn get_fibonacci_big(number: u128) -> PyResult<BigUint> {
     if number == 1 {
         return Ok(BigUint::from(1u32));
