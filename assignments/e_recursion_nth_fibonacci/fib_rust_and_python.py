@@ -28,12 +28,9 @@ inputs = [
     {"number": 40},
     {"number": 45},
     {"number": 50},
-    {"number": 55},
-    {"number": 65},
-    {"number": 75},
     {"number": 100},
-    {"number": 150},
     {"number": 175},
+    {"number": 300},
 ]
 
 
