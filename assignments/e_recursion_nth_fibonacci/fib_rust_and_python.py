@@ -78,7 +78,7 @@ def getNthFib_rec(number):
 
 def python_fib(number):
     start = timer()
-    for _ in range(100000):
+    for _ in range(200000):
         getNthFib(number)
     print(getNthFib(number))
     elapsed = timer() - start
@@ -88,7 +88,7 @@ def python_fib(number):
 
 def rust_fib(number):
     start = timer()
-    for _ in range(100000):
+    for _ in range(200000):
         rust.get_fibonacci(number)
     print(rust.get_fibonacci(number))
     elapsed = timer() - start
@@ -98,7 +98,7 @@ def rust_fib(number):
 
 def rust_fib_big(number):
     start = timer()
-    for _ in range(100000):
+    for _ in range(200000):
         rust.get_fibonacci_big(number)
     print(rust.get_fibonacci_big(number))
     elapsed = timer() - start
@@ -109,7 +109,7 @@ def rust_fib_big(number):
 def run_once():
 
     start = timer()
-    print(rust.get_fibonacci_big(1000))
+    print(rust.get_fibonacci_big(2000))
     elapsed = timer() - start
 
     print(f"Rust in {elapsed}.")
@@ -122,11 +122,11 @@ def run_once():
 
 
 if __name__ == "__main__":
-    """
+
     for test in inputs:
         python_fib(**test)
         rust_fib(**test)
-        rust_fib_big(**test)
+        # rust_fib_big(**test)
         print(50 * "-")
-    """
+
     run_once()
