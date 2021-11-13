@@ -24,8 +24,8 @@ def get_fibonacci(n):
 
 def python_fib():
     start = timer()
-    for number in range(150):
-        get_fibonacci(number)
+    for number in range(1000):
+        get_fibonacci(150)
 
     elapsed = timer() - start
 
@@ -34,8 +34,8 @@ def python_fib():
 
 def rust_fib():
     start = timer()
-    for number in range(150):
-        rust.get_fibonacci(number)
+    for number in range(1000):
+        rust.get_fibonacci(150)
     elapsed = timer() - start
     print("Rust completed in {:.2f} seconds.".format(elapsed))
 
