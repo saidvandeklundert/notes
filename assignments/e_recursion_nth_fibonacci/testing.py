@@ -17,11 +17,11 @@ inputs = [
 ]
 
 
-def getNthFib(n):
-
+def getNthFib(number):
+    number -= 1
     fib_seq = [0]
-    while n > 0:
-        n -= 1
+    while number > 0:
+        number -= 1
         if len(fib_seq) == 1:
             fib_seq.append(1)
         else:
