@@ -8,7 +8,6 @@ inputs = [
 
 
 def getNthFib_rec(n):
-    print(n)
     if n == 2:
         return 1
     elif n == 1:
