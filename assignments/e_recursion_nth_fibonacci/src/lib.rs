@@ -1,8 +1,8 @@
 use pyo3::prelude::*;
 
 #[pyfunction]
-fn fib_in_rust(number: isize) -> PyResult<isize> {
-    Ok(get_nth_fib(number))
+fn fib_in_rust(n: isize) -> PyResult<isize> {
+    Ok(get_nth_fib(n))
 }
 
 fn get_nth_fib(number: isize) -> isize {
