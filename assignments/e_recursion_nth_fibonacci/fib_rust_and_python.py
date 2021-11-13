@@ -106,6 +106,21 @@ def rust_fib_big(number):
     print(f"Rust in {elapsed}.")
 
 
+def run_once():
+
+    start = timer()
+    print(rust.get_fibonacci_big(1000))
+    elapsed = timer() - start
+
+    print(f"Rust in {elapsed}.")
+
+    start = timer()
+    print(getNthFib(250))
+    elapsed = timer() - start
+
+    print(f"Rust in {elapsed}.")
+
+
 if __name__ == "__main__":
     for test in inputs:
         python_fib(**test)
