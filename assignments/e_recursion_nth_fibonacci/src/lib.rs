@@ -14,7 +14,7 @@ fn get_nth_fib(number: u32) -> u32 {
 }
 
 #[pyfunction]
-fn get_fibonacci(number: u64) -> PyResult<u64> {
+fn get_fibonacci(number: u128) -> PyResult<u128> {
     if number == 1 {
         return Ok(1);
     } else if number == 2 {
