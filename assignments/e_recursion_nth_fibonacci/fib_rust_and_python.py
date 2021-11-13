@@ -33,6 +33,7 @@ from timeit import default_timer as timer
 
 inputs = [
     {"number": 175},
+    {"number": 250},
 ]
 
 
@@ -109,6 +110,6 @@ def rust_fib_big(number):
 if __name__ == "__main__":
     for test in inputs:
         python_fib(**test)
-        rust_fib(**test)
+        # rust_fib(**test)
         rust_fib_big(**test)
         print(50 * "-")
