@@ -7,11 +7,25 @@ inputs = [
 ]
 
 
+def get_fibonacci(n):
+    n -= 1
+    fib_seq = [0]
+    while n > 0:
+        n -= 1
+        if len(fib_seq) == 1:
+            fib_seq.append(1)
+        else:
+            last = fib_seq[-1]
+            second_to_last = fib_seq[-2]
+            fib_seq.append(last + second_to_last)
+
+    return fib_seq[-1]
+
+
 def python_fib():
     start = timer()
     for number in range(150):
-        getNthFib(number)
-    print(getNthFib(number))
+        get_fibonacci(number)
 
     elapsed = timer() - start
 
