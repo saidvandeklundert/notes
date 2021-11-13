@@ -1,9 +1,9 @@
 import rust
 
 inputs = [
-    {"n": 10},
-    {"n": 11},
-    {"n": 12},
+    {"number": 10},
+    {"number": 11},
+    {"number": 12},
 ]
 
 
@@ -22,13 +22,13 @@ def getNthFib(n):
     return fib_seq[-1]
 
 
-def getNthFib_rec(n):
-    if n == 2:
+def getNthFib_rec(number):
+    if number == 2:
         return 1
-    elif n == 1:
+    elif number == 1:
         return 0
     else:
-        return getNthFib_rec(n - 1) + getNthFib_rec(n - 2)
+        return getNthFib_rec(number - 1) + getNthFib_rec(number - 2)
 
 
 if __name__ == "__main__":
