@@ -30,7 +30,6 @@ inputs = [
     {"number": 50},
     {"number": 100},
     {"number": 175},
-    {"number": 200},
 ]
 
 
@@ -77,14 +76,14 @@ def getNthFib_rec(number):
 def python_fib(number):
     start = timer()
     result = getNthFib(number)
-    elapsed = timer() - start
+    elapsed = int(timer() - start)
     print(f"Python got {result} in {elapsed}.")
 
 
 def rust_fib(number):
     start = timer()
     result = rust.get_fibonacci(str(number))
-    elapsed = timer() - start
+    elapsed = int(timer() - start)
     print(f"Rust got {result} in {elapsed}.")
 
 
