@@ -33,8 +33,8 @@ def getNthFib_rec(number):
 
 if __name__ == "__main__":
     for test in inputs:
-        print(f"{test}")
-        print(getNthFib_rec(**test))
-        print(rust.get_fibonacci(**test))
-        print(rust.fib_in_rust_recursive(**test))
+        print(f"input argument: {test}")
+        print("Python recursive:", getNthFib_rec(**test))
+        print("Rust non-recursive:", rust.get_fibonacci(**test))
+        print("Rust recursive:", rust.fib_in_rust_recursive(**test))
         print(50 * "-")
