@@ -1,9 +1,19 @@
 import rust
 
 inputs = [
+    {"number": 1},
+    {"number": 2},
+    {"number": 3},
+    {"number": 4},
+    {"number": 5},
+    {"number": 6},
+    {"number": 7},
+    {"number": 8},
+    {"number": 9},
     {"number": 10},
     {"number": 11},
     {"number": 12},
+    {"number": 13},
 ]
 
 
@@ -34,7 +44,7 @@ def getNthFib_rec(number):
 if __name__ == "__main__":
     for test in inputs:
         print(f"input argument: {test}")
-        print("Python recursive:", getNthFib(**test))
+        print("Python non-recursive:", getNthFib(**test))
         print("Python recursive:", getNthFib_rec(**test))
         print("Rust non-recursive:", rust.get_fibonacci(**test))
         print("Rust recursive:", rust.fib_in_rust_recursive(**test))
