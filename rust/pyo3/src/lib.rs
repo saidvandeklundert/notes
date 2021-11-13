@@ -53,7 +53,7 @@ fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
 #[pyfunction]
 fn human_says_hi(human_data: String) {
     println!("{}", human_data);
-    let human: Human = serde_json::from_str(human_data).unwrap();
+    let human: Human = serde_json::from_str(&human_data).unwrap();
 
     println!(
         "Now we can work with the struct: {:?}.\n {} is {} years old.",
