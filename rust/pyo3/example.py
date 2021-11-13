@@ -1,4 +1,5 @@
 import rust
+from pydantic import BaseModel
 
 a_list = ["one", "two", "three"]
 rust.list_printer(a_list)
@@ -18,3 +19,12 @@ except TypeError as e:
     print(f"Caught a type error: {e}")
 
 rust.dict_printer(a_dict)
+
+
+class Human(BaseModel):
+    name: str
+    age: int
+
+
+jan = Human(name="Jan", age=6)
+rust.human_says_hi(jan.json())
