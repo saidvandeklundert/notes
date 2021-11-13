@@ -84,7 +84,7 @@ def python_fib(number):
 
 def rust_fib(number):
     start = timer()
-    result = rust.get_fibonacci(number)
+    result = rust.get_fibonacci(str(number))
     elapsed = timer() - start
     print(f"Rust got {result} in {elapsed}.")
 

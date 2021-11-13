@@ -14,7 +14,8 @@ fn get_nth_fib(number: u32) -> u32 {
 }
 
 #[pyfunction]
-fn get_fibonacci(number: u128) -> PyResult<u128> {
+fn get_fibonacci(number: String) -> PyResult<u128> {
+    let number: u128 = number.parse().unwrap();
     if number == 1 {
         return Ok(1);
     } else if number == 2 {
