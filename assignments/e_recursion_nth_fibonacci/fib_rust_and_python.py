@@ -29,6 +29,7 @@ inputs = [
     {"number": 45},
     {"number": 50},
     {"number": 55},
+    {"number": 65},
 ]
 
 
