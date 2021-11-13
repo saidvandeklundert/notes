@@ -1,5 +1,5 @@
 use num_bigint::BigUint;
-use num_traits::{One, Zero};
+use num_traits::{One, Two, Zero};
 use pyo3::prelude::*;
 
 #[pyfunction]
@@ -36,9 +36,9 @@ fn get_fibonacci(number: u128) -> PyResult<u128> {
 
 fn get_fibonacci_big(number: u128) -> PyResult<BigUint> {
     if number == 1 {
-        return Ok(1);
+        return Ok(BigUint::from(1u32));
     } else if number == 2 {
-        return Ok(2);
+        return Ok(BigUint::from(2u32));
     }
     let mut sum: BigUint = Zero::zero();
     let mut last: BigUint = Zero::zero();
