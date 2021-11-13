@@ -1,12 +1,12 @@
 use pyo3::prelude::*;
 
 #[pyfunction]
-fn fib_in_rust(n: isize) -> PyResult<isize> {
+fn fib_in_rust_recursive(n: u32) -> PyResult<u32> {
     println!("{}", n);
     Ok(get_nth_fib(n))
 }
 
-fn get_nth_fib(number: isize) -> isize {
+fn get_nth_fib(number: u32) -> u32 {
     match number {
         1 => return number,
         2 => return number,
