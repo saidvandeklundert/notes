@@ -19,6 +19,21 @@ inputs = [
 
 def getNthFib(number):
     fib_seq = [0, 1]
+    number = 3
+    while number <= number:
+        number -= 1
+        if len(fib_seq) == 1:
+            fib_seq.append(1)
+        else:
+            last = fib_seq[-1]
+            second_to_last = fib_seq[-2]
+            fib_seq.append(last + second_to_last)
+
+    return fib_seq[-1]
+
+
+def getNthFib_a(number):
+    fib_seq = [0, 1]
     counter = 3
     while counter <= number:
         next_fib = fib_seq[-1] + fib_seq[-2]
@@ -42,7 +57,9 @@ if __name__ == "__main__":
     for test in inputs:
         print(f"input argument: {test}")
         print("Python non-recursive:", getNthFib(**test))
+        print("Python non-recursive a:", getNthFib_a(**test))
         print("Python recursive:", getNthFib_rec(**test))
+
         print("Rust non-recursive:", rust.get_fibonacci(**test))
         print("Rust recursive:", rust.fib_in_rust_recursive(**test))
         print(50 * "-")
