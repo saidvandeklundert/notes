@@ -2,7 +2,6 @@ use pyo3::prelude::*;
 
 #[pyfunction]
 fn fib_in_rust_recursive(number: u32) -> PyResult<u32> {
-    println!("{}", number);
     Ok(get_nth_fib(number))
 }
 
