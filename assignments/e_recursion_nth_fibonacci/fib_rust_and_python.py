@@ -83,8 +83,8 @@ def python_fib(number):
     print(getNthFib(number))
 
     elapsed = timer() - start
-    # print(f"Python got {result} in {elapsed}.")
-    print("Python  in {:.2f}.".format(elapsed))
+
+    print("Python completed in {:.2f} seconds.".format(elapsed))
 
 
 def rust_fib(number):
@@ -93,8 +93,7 @@ def rust_fib(number):
         rust.get_fibonacci(number)
     print(rust.get_fibonacci(number))
     elapsed = timer() - start
-    # print(f"Rust got {result} in {elapsed}.")
-    print(f"Rust in {elapsed}.")
+    print("Rust completed in {:.2f} seconds.".format(elapsed))
 
 
 def rust_fib_big(number):
@@ -103,8 +102,7 @@ def rust_fib_big(number):
         rust.get_fibonacci_big(number)
     print(rust.get_fibonacci_big(number))
     elapsed = timer() - start
-    # print(f"Rust got {result} in {elapsed}.")
-    print(f"Rust in {elapsed}.")
+    print("Rust with BigUint completed in {:.2f} seconds.".format(elapsed))
 
 
 def run_once():
