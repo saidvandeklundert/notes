@@ -56,7 +56,7 @@ fn human_says_hi(human_data: String) {
     let human: Human = serde_json::from_str(&human_data).unwrap();
 
     println!(
-        "Now we can work with the struct: {:#?}.\n {} is {} years old.",
+        "Now we can work with the struct:\n {:#?}.\n {} is {} years old.",
         human, human.name, human.age,
     )
 }
