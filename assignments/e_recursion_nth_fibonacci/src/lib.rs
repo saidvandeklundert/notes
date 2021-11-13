@@ -33,6 +33,24 @@ fn get_fibonacci(number: u128) -> PyResult<u128> {
     Ok(sum)
 }
 
+fn get_fibonacci_nobig(number: u128) -> PyResult<u128> {
+    if number == 1 {
+        return Ok(1);
+    } else if number == 2 {
+        return Ok(2);
+    }
+
+    let mut sum = 0;
+    let mut last = 0;
+    let mut curr = 1;
+    for i in 1..number {
+        sum = last + curr;
+        last = curr;
+        curr = sum;
+    }
+    Ok(sum)
+}
+
 #[pymodule]
 fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(fib_in_rust_recursive, m)?)?;
