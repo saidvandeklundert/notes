@@ -49,6 +49,7 @@ def getNthFib_rec(n):
 
 if __name__ == "__main__":
     for test in inputs:
+        print(**test)
         print(getNthFib_rec(**test))
         print(rust.fib_in_rust(**test))
         print(50 * "-")
