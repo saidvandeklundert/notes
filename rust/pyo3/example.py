@@ -1,9 +1,11 @@
 import rust
 
+a_list = ["one", "two", "three"]
+rust.list_printer(a_list)
 
-rust.list_printer(["one", "two", "three"])
-
-example_dict = {
+another_list = ["1", "2", "3", "4", "5", "6", "7", "8"]
+rust.array_printer(a_list)
+a_dict = {
     "key 1": "value 1",
     "key 2": "value 2",
     "key 3": "value 3",
@@ -15,4 +17,4 @@ try:
 except TypeError as e:
     print(f"Caught a type error: {e}")
 
-rust.dict_printer(example_dict)
+rust.dict_printer(a_dict)
