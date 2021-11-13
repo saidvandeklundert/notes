@@ -1,6 +1,7 @@
 import rust
 from timeit import default_timer as timer
-    """
+
+"""
     {"number": 1},
     {"number": 2},
     {"number": 3},
@@ -28,10 +29,9 @@ from timeit import default_timer as timer
     {"number": 45},
     {"number": 50},    
     {"number": 100},
-"""    
+"""
 
 inputs = [
-
     {"number": 175},
 ]
 
