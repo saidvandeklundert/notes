@@ -1,4 +1,5 @@
 use pyo3::prelude::*;
+use std::collections::HashMap;
 
 /// Multiply two numbers:
 #[pyfunction]
@@ -16,11 +17,19 @@ fn list_sum(a: Vec<isize>) -> PyResult<isize> {
     Ok(sum)
 }
 
-/// Print every item in a list to console:
+/// Print every item of a list to console:
 #[pyfunction]
 fn list_printer(a: Vec<String>) {
     for string in a {
         println!("{}", string)
+    }
+}
+
+// Print all the key values in a dict to console:
+#[pyfunction]
+fn dict_printer(hm: HashMap<String, String>) {
+    for (key, value) in hm {
+        println!("{} {}", key, value)
     }
 }
 
@@ -47,6 +56,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(multiply, m)?)?;
     m.add_function(wrap_pyfunction!(list_sum, m)?)?;
     m.add_function(wrap_pyfunction!(list_printer, m)?)?;
+    m.add_function(wrap_pyfunction!(dict_printer, m)?)?;
     m.add_function(wrap_pyfunction!(array_printer, m)?)?;
     Ok(())
 }
