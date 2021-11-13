@@ -35,5 +35,6 @@ if __name__ == "__main__":
     for test in inputs:
         print(f"{test}")
         print(getNthFib_rec(**test))
+        print(rust.get_fibonacci(**test))
         print(rust.fib_in_rust_recursive(**test))
         print(50 * "-")
