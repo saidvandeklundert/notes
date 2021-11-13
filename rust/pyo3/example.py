@@ -4,7 +4,7 @@ a_list = ["one", "two", "three"]
 rust.list_printer(a_list)
 
 another_list = ["1", "2", "3", "4", "5", "6", "7", "8"]
-rust.array_printer(a_list)
+rust.array_printer(another_list)
 a_dict = {
     "key 1": "value 1",
     "key 2": "value 2",
