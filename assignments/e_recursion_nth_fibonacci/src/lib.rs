@@ -1,5 +1,5 @@
 use num_bigint::BigUint;
-use num_traits::{One, Two, Zero};
+use num_traits::{One, Zero};
 use pyo3::prelude::*;
 
 #[pyfunction]
