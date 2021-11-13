@@ -16,6 +16,6 @@ fn get_nth_fib(number: u32) -> u32 {
 
 #[pymodule]
 fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(fib_in_rust, m)?)?;
+    m.add_function(wrap_pyfunction!(fib_in_rust_recursive, m)?)?;
     Ok(())
 }
