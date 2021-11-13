@@ -75,16 +75,20 @@ def getNthFib_rec(number):
 
 def python_fib(number):
     start = timer()
-    result = getNthFib(number)
-    elapsed = int(timer() - start)
-    print(f"Python got {result} in {elapsed}.")
+    for _ in range(100):
+        result = getNthFib(number)
+    elapsed = timer() - start
+    # print(f"Python got {result} in {elapsed}.")
+    print(f"Python  in {elapsed}.")
 
 
 def rust_fib(number):
     start = timer()
-    result = rust.get_fibonacci(str(number))
-    elapsed = int(timer() - start)
-    print(f"Rust got {result} in {elapsed}.")
+    for _ in range(100):
+        result = rust.get_fibonacci(str(number))
+    elapsed = timer() - start
+    # print(f"Rust got {result} in {elapsed}.")
+    print(f"Rust in {elapsed}.")
 
 
 if __name__ == "__main__":
