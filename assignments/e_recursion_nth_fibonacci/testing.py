@@ -18,17 +18,15 @@ inputs = [
 
 
 def getNthFib(number):
-    fib_seq = [0]
-    while number > 0:
-        number -= 1
-        if len(fib_seq) == 1:
-            fib_seq.append(1)
-        else:
-            last = fib_seq[-1]
-            second_to_last = fib_seq[-2]
-            fib_seq.append(last + second_to_last)
+    fib_seq = [0, 1]
+    counter = 3
+    while counter <= number:
+        next_fib = fib_seq[-1] + fib_seq[-2]
+        fib_seq[0] = fib_seq[1]
+        fib_seq[1] = next_fib
+        counter += 1
 
-    return fib_seq[-1]
+    return fib_seq[1] if number > 1 else fib_seq[0]
 
 
 def getNthFib_rec(number):
