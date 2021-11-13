@@ -10,4 +10,9 @@ example_dict = {
     "key 4": "value 4",
 }
 
-rust.dict_printer(["one", "two", "three"])
+try:
+    rust.dict_printer("wrong type")
+except TypeError as e:
+    print(f"Caught a type error: {e}")
+
+rust.dict_printer(example_dict)
