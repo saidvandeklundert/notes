@@ -60,16 +60,16 @@ def getNthFib_rec(number):
 
 def python_fib(number):
     start = timer()
-    print(getNthFib(number))
-    end = timer()
-    print(end - start)
+    result = getNthFib(number)
+    elapsed = timer() - start
+    print(f"Python got {result} in {elapsed}.")
 
 
 def rust_fib(number):
     start = timer()
-    print(rust.get_fibonacci(number))
-    end = timer()
-    print(end - start)
+    result = rust.get_fibonacci(number)
+    elapsed = timer() - start
+    print(f"Rust got {result} in {elapsed}.")
 
 
 if __name__ == "__main__":
