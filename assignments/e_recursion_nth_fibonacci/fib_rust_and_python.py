@@ -122,8 +122,11 @@ def run_once():
 
 
 if __name__ == "__main__":
+    """
     for test in inputs:
         python_fib(**test)
         rust_fib(**test)
         rust_fib_big(**test)
         print(50 * "-")
+    """
+    run_once()
