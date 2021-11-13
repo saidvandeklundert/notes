@@ -1,4 +1,5 @@
 import rust
+from timeit import default_timer as timer
 
 inputs = [
     {"number": 1},
@@ -57,11 +58,22 @@ def getNthFib_rec(number):
         return getNthFib_rec(number - 1) + getNthFib_rec(number - 2)
 
 
+def python_fib(number):
+    start = timer()
+    print(getNthFib(number))
+    end = timer()
+    print(end - start)
+
+
+def rust_fib(number):
+    start = timer()
+    print(rust.get_fibonacci(number))
+    end = timer()
+    print(end - start)
+
+
 if __name__ == "__main__":
     for test in inputs:
-        print(f"input argument: {test}")
-        print("Python:", getNthFib(**test))
-
-        print("Rust:", rust.get_fibonacci(**test))
-
+        python_fib(**test)
+        rust_fib(**test)
         print(50 * "-")
