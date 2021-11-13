@@ -18,7 +18,11 @@ inputs = [
 
 
 def getNthFib(number):
-    number -= 1
+    if number == 1:
+        return 1
+    elif number == 2:
+        return 2
+
     fib_seq = [0]
     while number > 0:
         number -= 1
