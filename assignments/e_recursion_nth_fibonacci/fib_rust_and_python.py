@@ -33,6 +33,7 @@ inputs = [
     {"number": 75},
     {"number": 100},
     {"number": 150},
+    {"number": 175},
 ]
 
 
