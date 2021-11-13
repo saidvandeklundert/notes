@@ -118,7 +118,7 @@ def run_once():
     print(getNthFib(1000))
     elapsed = timer() - start
 
-    print(f"Rust in {elapsed}.")
+    print(f"Python in {elapsed}.")
 
 
 if __name__ == "__main__":
