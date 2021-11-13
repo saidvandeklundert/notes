@@ -30,7 +30,7 @@ inputs = [
     {"number": 50},
     {"number": 100},
     {"number": 175},
-    {"number": 300},
+    {"number": 200},
 ]
 
 
