@@ -1,11 +1,16 @@
 import rust
 from pydantic import BaseModel
 
+# multiply
+print(rust.multiply(2, 3))
+
+# Type printers
 a_list = ["one", "two", "three"]
 rust.list_printer(a_list)
 
 another_list = ["1", "2", "3", "4", "5", "6", "7", "8"]
 rust.array_printer(another_list)
+
 a_dict = {
     "key 1": "value 1",
     "key 2": "value 2",
@@ -19,39 +24,6 @@ except TypeError as e:
     print(f"Caught a type error: {e}")
 
 rust.dict_printer(a_dict)
-
-
-class Human(BaseModel):
-    name: str
-    age: int
-
-
-jan = Human(name="Jan", age=6)
-rust.human_says_hi(jan.json())
-
-# logging example:
-import logging
-
-FORMAT = "%(levelname)s %(name)s %(asctime)-15s %(filename)s:%(lineno)d %(message)s"
-logging.basicConfig(format=FORMAT)
-logging.getLogger().setLevel(logging.DEBUG)
-logging.info("Logging from the Python code")
-rust.log_example()
-rust.log_different_levels()
-
-# data class
-from dataclasses import dataclass
-
-
-@dataclass
-class Person:
-    """Make a person."""
-
-    name: str
-    age: int
-
-
-marie = Person(name="Marie", age=2)
 
 
 # fibonacci
@@ -78,6 +50,29 @@ ru_elapsed = round(timer() - ru_start, 3)
 print("Calculating the 150th fibonacci number 1000 times.")
 print(f"Python took {py_elapsed} seconds and got:\t{py_res}.")
 print(f"Rust took {ru_elapsed} seconds and got:\t{ru_res}.")
+
+# sending over a Pydantic basemodel:
+
+
+class Human(BaseModel):
+    name: str
+    age: int
+
+
+jan = Human(name="Jan", age=6)
+rust.human_says_hi(jan.json())
+
+# logging example:
+import logging
+
+FORMAT = "%(levelname)s %(name)s %(asctime)-15s %(filename)s:%(lineno)d %(message)s"
+logging.basicConfig(format=FORMAT)
+logging.getLogger().setLevel(logging.DEBUG)
+logging.info("Logging from the Python code")
+rust.log_example()
+rust.log_different_levels()
+
+# Exception handling example:
 
 print(rust.greater_than_2(3))
 try:
