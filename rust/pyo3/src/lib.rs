@@ -108,7 +108,9 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
 // Raise an exception:
 
 #[derive(Debug)]
-struct MyError;
+struct MyError {
+    pub descr: &'static str,
+}
 
 impl std::error::Error for MyError {}
 
@@ -129,7 +131,9 @@ fn less_than_2(number: isize) -> Result<isize, MyError> {
     if number < 2 {
         return Ok(number);
     } else {
-        return Err(MyError);
+        return Err(MyError {
+            descr: "number is greater than 2",
+        });
     }
 }
 
