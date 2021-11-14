@@ -98,6 +98,6 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(array_printer, m)?)?;
     m.add_function(wrap_pyfunction!(human_says_hi, m)?)?;
     m.add_wrapped(wrap_pyfunction!(log_example))?;
-    m.add_wrapped(wrap_pyfunction!(log_hello))?;
+    m.add_wrapped(wrap_pyfunction!(different_levels))?;
     Ok(())
 }
