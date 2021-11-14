@@ -1,6 +1,6 @@
 extern crate serde;
 extern crate serde_json;
-use log::{debug, info, trace};
+use log::{debug, error, info, trace, warn};
 use pyo3::prelude::*;
 use pyo3::wrap_pyfunction;
 use pyo3_log::{Caching, Logger};
@@ -71,18 +71,17 @@ struct Human {
 }
 
 #[pyfunction]
-#[text_signature = "()"]
-fn log_hello() {
+fn different_levels() {
+    error!("error");
+    warn!("warn");
+    info!("info");
+    debug!("debug");
     trace!("xyz");
-    debug!("stuff2");
-    debug!("Stuff");
-    info!("Hello {}", "world");
-    info!("Hello 2{}", "world");
 }
 
 #[pyfunction]
 fn log_example() {
-    info!("Something!");
+    info!("A log message from {}!", "Rust");
 }
 
 /// A Python module implemented in Rust. The name of this function must match
