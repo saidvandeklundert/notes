@@ -140,9 +140,9 @@ fn greater_than_2(number: isize) -> Result<isize, MyError> {
         return Err(MyError {
             msg: "number is less than or equal to 2",
         });
-    } else{
+    } else {
         return Ok(number);
-    
+    }
 }
 
 /// A Python module implemented in Rust. The name of this function must match
