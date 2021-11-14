@@ -83,5 +83,5 @@ rust.less_than_2(1)
 try:
     rust.less_than_2(3)
 except Exception as e:
-    print(f"Caught a panic: {e}")
+    print(f"Caught an exception: {e}")
 print("Still going strong.")

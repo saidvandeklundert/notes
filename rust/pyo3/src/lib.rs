@@ -106,28 +106,28 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
 }
 
 #[derive(Debug)]
-struct Errorr;
+struct MyError;
 
-impl std::error::Error for Errorr {}
+//impl std::error::Error for MyError {}
 
-impl fmt::Display for Errorr {
+impl fmt::Display for MyError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Oh no!")
+        write!(f, "write the Err here!")
     }
 }
 
-impl std::convert::From<Errorr> for PyErr {
-    fn from(err: Errorr) -> PyErr {
+impl std::convert::From<MyError> for PyErr {
+    fn from(err: MyError) -> PyErr {
         PyOSError::new_err(err.to_string())
     }
 }
 
 #[pyfunction]
-fn less_than_2(number: isize) -> Result<isize, Errorr> {
+fn less_than_2(number: isize) -> Result<isize, MyError> {
     if number < 2 {
         return Ok(number);
     } else {
-        return Err(Errorr);
+        return Err(MyError);
     }
 }
 
