@@ -102,6 +102,11 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
     Ok(sum)
 }
 
+#[pyfunction]
+fn just_panic() {
+    panic!("This is a panic!");
+}
+
 /// A Python module implemented in Rust. The name of this function must match
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
@@ -118,6 +123,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(log_example))?;
     m.add_wrapped(wrap_pyfunction!(log_different_levels))?;
     m.add_function(wrap_pyfunction!(get_fibonacci, m)?)?;
+    m.add_function(wrap_pyfunction!(just_panic, m)?)?;
 
     Ok(())
 }

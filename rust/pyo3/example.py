@@ -78,3 +78,10 @@ ru_elapsed = round(timer() - ru_start, 3)
 print("Calculating the 150th fibonacci number 1000 times.")
 print(f"Python took {py_elapsed} seconds and got:\t{py_res}.")
 print(f"Rust took {ru_elapsed} seconds and got:\t{ru_res}.")
+
+# panic!
+try:
+    rust.just_panic()
+except Exception as e:
+    print(f"Caught a panic: {e}")
+print("Still going strong.")
