@@ -89,5 +89,5 @@ for i in range(1000):
     ru_res = rust.get_fibonacci(150)
 ru_elapsed = round(timer() - ru_start, 3)
 print("Calculating the 150th fibonacci number 1000 times.")
-print(f"Python took {py_elapsed} seconds and got {py_res}.")
-print(f"Rust took {ru_elapsed} seconds and got {ru_res}.")
+print(f"Python took {py_elapsed} seconds and got:\t{py_res}.")
+print(f"Rust took {ru_elapsed} seconds and got:\t{ru_res}.")
