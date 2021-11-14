@@ -28,3 +28,11 @@ class Human(BaseModel):
 
 jan = Human(name="Jan", age=6)
 rust.human_says_hi(jan.json())
+
+import logging
+
+FORMAT = "%(levelname)s %(name)s %(asctime)-15s %(filename)s:%(lineno)d %(message)s"
+logging.basicConfig(format=FORMAT)
+logging.getLogger().setLevel(logging.INFO)
+logging.info("Test 1")
+rust.log_hello()

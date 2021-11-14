@@ -1,6 +1,8 @@
 extern crate serde;
 extern crate serde_json;
+use log::{debug, info, trace};
 use pyo3::prelude::*;
+use pyo3_log::{Caching, Logger};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -67,6 +69,16 @@ struct Human {
     age: u8,
 }
 
+#[pyfunction]
+#[text_signature = "()"]
+fn log_hello() {
+    trace!("xyz");
+    debug!("stuff2");
+    debug!("Stuff");
+    info!("Hello {}", "world");
+    info!("Hello 2{}", "world");
+}
+
 /// A Python module implemented in Rust. The name of this function must match
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
@@ -79,5 +91,6 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(dict_printer, m)?)?;
     m.add_function(wrap_pyfunction!(array_printer, m)?)?;
     m.add_function(wrap_pyfunction!(human_says_hi, m)?)?;
+    m.add_wrapped(wrap_pyfunction!(log_hello))?;
     Ok(())
 }
