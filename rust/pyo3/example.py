@@ -88,9 +88,6 @@ ru_start = timer()
 for i in range(1000):
     ru_res = rust.get_fibonacci(150)
 ru_elapsed = timer() - ru_start
-print(
-    f"Python took {py_elapsed} seconds to calculate the 150th fibonacci number and got {py_res}."
-)
-print(
-    f"Rust took {ru_elapsed} seconds to calculate the 150th fibonacci number and got {ru_res}."
-)
+print("Calculating the 150th fibonacci number 1000 times.")
+print(f"Python took {py_elapsed} seconds and got {py_res}.")
+print(f"Rust took {ru_elapsed} seconds and got {ru_res}.")
