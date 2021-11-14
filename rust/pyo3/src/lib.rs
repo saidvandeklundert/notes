@@ -71,12 +71,11 @@ struct Human {
 }
 
 #[pyfunction]
-fn different_levels() {
-    error!("error");
-    warn!("warn");
-    info!("info");
-    debug!("debug");
-    trace!("xyz");
+fn log_different_levels() {
+    error!("logging an error");
+    warn!("logging a warning");
+    info!("logging an info message");
+    debug!("logging a debug message");
 }
 
 #[pyfunction]
@@ -98,6 +97,6 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(array_printer, m)?)?;
     m.add_function(wrap_pyfunction!(human_says_hi, m)?)?;
     m.add_wrapped(wrap_pyfunction!(log_example))?;
-    m.add_wrapped(wrap_pyfunction!(different_levels))?;
+    m.add_wrapped(wrap_pyfunction!(log_different_levels))?;
     Ok(())
 }
