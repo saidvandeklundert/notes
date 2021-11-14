@@ -80,11 +80,17 @@ fn log_hello() {
     info!("Hello 2{}", "world");
 }
 
+#[pyfunction]
+fn log_something() {
+    info!("Something!");
+}
+
 /// A Python module implemented in Rust. The name of this function must match
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
 #[pymodule]
 fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
+    pyo3_log::init();
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     m.add_function(wrap_pyfunction!(multiply, m)?)?;
     m.add_function(wrap_pyfunction!(list_sum, m)?)?;
@@ -92,6 +98,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(dict_printer, m)?)?;
     m.add_function(wrap_pyfunction!(array_printer, m)?)?;
     m.add_function(wrap_pyfunction!(human_says_hi, m)?)?;
+    m.add_wrapped(wrap_pyfunction!(log_something))?;
     m.add_wrapped(wrap_pyfunction!(log_hello))?;
     Ok(())
 }
