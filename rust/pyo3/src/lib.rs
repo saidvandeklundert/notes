@@ -105,7 +105,7 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
     Ok(sum)
 }
 
-// Raising an exception in a function called 'between_2_and_10', which is defined later on:
+// Raising an exception in a function called 'greater_than_2', which is defined later on:
 
 // Define 'MyError' as a custom exception:
 #[derive(Debug)]
@@ -135,18 +135,14 @@ impl std::convert::From<MyError> for PyErr {
 }
 
 #[pyfunction]
-fn between_2_and_10(number: isize) -> Result<isize, MyError> {
+fn greater_than_2(number: isize) -> Result<isize, MyError> {
     if number <= 2 {
         return Err(MyError {
             msg: "number is less than or equal to 2",
         });
-    } else if number > 2 && number < 10 {
+    } else{
         return Ok(number);
-    } else {
-        return Err(MyError {
-            msg: "number is greater than or equal to 10",
-        });
-    }
+    
 }
 
 /// A Python module implemented in Rust. The name of this function must match
@@ -165,7 +161,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(log_example))?;
     m.add_wrapped(wrap_pyfunction!(log_different_levels))?;
     m.add_function(wrap_pyfunction!(get_fibonacci, m)?)?;
-    m.add_function(wrap_pyfunction!(between_2_and_10, m)?)?;
+    m.add_function(wrap_pyfunction!(greater_than_2, m)?)?;
 
     Ok(())
 }

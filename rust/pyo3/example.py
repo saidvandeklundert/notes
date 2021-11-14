@@ -79,9 +79,9 @@ print("Calculating the 150th fibonacci number 1000 times.")
 print(f"Python took {py_elapsed} seconds and got:\t{py_res}.")
 print(f"Rust took {ru_elapsed} seconds and got:\t{ru_res}.")
 
-print(rust.between_2_and_10(3))
+print(rust.greater_than_2(3))
 try:
-    print(rust.between_2_and_10(11))
+    print(rust.greater_than_2(1))
 except Exception as e:
     print(f"Caught an exception: {e}")
     print(type(e))
