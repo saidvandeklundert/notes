@@ -78,6 +78,17 @@ for i in range(10):
     res_rust = rust.get_fibonacci(i)
     print(f"number{i}:\t{res_python}\tand in Rust: {res_rust}")
 
+from timeit import default_timer as timer
 
-print(get_fibonacci(150))
-print(rust.get_fibonacci(150))
+py_start = timer()
+py_res = get_fibonacci(150)
+py_elapsed = timer() - py_start
+ru_start = timer()
+ru_res = rust.get_fibonacci(150)
+ru_elapsed = timer() - ru_start
+print(
+    f"Python took {py_elapsed} seconds to calculate the 150th fibonacci number and got {py_res}."
+)
+print(
+    f"Rust took {ru_elapsed} seconds to calculate the 150th fibonacci number and got {ru_res}."
+)
