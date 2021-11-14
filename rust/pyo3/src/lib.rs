@@ -105,21 +105,29 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
     Ok(sum)
 }
 
-// Raising an exception in a function called 'less_than_2', which is defined later on:
+// Raising an exception in a function called 'between_2_and_10', which is defined later on:
 
+// Define 'MyError' as a custom exception:
 #[derive(Debug)]
 struct MyError {
+    /*
+    the 'message' field that is used later on
+    to be able print any message.
+    */
     pub msg: &'static str,
 }
 
+// Implement the 'Error' trait for 'MyError':
 impl std::error::Error for MyError {}
 
+// Implement the 'Display' trait for 'MyError':
 impl fmt::Display for MyError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Error from Rust: {}", self.msg)
     }
 }
 
+//
 impl std::convert::From<MyError> for PyErr {
     fn from(err: MyError) -> PyErr {
         PyOSError::new_err(err.to_string())
@@ -127,12 +135,16 @@ impl std::convert::From<MyError> for PyErr {
 }
 
 #[pyfunction]
-fn less_than_2(number: isize) -> Result<isize, MyError> {
-    if number < 2 {
+fn between_2_and_10(number: isize) -> Result<isize, MyError> {
+    if number <= 2 {
+        return Err(MyError {
+            msg: "number is less than or equal to 2",
+        });
+    } else if number > 2 && number < 10 {
         return Ok(number);
     } else {
         return Err(MyError {
-            msg: "number is greater than 2",
+            msg: "number is greater than or equal to 10",
         });
     }
 }
@@ -153,7 +165,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(log_example))?;
     m.add_wrapped(wrap_pyfunction!(log_different_levels))?;
     m.add_function(wrap_pyfunction!(get_fibonacci, m)?)?;
-    m.add_function(wrap_pyfunction!(less_than_2, m)?)?;
+    m.add_function(wrap_pyfunction!(between_2_and_10, m)?)?;
 
     Ok(())
 }
