@@ -84,7 +84,7 @@ fn log_example() {
 }
 
 #[pyclass]
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 struct Person {
     name: String,
     age: u8,
