@@ -9,6 +9,11 @@ print(result)
 result = rust.list_sum([10, 10, 10, 10, 10])
 print(result)
 
+# word printer:
+# word_printer(mut word: String, n: isize, reverse: bool, uppercase: bool)
+rust.word_printer("hello", 3, False, True)
+rust.word_printer("eyb", 3, True, False)
+
 # Working with different types:
 
 a_list = ["one", "two", "three"]

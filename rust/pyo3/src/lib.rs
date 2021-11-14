@@ -26,6 +26,26 @@ fn list_sum(a: Vec<isize>) -> PyResult<isize> {
     Ok(sum)
 }
 
+/// Word printer:
+/// Prints a word to the console n number of times.
+/// Optionally, the word is printed in reverse and or in uppercase.
+#[pyfunction]
+fn word_printer(mut word: String, n: isize, reverse: bool, uppercase: bool) {
+    if reverse {
+        let mut reversed_word = String::new();
+        for c in word.chars().rev() {
+            reversed_word.push(c);
+        }
+        word = reversed_word;
+    }
+    if uppercase {
+        word = word.to_uppercase();
+    }
+    for _ in 0..n {
+        println!("{}", word);
+    }
+}
+
 /// Print every item of a list to console:
 #[pyfunction]
 fn list_printer(a: Vec<String>) {
@@ -157,6 +177,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     m.add_function(wrap_pyfunction!(multiply, m)?)?;
     m.add_function(wrap_pyfunction!(list_sum, m)?)?;
+    m.add_function(wrap_pyfunction!(word_printer, m)?)?;
     m.add_function(wrap_pyfunction!(list_printer, m)?)?;
     m.add_function(wrap_pyfunction!(dict_printer, m)?)?;
     m.add_function(wrap_pyfunction!(array_printer, m)?)?;
