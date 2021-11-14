@@ -109,14 +109,14 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
 
 #[derive(Debug)]
 struct MyError {
-    pub descr: &'static str,
+    pub msg: &'static str,
 }
 
 impl std::error::Error for MyError {}
 
 impl fmt::Display for MyError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "write the Err here!")
+        write!(f, "Error from Rust: {}", self.msg)
     }
 }
 
@@ -132,7 +132,7 @@ fn less_than_2(number: isize) -> Result<isize, MyError> {
         return Ok(number);
     } else {
         return Err(MyError {
-            descr: "number is greater than 2",
+            msg: "number is greater than 2",
         });
     }
 }
