@@ -2,6 +2,7 @@ extern crate serde;
 extern crate serde_json;
 use log::{debug, info, trace};
 use pyo3::prelude::*;
+use pyo3::wrap_pyfunction;
 use pyo3_log::{Caching, Logger};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
