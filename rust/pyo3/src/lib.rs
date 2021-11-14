@@ -1,11 +1,14 @@
 extern crate serde;
 extern crate serde_json;
 use log::{debug, error, info, warn};
+use pyo3::exceptions::PyOSError;
 use pyo3::prelude::*;
 use pyo3::wrap_pyfunction;
 use pyo3_log;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+
+use std::fmt;
 
 /// Multiply two numbers:
 #[pyfunction]
@@ -102,14 +105,29 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
     Ok(sum)
 }
 
+#[derive(Debug)]
+struct Errorr;
+
+impl std::error::Error for Errorr {}
+
+impl fmt::Display for Errorr {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Oh no!")
+    }
+}
+
+impl std::convert::From<Errorr> for PyErr {
+    fn from(err: Errorr) -> PyErr {
+        PyOSError::new_err(err.to_string())
+    }
+}
+
 #[pyfunction]
-fn less_than_2(number: isize) -> PyResult<isize> {
+fn less_than_2(number: isize) -> Result<isize, Errorr> {
     if number < 2 {
         return Ok(number);
     } else {
-        return Err(pyo3::exceptions::ValueError::py_err(
-            "Number must be less than 2",
-        ));
+        return Err(Errorr);
     }
 }
 
