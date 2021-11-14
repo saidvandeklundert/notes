@@ -105,10 +105,12 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
     Ok(sum)
 }
 
+// Raise an exception:
+
 #[derive(Debug)]
 struct MyError;
 
-//impl std::error::Error for MyError {}
+impl std::error::Error for MyError {}
 
 impl fmt::Display for MyError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
