@@ -90,6 +90,7 @@ struct Person {
     age: u8,
 }
 
+#[pyfunction]
 fn use_person(mut person: Person) -> PyResult<Person> {
     info!("Increasing the age for {:#?}", person);
     person.age += 1;
