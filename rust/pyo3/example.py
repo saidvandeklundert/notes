@@ -81,10 +81,12 @@ for i in range(10):
 from timeit import default_timer as timer
 
 py_start = timer()
-py_res = get_fibonacci(150)
+for i in range(1000):
+    py_res = get_fibonacci(150)
 py_elapsed = timer() - py_start
 ru_start = timer()
-ru_res = rust.get_fibonacci(150)
+for i in range(1000):
+    ru_res = rust.get_fibonacci(150)
 ru_elapsed = timer() - ru_start
 print(
     f"Python took {py_elapsed} seconds to calculate the 150th fibonacci number and got {py_res}."
