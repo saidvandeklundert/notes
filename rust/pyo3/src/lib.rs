@@ -129,7 +129,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(log_example))?;
     m.add_wrapped(wrap_pyfunction!(log_different_levels))?;
     m.add_function(wrap_pyfunction!(get_fibonacci, m)?)?;
-    m.add_function(wrap_pyfunction!(just_panic, m)?)?;
+    m.add_function(wrap_pyfunction!(less_than_2, m)?)?;
 
     Ok(())
 }
