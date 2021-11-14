@@ -105,7 +105,8 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
     Ok(sum)
 }
 
-// Raising an exception in a function called 'greater_than_2', which is defined later on:
+// Raising an exception in a function called 'greater_than_2', which is defined later on.
+// Some additional clarifications can be found here: https://blog.burntsushi.net/rust-error-handling/
 
 // Define 'MyError' as a custom exception:
 #[derive(Debug)]

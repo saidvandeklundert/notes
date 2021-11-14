@@ -2,7 +2,12 @@ import rust
 from pydantic import BaseModel
 
 # multiply
-print(rust.multiply(2, 3))
+result = rust.multiply(2, 3)
+print(result)
+
+# sum of list of numbers:
+result = rust.list_sum([10, 10, 10, 10, 10])
+print(result)
 
 # Working with different types:
 
@@ -21,6 +26,8 @@ a_dict = {
 
 rust.dict_printer(a_dict)
 
+# the following two functions will fail because 'dict_printer'
+#  is expecting a dict with string keys and string values:
 try:
     rust.dict_printer("wrong type")
 except TypeError as e:
@@ -32,7 +39,7 @@ except TypeError as e:
     print(f"Caught a type error: {e}")
 
 
-# fibonacci
+# Calculating fibonacci
 from fib import get_fibonacci
 
 print(f"Fibonacci number in Python and in Rust:")
@@ -58,8 +65,6 @@ print(f"Python took {py_elapsed} seconds and got:\t{py_res}.")
 print(f"Rust took {ru_elapsed} seconds and got:\t{ru_res}.")
 
 # sending over a Pydantic basemodel:
-
-
 class Human(BaseModel):
     name: str
     age: int

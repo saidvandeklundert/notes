@@ -1,5 +1,5 @@
 
-### multiply
+### multiply and sum of vectors:
 ### Working with different types
 
 Conversions table:
