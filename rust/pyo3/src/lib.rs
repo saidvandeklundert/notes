@@ -83,22 +83,6 @@ fn log_example() {
     info!("A log message from {}!", "Rust");
 }
 
-#[pyclass]
-#[derive(Debug, Clone)]
-struct Person {
-    #[pyo3(get, set)]
-    name: String,
-    #[pyo3(get, set)]
-    age: u8,
-}
-
-#[pyfunction]
-fn use_person(mut person: Person) -> PyResult<Person> {
-    info!("Increasing the age for {:#?}", person);
-    person.age += 1;
-    return Ok(person);
-}
-
 /// A Python module implemented in Rust. The name of this function must match
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
@@ -114,7 +98,6 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(human_says_hi, m)?)?;
     m.add_wrapped(wrap_pyfunction!(log_example))?;
     m.add_wrapped(wrap_pyfunction!(log_different_levels))?;
-    m.add_class::<Person>()?;
-    m.add_wrapped(wrap_pyfunction!(use_person, m))?;
+
     Ok(())
 }
