@@ -97,7 +97,7 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
     let mut sum = 0;
     let mut last = 0;
     let mut curr = 1;
-    for i in 1..number {
+    for _ in 1..number {
         sum = last + curr;
         last = curr;
         curr = sum;
