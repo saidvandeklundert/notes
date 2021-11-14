@@ -105,7 +105,7 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
     Ok(sum)
 }
 
-// Raise an exception:
+// Raising an exception in a function called 'less_than_2', which is defined later on:
 
 #[derive(Debug)]
 struct MyError {
