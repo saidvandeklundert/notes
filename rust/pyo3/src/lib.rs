@@ -168,6 +168,25 @@ fn greater_than_2(number: isize) -> Result<isize, MyError> {
     }
 }
 
+#[pyclass]
+pub struct RustStruct {
+    pub data: String,
+    pub vector: Vec<u8>,
+}
+
+impl RustStruct {
+    pub fn new(data: String, vector: Vec<u8>) -> RustStruct {
+        RustStruct { data, vector }
+    }
+
+    pub fn printer(&self) {
+        println!("{}", self.data);
+        for i in &self.vector {
+            println!("{}", i);
+        }
+    }
+}
+
 /// A Python module implemented in Rust. The name of this function must match
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
@@ -186,6 +205,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(log_different_levels))?;
     m.add_function(wrap_pyfunction!(get_fibonacci, m)?)?;
     m.add_function(wrap_pyfunction!(greater_than_2, m)?)?;
+    m.add_class::<RustStruct>()?;
 
     Ok(())
 }
