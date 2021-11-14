@@ -38,3 +38,17 @@ logging.getLogger().setLevel(logging.DEBUG)
 logging.info("Logging from the Python code")
 rust.log_example()
 rust.log_different_levels()
+
+# data class
+from dataclasses import dataclass
+
+
+@dataclass
+class Person:
+    """Make a person."""
+
+    name: str
+    age: int
+
+
+marie = Person(name="Marie", age=2)
