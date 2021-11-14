@@ -127,7 +127,8 @@ impl fmt::Display for MyError {
     }
 }
 
-//
+// Implement the 'From' trait for 'MyError'.
+// Used to do value-to-value conversions while consuming the input value.
 impl std::convert::From<MyError> for PyErr {
     fn from(err: MyError) -> PyErr {
         PyOSError::new_err(err.to_string())
@@ -135,6 +136,7 @@ impl std::convert::From<MyError> for PyErr {
 }
 
 #[pyfunction]
+// The function 'greater_than_2' raises an exception if the input value is 2 or less.
 fn greater_than_2(number: isize) -> Result<isize, MyError> {
     if number <= 2 {
         return Err(MyError {
