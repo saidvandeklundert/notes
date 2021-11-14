@@ -4,7 +4,8 @@ from pydantic import BaseModel
 # multiply
 print(rust.multiply(2, 3))
 
-# Type printers
+# Working with different types:
+
 a_list = ["one", "two", "three"]
 rust.list_printer(a_list)
 
@@ -18,12 +19,17 @@ a_dict = {
     "key 4": "value 4",
 }
 
+rust.dict_printer(a_dict)
+
 try:
     rust.dict_printer("wrong type")
 except TypeError as e:
     print(f"Caught a type error: {e}")
 
-rust.dict_printer(a_dict)
+try:
+    rust.dict_printer({"a": 1, "b": 2})
+except TypeError as e:
+    print(f"Caught a type error: {e}")
 
 
 # fibonacci
