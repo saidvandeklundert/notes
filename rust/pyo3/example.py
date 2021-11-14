@@ -59,9 +59,6 @@ marie = Person(name="Marie", age=2)
 
 def get_fibonacci(n):
     """Get the nth fibonacci number."""
-    if n < 0:
-        raise ValueError("n must be >= 0")
-
     fib_seq = [0]
     while n > 0:
         n -= 1
@@ -76,8 +73,10 @@ def get_fibonacci(n):
 
 
 for i in range(10):
-    print(get_fibonacci(i))
-    print(rust.get_fibonacci(i))
+    res_python = get_fibonacci(i)
+    res_rust = rust.get_fibonacci(i)
+    print(f"Result for {i}.\t\tPython: {res_python}\t\tRust: {res_rust}")
+
 
 print(get_fibonacci(150))
 print(rust.get_fibonacci(150))
