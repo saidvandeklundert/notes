@@ -71,6 +71,7 @@ print(f"Rust took {ru_elapsed} seconds and got:\t{ru_res}.")
 
 # Using RustStruct
 x = rust.RustStruct(data="some data", vector=[255, 255, 255])
+x.extend_vector([1, 1, 1, 1])
 x.printer()
 
 
