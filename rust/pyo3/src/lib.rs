@@ -81,7 +81,7 @@ fn log_hello() {
 }
 
 #[pyfunction]
-fn log_something() {
+fn log_example() {
     info!("Something!");
 }
 
@@ -98,7 +98,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(dict_printer, m)?)?;
     m.add_function(wrap_pyfunction!(array_printer, m)?)?;
     m.add_function(wrap_pyfunction!(human_says_hi, m)?)?;
-    m.add_wrapped(wrap_pyfunction!(log_something))?;
+    m.add_wrapped(wrap_pyfunction!(log_example))?;
     m.add_wrapped(wrap_pyfunction!(log_hello))?;
     Ok(())
 }
