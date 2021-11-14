@@ -91,10 +91,10 @@ struct Person {
 }
 
 #[pyfunction]
-fn use_person(mut person: Person) {
+fn use_person(mut person: Person) -> PyResult<Person> {
     info!("Increasing the age for {:#?}", person);
     person.age += 1;
-    info!("Person is now {}", person.age);
+    return Ok(person);
 }
 
 /// A Python module implemented in Rust. The name of this function must match
