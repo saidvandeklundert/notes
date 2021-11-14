@@ -173,12 +173,12 @@ pub struct RustStruct {
     pub data: String,
     pub vector: Vec<u8>,
 }
-
+#[pymethods]
 impl RustStruct {
+    #[new]
     pub fn new(data: String, vector: Vec<u8>) -> RustStruct {
         RustStruct { data, vector }
     }
-
     pub fn printer(&self) {
         println!("{}", self.data);
         for i in &self.vector {
