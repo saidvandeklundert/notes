@@ -63,7 +63,7 @@ def get_fibonacci(n):
         raise ValueError("n must be >= 0")
 
     fib_seq = [0]
-    while n > 1:
+    while n > 0:
         n -= 1
         if len(fib_seq) == 1:
             fib_seq.append(1)
