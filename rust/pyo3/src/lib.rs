@@ -103,8 +103,14 @@ fn get_fibonacci(number: isize) -> PyResult<u128> {
 }
 
 #[pyfunction]
-fn just_panic() {
-    panic!("This is a panic!");
+fn less_than_2(number: isize) -> PyResult<isize> {
+    if number < 2 {
+        return Ok(number);
+    } else {
+        return Err(pyo3::exceptions::ValueError::py_err(
+            "Number must be less than 2",
+        ));
+    }
 }
 
 /// A Python module implemented in Rust. The name of this function must match
