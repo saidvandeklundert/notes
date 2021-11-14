@@ -75,11 +75,9 @@ def get_fibonacci(n):
     return fib_seq[-1]
 
 
-print(get_fibonacci(0))
-print(rust.get_fibonacci(0))
-print(get_fibonacci(1))
-print(rust.get_fibonacci(1))
-print(get_fibonacci(2))
-print(rust.get_fibonacci(2))
+for i in range(10):
+    print(get_fibonacci(i))
+    print(rust.get_fibonacci(i))
+
 print(get_fibonacci(150))
 print(rust.get_fibonacci(150))
