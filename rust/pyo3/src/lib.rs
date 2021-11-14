@@ -1,9 +1,9 @@
 extern crate serde;
 extern crate serde_json;
-use log::{debug, error, info, trace, warn};
+use log::{debug, error, info, warn};
 use pyo3::prelude::*;
 use pyo3::wrap_pyfunction;
-use pyo3_log::{Caching, Logger};
+use pyo3_log;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
