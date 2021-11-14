@@ -72,10 +72,11 @@ def get_fibonacci(n):
     return fib_seq[-1]
 
 
+print(f"Fibonacci number in Python and in Rust:")
 for i in range(10):
     res_python = get_fibonacci(i)
     res_rust = rust.get_fibonacci(i)
-    print(f"Fibonacci number{i} in Python: {res_python}\tand in Rust: {res_rust}")
+    print(f"\t{i}\t{res_python}\t{res_rust}")
 
 
 print(get_fibonacci(150))
