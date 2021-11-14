@@ -83,6 +83,25 @@ fn log_example() {
     info!("A log message from {}!", "Rust");
 }
 
+#[pyfunction]
+fn get_fibonacci(number: isize) -> PyResult<u128> {
+    if number == 1 {
+        return Ok(1);
+    } else if number == 2 {
+        return Ok(2);
+    }
+
+    let mut sum = 0;
+    let mut last = 0;
+    let mut curr = 1;
+    for i in 1..number {
+        sum = last + curr;
+        last = curr;
+        curr = sum;
+    }
+    Ok(sum)
+}
+
 /// A Python module implemented in Rust. The name of this function must match
 /// the `lib.name` setting in the `Cargo.toml`, else Python will not be able to
 /// import the module.
@@ -98,6 +117,7 @@ fn rust(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(human_says_hi, m)?)?;
     m.add_wrapped(wrap_pyfunction!(log_example))?;
     m.add_wrapped(wrap_pyfunction!(log_different_levels))?;
+    m.add_function(wrap_pyfunction!(get_fibonacci, m)?)?;
 
     Ok(())
 }

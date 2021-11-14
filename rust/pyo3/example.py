@@ -52,3 +52,34 @@ class Person:
 
 
 marie = Person(name="Marie", age=2)
+
+
+# fibonacci
+
+
+def get_fibonacci(n):
+    """Get the nth fibonacci number."""
+    if n < 0:
+        raise ValueError("n must be >= 0")
+
+    fib_seq = [0]
+    while n > 1:
+        n -= 1
+        if len(fib_seq) == 1:
+            fib_seq.append(1)
+        else:
+            last = fib_seq[-1]
+            second_to_last = fib_seq[-2]
+            fib_seq.append(last + second_to_last)
+
+    return fib_seq[-1]
+
+
+get_fibonacci(0)
+rust.get_fibonacci(0)
+get_fibonacci(1)
+rust.get_fibonacci(1)
+get_fibonacci(2)
+rust.get_fibonacci(2)
+get_fibonacci(150)
+rust.get_fibonacci(150)
