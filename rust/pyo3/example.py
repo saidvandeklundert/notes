@@ -55,22 +55,7 @@ marie = Person(name="Marie", age=2)
 
 
 # fibonacci
-
-
-def get_fibonacci(n):
-    """Get the nth fibonacci number."""
-    fib_seq = [0]
-    while n > 0:
-        n -= 1
-        if len(fib_seq) == 1:
-            fib_seq.append(1)
-        else:
-            last = fib_seq[-1]
-            second_to_last = fib_seq[-2]
-            fib_seq.append(last + second_to_last)
-
-    return fib_seq[-1]
-
+from fib import get_fibonacci
 
 print(f"Fibonacci number in Python and in Rust:")
 for i in range(10):
@@ -81,12 +66,14 @@ for i in range(10):
 from timeit import default_timer as timer
 
 py_start = timer()
-for i in range(1000):
-    py_res = get_fibonacci(150)
+for i in range(999):
+    get_fibonacci(150)
+py_res = get_fibonacci(150)
 py_elapsed = round(timer() - py_start, 3)
 ru_start = timer()
-for i in range(1000):
-    ru_res = rust.get_fibonacci(150)
+for i in range(999):
+    rust.get_fibonacci(150)
+ru_res = rust.get_fibonacci(150)
 ru_elapsed = round(timer() - ru_start, 3)
 print("Calculating the 150th fibonacci number 1000 times.")
 print(f"Python took {py_elapsed} seconds and got:\t{py_res}.")
