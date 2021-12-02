@@ -114,5 +114,8 @@ Using this new interpretation of the commands, calculate the horizontal position
 |
 |
 |
-
+answer 1:
 1.989.265
+
+answer 2:
+2.089.174.012
