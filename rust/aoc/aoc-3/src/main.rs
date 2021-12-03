@@ -51,8 +51,8 @@ fn main() {
         println!("gamma {:?}", gamma);
         println!("epsilon {:?}", epsilon);
 
-        let gamma_number = generate_two_bytes_number(gamma);
-        let epsilon_number = generate_two_bytes_number(epsilon);
+        let gamma_number = generate_4_bytes_number(gamma);
+        let epsilon_number = generate_4_bytes_number(epsilon);
         println!("gamma_number {:?}", gamma_number);
         println!("epsilon_number {:?}", epsilon_number);
         let result = gamma_number * epsilon_number;
@@ -60,8 +60,8 @@ fn main() {
     }
 }
 
-fn generate_two_bytes_number(vec: Vec<usize>) -> u32 {
-    let mut two_byte: u32 = 0b0000_0000_0000_0000_0000_0000_0000_0000;
+fn generate_4_bytes_number(vec: Vec<usize>) -> u32 {
+    let mut f_bytes: u32 = 0b0000_0000_0000_0000_0000_0000_0000_0000;
     for (idx, v) in vec.iter().rev().enumerate() {
         // take the value of the element in the vec:
         let value = *v as u32;
@@ -69,9 +69,9 @@ fn generate_two_bytes_number(vec: Vec<usize>) -> u32 {
         let bit_nr = idx as u32;
         println!("value: {} bit_nr{}", value, bit_nr);
         // manipulate the n-th bit in the two_byte value:
-        two_byte |= value << bit_nr;
+        f_bytes |= value << bit_nr;
     }
-    two_byte
+    f_bytes
 }
 
 fn zero_and_one_swap(x: usize) -> usize {
