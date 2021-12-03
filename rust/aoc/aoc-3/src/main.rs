@@ -1,24 +1,6 @@
 use std::fs;
 fn main() {
     {
-        {
-            let mut byte: u8 = 0b0000_0000;
-            println!("1: 0b{:08b}", byte);
-            byte |= 0b0000_1000; // Set a bit
-            println!("2: 0b{:08b}", byte);
-            byte &= 0b1111_0111; // Unset a bit
-            println!("3: 0b{:08b}", byte);
-            byte ^= 0b0000_1000; // Toggle a bit
-            println!("4: 0b{:08b}", byte);
-        }
-        {
-            let mut two_byte: u16 = 0b0000_0000_0000_0000;
-
-            let epsilon = vec![0, 1, 0, 0, 1];
-            let result = generate_4_bytes_number(epsilon);
-            println!("4: 0b{:16b}", result);
-            println!("{}", result);
-        }
         //1 pathetic first attempt at a solution but it works:
         let data = input();
         println!("{:?}", data);
@@ -58,6 +40,14 @@ fn main() {
         let result = gamma_number * epsilon_number;
         println!("result {}", result);
     }
+    {
+        // assignment number 2:
+        let data = input();
+
+        for vec in data {
+            println!("{:?}", vec);
+        }
+    }
 }
 
 fn generate_4_bytes_number(vec: Vec<usize>) -> u32 {
@@ -86,20 +76,56 @@ fn zero_and_one_swap(x: usize) -> usize {
 
 fn input_string() -> String {
     let string: String = fs::read_to_string("input.txt").unwrap();
+    let string: String = String::from(
+        "
+00100
+11110
+10110
+10111
+10101
+01111
+00111
+11100
+10000
+11001
+00010
+01010",
+    );
     string.trim().to_string()
 }
 fn input() -> Vec<Vec<u8>> {
     let mut vec: Vec<Vec<u8>> = Vec::new();
     let string = input_string();
     for line in string.lines() {
-        println!("{}", line);
         let mut vec_to_add: Vec<u8> = vec![];
         for c in line.chars() {
             let addition = (c.to_string()).parse::<u8>().unwrap();
             vec_to_add.push(addition);
         }
-        println!("{:?}", vec_to_add);
         vec.push(vec_to_add);
     }
     vec
 }
+
+/*
+        {
+            // these are just notes
+            let mut byte: u8 = 0b0000_0000;
+            println!("1: 0b{:08b}", byte);
+            byte |= 0b0000_1000; // Set a bit
+            println!("2: 0b{:08b}", byte);
+            byte &= 0b1111_0111; // Unset a bit
+            println!("3: 0b{:08b}", byte);
+            byte ^= 0b0000_1000; // Toggle a bit
+            println!("4: 0b{:08b}", byte);
+        }
+        {
+            // these are just notes
+            let two_byte: u16 = 0b0000_0000_0000_0000;
+
+            let epsilon = vec![0, 1, 0, 0, 1];
+            let result = generate_4_bytes_number(epsilon);
+            println!("4: 0b{:16b}", result);
+            println!("{}", result);
+        }
+*/
