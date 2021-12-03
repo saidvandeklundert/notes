@@ -15,7 +15,7 @@ fn main() {
             let mut two_byte: u16 = 0b0000_0000_0000_0000;
 
             let epsilon = vec![0, 1, 0, 0, 1];
-            let result = generate_two_bytes_number(epsilon);
+            let result = generate_4_bytes_number(epsilon);
             println!("4: 0b{:16b}", result);
             println!("{}", result);
         }
