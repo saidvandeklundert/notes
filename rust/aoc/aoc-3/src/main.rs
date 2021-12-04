@@ -1,4 +1,7 @@
+#![feature(drain_filter)]
 use std::fs;
+use std::io::{prelude::*, BufReader};
+const WIDTH: usize = 12;
 fn main() {
     {
         //1 pathetic first attempt at a solution but it works:
@@ -42,11 +45,40 @@ fn main() {
     }
     {
         // assignment number 2:
-        let data = input();
+        part_2();
+        alt2();
+    }
+}
 
-        for vec in data {
-            println!("{:?}", vec);
+fn drop_uninteresting(vec_of_vec: &mut Vec<Vec<u8>>, idx: usize, keep: u8) {
+    let mut to_drop: Vec<usize> = vec![];
+    for (index, vec) in vec_of_vec.iter().enumerate() {
+        if vec[idx] != keep {
+            to_drop.push(index);
         }
+    }
+
+    for v in to_drop.iter().rev() {
+        vec_of_vec.remove(*v);
+    }
+}
+fn get_most_common_number(vec_of_vec: Vec<Vec<u8>>, idx: usize) -> u8 {
+    let mut number_of_zeros = 0;
+    let mut number_of_ones = 0;
+    for vec in &vec_of_vec {
+        if vec[idx] == 0 {
+            number_of_zeros += 1
+        } else if vec[idx] == 1 {
+            number_of_ones += 1
+        }
+    }
+    if number_of_zeros > number_of_ones {
+        return 0;
+    } else if number_of_ones > number_of_zeros {
+        return 1;
+    // when things are equal, return 0
+    } else {
+        return 1;
     }
 }
 
@@ -75,7 +107,7 @@ fn zero_and_one_swap(x: usize) -> usize {
 }
 
 fn input_string() -> String {
-    let string: String = fs::read_to_string("input.txt").unwrap();
+    let _string: String = fs::read_to_string("input.txt").unwrap();
     let string: String = String::from(
         "
 00100
@@ -107,6 +139,79 @@ fn input() -> Vec<Vec<u8>> {
     vec
 }
 
+fn part_2() {
+    let ls: Vec<Vec<char>> = BufReader::new(fs::File::open("input.txt").unwrap())
+        .lines()
+        .map(|l| l.unwrap().chars().collect())
+        .collect();
+    println!("part_2\nls first 2 elements:\n {:?}", &ls[0..2]);
+    let mut vec_vec_char = ls.clone();
+
+    for bit in 0..ls[0].len() {
+        println!("bit: {:?}", bit);
+        let bits = vec_vec_char.iter().map(|x| x[bit]).collect::<Vec<_>>();
+
+        let c0 = bits.iter().filter(|x| **x == '0').count();
+        let c1 = bits.iter().filter(|x| **x == '1').count();
+
+        let keep = if c1 >= c0 { '1' } else { '0' };
+
+        vec_vec_char.retain(|x| x[bit] == keep);
+        if vec_vec_char.len() == 1 {
+            break;
+        }
+    }
+
+    let mut nums_car = ls.clone();
+
+    for bit in 0..ls[0].len() {
+        let bits = nums_car.iter().map(|x| x[bit]).collect::<Vec<_>>();
+
+        let c0 = bits.iter().filter(|x| **x == '0').count();
+        let c1 = bits.iter().filter(|x| **x == '1').count();
+
+        let keep = if c1 >= c0 { '0' } else { '1' };
+
+        nums_car.retain(|x| x[bit] == keep);
+        if nums_car.len() == 1 {
+            break;
+        }
+    }
+
+    let oxy = u32::from_str_radix(&vec_vec_char[0].iter().collect::<String>(), 2).unwrap();
+    let car = u32::from_str_radix(&nums_car[0].iter().collect::<String>(), 2).unwrap();
+
+    println!("part 2 : {:?}", oxy * car);
+}
+pub fn alt2() {
+    //https://github.com/timvisee/advent-of-code-2021/blob/master/day03b/src/main.rs
+    let nums = include_str!("input.txt")
+        .lines()
+        .map(|l| u32::from_str_radix(l, 2).unwrap())
+        .collect::<Vec<_>>();
+
+    let oxy = (0..WIDTH)
+        .rev()
+        .scan(nums.clone(), |oxy, i| {
+            let one = oxy.iter().filter(|n| *n & 1 << i > 0).count() >= (oxy.len() + 1) / 2;
+            oxy.drain_filter(|n| (*n & 1 << i > 0) != one);
+            oxy.first().copied()
+        })
+        .last()
+        .unwrap();
+
+    let co2 = (0..WIDTH)
+        .rev()
+        .scan(nums, |co2, i| {
+            let one = co2.iter().filter(|n| *n & 1 << i > 0).count() >= (co2.len() + 1) / 2;
+            co2.drain_filter(|n| (*n & 1 << i > 0) == one);
+            co2.first().copied()
+        })
+        .last()
+        .unwrap();
+
+    println!("{}", oxy * co2);
+}
 /*
         {
             // these are just notes
