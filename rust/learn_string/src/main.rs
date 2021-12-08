@@ -86,6 +86,7 @@ fn main() {
         println!("{}", mem::size_of::<MyString>());
     }
     {
+        // This is about the extend trait being implemented for string
         use core::mem::{self, ManuallyDrop, MaybeUninit};
         let mut string: String = String::from("some string");
         let another_string: String = String::from(" and another string");
@@ -93,6 +94,38 @@ fn main() {
         string.extend(another_string.chars());
         string.extend(yet_another_string.chars());
         println!("{}", string);
+    }
+    {
+        // From string.rs:
+        //
+        /// `String` implements <code>[Deref]<Target = [str]></code>, and so inherits all of [`str`]'s
+        /// methods. In addition, this means that you can pass a `String` to a
+        /// function which takes a [`&str`] by using an ampersand (`&`):
+        let some_string: String = String::from("Trailing whitespace ");
+        let some_other_string = some_string.trim();
+        some_string.len();
+    }
+    {
+        let instructions: Vec<String> = vec![
+            String::from("forward"),
+            String::from("forward"),
+            String::from("down"),
+            String::from("down"),
+            String::from("up"),
+        ];
+
+        for instruction in instructions {
+            match instruction.as_ref() {
+                "forward" => println!("forward"),
+                "down" => println!("down"),
+                "up" => println!("up"),
+                _ => println!("nothing"),
+            }
+        }
+    }
+    {
+        let string_number: String = String::from("127");
+        let number: i32 = string_number.parse::<i32>().unwrap();
     }
 }
 

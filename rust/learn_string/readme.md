@@ -389,3 +389,137 @@ impl Extend<char> for String {
 ```
 
 Extend is here: https://doc.rust-lang.org/src/core/iter/traits/collect.rs.html#318-354
+
+
+## str methods:
+
+
+The str is found here: https://github.com/rust-lang/rust/blob/master/library/core/src/str/mod.rs
+
+
+```rust
+        /// `String` implements <code>[Deref]<Target = [str]></code>, and so inherits all of [`str`]'s
+        /// methods. In addition, this means that you can pass a `String` to a
+        /// function which takes a [`&str`] by using an ampersand (`&`):
+
+
+//...
+#[stable(feature = "rust1", since = "1.0.0")]
+impl ops::Deref for String {
+    type Target = str;
+
+    #[inline]
+    fn deref(&self) -> &str {
+        unsafe { str::from_utf8_unchecked(&self.vec) }
+    }
+}
+
+#[stable(feature = "derefmut_for_string", since = "1.3.0")]
+impl ops::DerefMut for String {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut str {
+        unsafe { str::from_utf8_unchecked_mut(&mut *self.vec) }
+    }
+}
+```
+
+### len of string:
+
+To look at the lenght of the bytes in the vector:
+```rust
+impl str {
+    /// Returns the length of `self`.
+    pub const fn len(&self) -> usize {
+        self.as_bytes().len()
+    }
+    ...
+}    
+```
+
+### strip(), err, I mean trim():
+
+```rust
+impl str {
+    /// Returns a string slice with leading and trailing whitespace removed.
+    pub fn trim(&self) -> &str {
+        self.trim_matches(|c: char| c.is_whitespace())
+    }
+
+    /// Returns a string slice with leading whitespace removed.
+    pub fn trim_start(&self) -> &str {
+        self.trim_start_matches(|c: char| c.is_whitespace())
+    }
+
+    /// Returns a string slice with trailing whitespace removed.
+    pub fn trim_end(&self) -> &str {
+        self.trim_end_matches(|c: char| c.is_whitespace())
+    }    
+}
+```
+
+
+### chars()
+
+```rust
+impl str{
+    pub fn chars(&self) -> Chars<'_> {
+        Chars { iter: self.as_bytes().iter() }
+    }
+
+    pub fn char_indices(&self) -> CharIndices<'_> {
+        CharIndices { front_offset: 0, iter: self.chars() }
+    }
+
+}
+```
+
+### split_whitespace()
+
+```rust
+impl str{
+    pub fn split_whitespace(&self) -> SplitWhitespace<'_> {
+        SplitWhitespace { inner: self.split(IsWhitespace).filter(IsNotEmpty) }
+    }
+
+    pub fn split_ascii_whitespace(&self) -> SplitAsciiWhitespace<'_> {
+        let inner =
+            self.as_bytes().split(IsAsciiWhitespace).filter(BytesIsNotEmpty).map(UnsafeBytesToStr);
+        SplitAsciiWhitespace { inner }
+    }
+```
+
+### lines()
+
+```rust
+impl str{
+
+    pub fn lines(&self) -> Lines<'_> {
+        Lines(self.split_terminator('\n').map(LinesAnyMap))
+    }    
+}
+```
+
+### ends
+
+```rust
+impl str{
+
+    pub fn ends_with<'a, P>(&'a self, pat: P) -> bool
+    where
+        P: Pattern<'a, Searcher: ReverseSearcher<'a>>,
+    {
+        pat.is_suffix_of(self)
+    }
+}    
+```
+
+### find()
+
+```rust
+impl str{    
+    /// Returns the byte index of the first character of this string slice that
+    pub fn find<'a, P: Pattern<'a>>(&'a self, pat: P) -> Option<usize> {
+        pat.into_searcher(self).next_match().map(|(i, _)| i)
+    }
+}    
+```

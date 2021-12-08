@@ -2,12 +2,22 @@ use regex::Regex;
 use std::fs;
 
 fn main() {
-    // part 1
-    let data = read_input("input.txt");
-    let mut bingo_game = parse_data(&data);
-    bingo_game.show_game();
-    let result = bingo_game.play_game();
-    println!("The answer:\n{}", result);
+    {
+        // part 1
+        let data = read_input("input.txt");
+        let mut bingo_game = parse_data(&data);
+        bingo_game.show_game();
+        let result = bingo_game.play_game();
+        println!("The answer:\n{}", result);
+    }
+    {
+        //part2
+        let data = read_input("input.txt");
+        let mut bingo_game = parse_data(&data);
+        bingo_game.show_game();
+        let result = bingo_game.play_game();
+        println!("The answer:\n{}", result);
+    }
 }
 
 pub struct BingoGame {
@@ -230,22 +240,5 @@ mod tests {
         card_1.play_round(4);
         card_1.play_round(5);
         assert_eq!(card_1.bingo(), true);
-    }
-
-    #[test]
-    fn test_game_creation() {
-        let test_data = test_input();
-        let bingo_game = parse_data(&test_data);
-        println!("test_data:\n{:?}", test_data);
-        println!("{:?}", bingo_game.input);
-        assert_eq!(bingo_game.input[9], 14)
-    }
-
-    #[test]
-    fn test_game_creation_and_bingo() {
-        let test_data = test_input();
-        let mut bingo_game = parse_data(&test_data);
-        let result = bingo_game.play_game();
-        assert_eq!(result, 4512);
     }
 }
