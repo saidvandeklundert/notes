@@ -28,7 +28,7 @@ static struct PyModuleDef helloworld =
         -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
         module_methods};
 
-PyMODINIT_FUNC PyInit_cModPyDem(void)
+PyMODINIT_FUNC PyInit_helloworld(void)
 {
     return PyModule_Create(&helloworld);
 }
