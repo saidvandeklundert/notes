@@ -41,3 +41,4 @@ gcc -shared -o libadd1.so add.o
 
 - valgrind
 - jansson 
+- cmake 
