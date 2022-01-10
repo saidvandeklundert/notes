@@ -1,10 +1,9 @@
 from distutils.core import setup, Extension
 
-module1 = Extension("hello", sources=["hellomodule.c"])
-
+module = Extension("cModPyDem", sources=["cModPyDem.c"])
 setup(
-    name="PackageName",
+    name="packagename",
     version="1.0",
-    description="This is a demo package",
-    ext_modules=[module1],
+    description="a test package",
+    ext_modules=[module],
 )
