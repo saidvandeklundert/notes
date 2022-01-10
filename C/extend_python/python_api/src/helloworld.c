@@ -4,11 +4,11 @@
 int square(int n)
 {
 
-    return n * n;
+    return n + n;
 }
 
 // The PyObject:
-static PyObject *square_func(PyObject *self, PyObject *args)
+static PyObject *square_name_in_python(PyObject *self, PyObject *args)
 {
     int n;
     if (!PyArg_ParseTuple(args, "i", &n))
@@ -18,7 +18,7 @@ static PyObject *square_func(PyObject *self, PyObject *args)
 
 //
 static PyMethodDef module_methods[] = {
-    {"square_func", (PyCFunction)square_func, METH_VARARGS, "multiply n by n"},
+    {"square_name_in_python", (PyCFunction)square_name_in_python, METH_VARARGS, "multiply n by n"},
     {NULL, NULL, 0, NULL}};
 
 // Here we define some module information:
