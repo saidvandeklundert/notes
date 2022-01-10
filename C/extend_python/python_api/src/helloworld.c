@@ -1,6 +1,6 @@
 #include <Python.h>
 
-// the function:
+// The C function that we will be exporting:
 int square(int n)
 {
 
@@ -16,10 +16,12 @@ static PyObject *square_func(PyObject *self, PyObject *args)
     return Py_BuildValue("i", square(n));
 }
 
+//
 static PyMethodDef module_methods[] = {
     {"square_func", (PyCFunction)square_func, METH_VARARGS, "multiply n by n"},
     {NULL, NULL, 0, NULL}};
 
+// Here we define some module information:
 static struct PyModuleDef helloworld =
     {
         PyModuleDef_HEAD_INIT,
