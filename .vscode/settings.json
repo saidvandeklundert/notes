@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.set": "jinja",
+        "stdlib.h": "c"
+    }
+}
