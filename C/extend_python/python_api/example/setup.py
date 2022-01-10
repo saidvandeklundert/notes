@@ -1,6 +1,6 @@
 from distutils.core import setup, Extension
 
-module = Extension("hello", sources=["hellomodule.c"])
+module = Extension("cModPyDem", sources=["cModPyDem.c"])
 setup(
     name="packagename",
     version="1.0",
