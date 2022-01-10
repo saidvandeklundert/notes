@@ -1,6 +1,14 @@
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
-// The C function that we will be exporting:
+// Function: hello from C
+static PyObject *hello(PyObject *self, PyObject *args)
+{
+    printf("Hello from C\n");
+    return Py_None;
+}
+
+// A C function that we will be exporting:
 int square(int n)
 {
 
@@ -8,6 +16,9 @@ int square(int n)
 }
 
 // The PyObject:
+//
+//  All object types are extensions of this type.
+//  This is a type which contains the information Python needs to treat a pointer to an object as an object.
 static PyObject *square_name_in_python(PyObject *self, PyObject *args)
 {
     int n;
@@ -16,12 +27,13 @@ static PyObject *square_name_in_python(PyObject *self, PyObject *args)
     return Py_BuildValue("i", square(n));
 }
 
-//
+// struct used to describe a method of an extension type:
 static PyMethodDef module_methods[] = {
+    {"hello", hello, METH_NOARGS, "Prints Hello World"},
     {"square_name_in_python", (PyCFunction)square_name_in_python, METH_VARARGS, "multiply n by n"},
-    {NULL, NULL, 0, NULL}};
+    {NULL, NULL, 0, NULL}}; // signal the end of the method definitions
 
-// Here we define some module information:
+// The PyModuleDef is the module definition struct:
 static struct PyModuleDef helloworld =
     {
         PyModuleDef_HEAD_INIT,
@@ -30,6 +42,7 @@ static struct PyModuleDef helloworld =
         -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
         module_methods};
 
+// The module initialization function:
 PyMODINIT_FUNC PyInit_helloworld(void)
 {
     return PyModule_Create(&helloworld);
