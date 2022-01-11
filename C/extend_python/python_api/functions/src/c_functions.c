@@ -27,7 +27,26 @@ static PyObject *greeter(PyObject *self, PyObject *args)
     return Py_BuildValue("s", greeting);
 }
 
-// Function definition:
+// Return the square value for a number:
+static PyObject *square(PyObject *self, PyObject *args)
+{
+    int n;
+
+    if (!PyArg_ParseTuple(args, "i", &n))
+    {
+        return NULL;
+    }
+
+    return Py_BuildValue("i", c_square(n));
+}
+
+// return the cube value for a number:
+int c_square(int n)
+{
+    return n * n;
+}
+
+// Print a message to the console using C:
 static PyObject *printer(PyObject *self, PyObject *args)
 {
     printf("Hello from C\n");
@@ -41,6 +60,7 @@ static PyMethodDef module_methods[] = {
     // Note that it will be available as 'system()' in Python, not 'spamsystem'.
     {"system", spam_system, METH_VARARGS, "Execute a shell command."},
     {"greeter", greeter, METH_VARARGS, "Return a greating to a person."},
+    {"square", square, METH_VARARGS, "Return the cube value for a number."},
     {NULL, NULL, 0, NULL}}; // signal the end of the method definitions
 
 // The PyModuleDef is the module definition struct:
