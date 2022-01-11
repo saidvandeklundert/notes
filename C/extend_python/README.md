@@ -64,9 +64,6 @@ At the top of the file, you need to pull in the Python API:
 On Windows, you will find an 'include' directory where Python is installed. On my system for instance, it was `C:\Python39\include`. On a Linux system, you might need to install the `python-dev` package.
 
 
-
-
-
 # Using the example extensions
 
 
