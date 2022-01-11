@@ -36,7 +36,7 @@ static PyObject *square(PyObject *self, PyObject *args)
     {
         return NULL;
     }
-
+    // Here we return the C function that will produce the square value:
     return Py_BuildValue("i", c_square(n));
 }
 
