@@ -10,15 +10,15 @@ static PyObject *hello(PyObject *self, PyObject *args)
 
 // struct used to describe a method of an extension type:
 static PyMethodDef module_methods[] = {
-    {"hello", hello, METH_NOARGS, "Prints Hello World"},
+    {"hello", hello, METH_NOARGS, "Hello from C"},
     {NULL, NULL, 0, NULL}}; // signal the end of the method definitions
 
 // The PyModuleDef is the module definition struct:
 static struct PyModuleDef helloworld =
     {
         PyModuleDef_HEAD_INIT,
-        "helloworld", /* name of module */
-        "",           /* module documentation, may be NULL */
+        "helloworld", // Module name
+        "",           // Module documentation, may be an empty string
         -1,           /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
         module_methods};
 
