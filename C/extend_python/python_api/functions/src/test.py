@@ -4,4 +4,5 @@ if __name__ == "__main__":
 
     c_functions.printer()
     c_functions.system("ls -l")
-    c_functions.greeter("Jan")
+    greeting = c_functions.greeter("Jan")
+    print(greeting)
