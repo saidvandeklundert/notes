@@ -1,0 +1,22 @@
+{
+  "name": "R1",
+  "serial": "BX109",
+  "model": "MX10008",
+  "platform": "juniper",
+  "mgmt": "10.0.0.1/31",
+  "role": "spine",
+  "interfaces": [
+    {
+      "name": "et-0/0/0"
+    },
+    {
+      "name": "et-0/0/1"
+    }
+  ],
+  "communities": null,
+  "secrets": {
+    "admin_password": "admin",
+    "admin_username": "admin",
+    "root_hash": "$ABC123"
+  }
+}

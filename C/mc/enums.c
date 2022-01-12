@@ -1,16 +1,5 @@
 #include <stdio.h>
 
-enum week
-{
-    Mon,
-    Tue,
-    Wed,
-    Thur,
-    Fri,
-    Sat,
-    Sun
-};
-
 enum color
 {
     PURPLE,
@@ -26,12 +15,13 @@ typedef enum
 } colors;
 int main()
 {
-    enum week day;
-    day = Wed;
-    printf("%d", day);
 
     enum color kleur;
     kleur = WHITE;
-    printf("%d", kleur);
+    printf("WHITE: %d\n", kleur);
+
+    printf("RED: %d\n", RED);
+    printf("GREEN: %d\n", GREEN);
+    printf("BLUE: %d\n", BLUE);
     return 0;
 }

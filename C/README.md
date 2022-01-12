@@ -183,9 +183,10 @@ There are 4 main type classes:
 - unsigned integers
 - signed integers
 - real floating-point numbers
-- complex floating-point numbers
+- complex floating-point numbers:
 
 
+There is also [C types](https://en.wikipedia.org/wiki/C_data_types) on wikipedia. There it says that 'The C language provides the four basic arithmetic type specifiers char, int, float and double, and the modifiers signed, unsigned, short, and long'.
 
 `int`: variable that can be used to contain integral values only
 `float`: numbers that contain decimal places
@@ -206,7 +207,7 @@ int const SIDE = 10;
 
 `string literals` read-only values. Were they introduced after constants in the language, probably this would have been a better choice.
 
-`enum`: enumeration constantshave either an explicit or a positional value.
+`enum`: the first value in an enum has value 0, the next 1, and so on. Enumeration constants have either an explicit or a positional value.
 
 ```c
 enum color
@@ -216,6 +217,63 @@ enum color
     BLUE 
 };
 ```
+#### Derived data types
+
+##### Aggregated types:
+
+`arrays`: combines items with the same base type.
+Arrays can be fixed lenght or variable length (VLA).
+
+VLA's cannot have initializers and VLAs can't be declared outside functions.
+
+Array parameters behave as if the array is passed by reference.
+
+Strings are 'special'. They are a 0-terminated array of `char`.
+
+
+`structures`: combines items that may have different base types. Omitted struct initializers force the corresponding member to 0. A struct initializer must initialize at least one member. Struct parameters are passed by value. Any data type other than a VLA is allowed as a member in a structure. 
+
+```c
+//A typedef only creates an alias for a type, but never a new type.
+
+typedef struct Person Person;
+struct Person
+{
+    char name[25];
+    int age;
+};
+```
+
+##### Other derived types:
+
+`pointers`: refer to an object in memory. They are opaque types and they are valid, null or indeterminate. Initialization or assignment with 0 makes a pointer null. Null pointers evaluate to false.
+`unions`: overlay items of different base types in the same memory location.
+
+### Functions
+
+Example of a function:
+```c
+int multiply(int a, int b)
+{
+    return a * b;
+}
+```
+
+Use `void` in case:
+- the function is to be called with no parameter
+- the function does not return a value
+
+Reaching the end of the {} block of a function is equivalent to a return statement without an expression. Reaching the end of a } is only allowed for `void` functions.
+
+The `main()` function is the default entrypoint.
+
+The two main forms for main:
+```c
+int main(void);
+int main(int argc, char* argv[argc+1]);
+```
+Use EXIT_SUCCESS and EXIT_FAILURE as return values for main.
+
 ### memory
 
 C is pass by value. You can (sort of) do pass by reference through the use of pointers.
@@ -231,6 +289,7 @@ C does not include a garbage collector. You have to free the memory yourself usi
 ```c
 free(b);
 ```
+
 
 
 
@@ -258,3 +317,12 @@ gcc -shared -o libadd1.so add.o
 
 typedef struct
 #define
+
+
+
+
+# Resources
+
+https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-087-practical-programming-in-c-january-iap-2010/
+
+https://www.learn-c.org/
