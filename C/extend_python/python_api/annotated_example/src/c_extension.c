@@ -40,7 +40,7 @@ static struct PyModuleDef c_extension =
         module_methods};
 
 // Define the module initialization function:
-PyMODINIT_FUNC PyInit_c_extensison(void)
+PyMODINIT_FUNC PyInit_c_extension(void)
 {
     return PyModule_Create(&c_extension);
 }
