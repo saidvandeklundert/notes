@@ -38,11 +38,39 @@ Declarations are bound to the scope in which they appear.
 size_t i = 0;
 ```
 
-`Statements`: instructions that tell the compiler what to do with identifiers that have been declared so far. 
+`Statements`: instructions that tell the compiler what to do with identifiers that have been declared so far. From KR, a statement 'specifies the computing operation to be done'. 
 
 `Include files`:
 
-`Header files`:
+`Header files`: file containing C function declarations and macro definitions that can be shared between several source files. Example on how to use one:
+```c
+#include <stdio.h>
+```
+The C library is interfaced via several header files.
+
+Input and Output can be found in `stdio.h`. String things are in `string.h` and there are many more available.
+
+Putting in a header file is akin to copying the code into the source file.
+
+The following form is for system header files:
+```c
+#include <file>
+```
+
+The following form is for your own program header files:
+```c
+#include "file"
+```
+
+Example header
+```c
+#ifndef FOO_H_   /* Include guard */
+#define FOO_H_
+
+int foo(int x);  /* An example function declaration */
+
+#endif // FOO_H_
+```
 
 `Scope`: part of a program where an identifier is visible.
 
@@ -62,7 +90,7 @@ double x = (double)people;
 `Abstract state machine`: the compiler can compute away a lot of nonesense at compile time to make the program faster at runtime. Programs execute as if following the abstract state machine. Abstract state machines cheat wherever they can and only respect the observable states of the abstract state machine.
 
 Another thing worth noting is that type determines optimization opportunities.
-
+`Variables`: store values that can be used during the computation.
 `Values`: All values are numbers or translate to numbers.
 
 ```
@@ -82,6 +110,31 @@ We don’t want the result of a computation to depend on the executable (which i
 `Types`: All values have a type that is statically determined. The operations that are possible on a value are determined by it's type. In effect, the type of a value is the thing that determines the result of operations.
 
 A type’s binary representation is observable and determines the results of all operations.
+
+`Errors`: Generally, there are three different ways to generate or convey errors in C:
+- return a special value that indicates an error
+- return a special value that indicates a function was successful
+- return a positive number on succes and a negative number on failure
+
+Example on how error checking could be implemented in C:
+```c
+if (puts("hello world") == EOF) {
+  perror("can't output to terminal:");
+  exit(EXIT_FAILURE);
+}
+```
+
+`Opaque types`: types specified through functional interfaces.
+
+### print formatters
+
+
+`integers`: `d` `u`
+`bit pattern`: `x`
+`integer characters`: `c`
+`string characers`: `s`
+`address`: `p`
+`floating points`: `g`
 
 ### Control
 
@@ -246,8 +299,65 @@ struct Person
 
 ##### Other derived types:
 
-`pointers`: refer to an object in memory. They are opaque types and they are valid, null or indeterminate. Initialization or assignment with 0 makes a pointer null. Null pointers evaluate to false.
 `unions`: overlay items of different base types in the same memory location.
+
+`pointers`: refer to an object in memory. They are opaque types and they are valid, null or indeterminate. Initialization or assignment with 0 makes a pointer null. Null pointers evaluate to false.
+
+Takeways:
+- pointer points to something by pointing to a location in memory. 
+- the thing a pointer points to is the thing that is found at that memory location.
+- pointers have specific properties for the following types:
+  - structures
+  - arrays
+  - functions
+- some pointer properties:
+  - they are considered scalar values, arithmetic operations are define for them
+  - they have state
+  - they have a dedicated null state
+- a valid pointer refers to the first element of an array of the reference type. This array can be of unknown length
+- the length of an array cannot be determined from the value of the pointer, this means that pointers are not arrays
+- we have to ensure that pointer variables are always null, unless they point to a valid object that we want to manipulate.
+```c
+char const* name = 0;
+```
+- when dereferenced, a pointed-to object must be of the designated type
+- A pointer must point to a valid object or one position beyond a valid object or be null.
+- never use NULL, it is not safe as it is not the same on every platform
+- do not hide pointers in a typedef
+- array-to-pointer decay: when A is an array, A[i] and *(A+i) are equivalent. Evaluation of an array A returns &A[0].
+- In a function declaration, any array parameter rewrites to a pointer.
+- Function pointers must be used with their exact type.
+- the function call operator (...) applies to function pointers.
+- Pointers can refer to objects and to functions.
+- Pointers are not arrays but refer to arrays.
+- Array parameters of functions are automatically rewritten as object pointers.
+- Function parameters of functions are automatically rewritten as function pointers.
+- Function pointer types must match exactly when they are assigned or called
+
+Syntax:
+`&` address off operator, returns a pointer type
+`*` object off operator. Allow 2 things:
+  - declare a pointer value
+  - get the value that the pointer is pointing to
+`->`: a pointer as the left operand that points to a member of the underlying struct.
+
+```c
+a -> some_struct
+```
+
+Some operations:
+```c
+int var = 100;  // value declaration
+int  *ip;       // pointer variable declaration
+
+
+ip = &var;      // store the address value of 'var' in 'ip'
+
+printf("Getting the value of the *ip pointer: %d\n", *ip );
+
+int* ip_2;      // second way to declare an integer pointer
+int * ip_3;     // third variable declaration
+```
 
 ### Functions
 
@@ -274,6 +384,11 @@ int main(int argc, char* argv[argc+1]);
 ```
 Use EXIT_SUCCESS and EXIT_FAILURE as return values for main.
 
+A pure function has the following two properties:
+- there are no effects other then the returned value
+- the function return value depends only on the parameters
+
+Express small tasks as pure functions whenever possible.
 ### memory
 
 C is pass by value. You can (sort of) do pass by reference through the use of pointers.
@@ -326,3 +441,9 @@ typedef struct
 https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-087-practical-programming-in-c-january-iap-2010/
 
 https://www.learn-c.org/
+
+
+C coding style from Linus:
+https://www.kernel.org/doc/Documentation/process/coding-style.rst
+
+https://stackoverflow.com/questions/11182765/how-can-i-build-my-c-extensions-with-mingw-w64-in-python
