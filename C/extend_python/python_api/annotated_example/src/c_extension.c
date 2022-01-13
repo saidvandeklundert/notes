@@ -40,8 +40,16 @@ static struct PyModuleDef c_extension =
         module_methods};
 
 // Define the module initialization function:
-PyMODINIT_FUNC PyInit_c_extension(void)
+PyMODINIT_FUNC PyInit_c_extensison(void)
 {
     return PyModule_Create(&c_extension);
 }
-// Note that the 'c_extension'
+/*
+    Note that the 'c_extension' name. It appears three times:
+    - PyModuleDef
+    - PyModuleDef_HEAD_INIT
+    - as part of the PyMODINIT_FUNC 'PyInit_c_extension'
+
+    This has to match. You will not see a compiler error or warning if this does not match.
+
+*/
