@@ -7,7 +7,7 @@ int multiplier(int a, int b)
     return a * b;
 }
 
-static PyObject *_multiplier(PyObject *self, PyObject *args)
+static PyObject *c_multiplier(PyObject *self, PyObject *args)
 {
     // Declare variables:
     int a;
@@ -27,7 +27,7 @@ static PyObject *_multiplier(PyObject *self, PyObject *args)
 // struct with an array of methods:
 static PyMethodDef module_methods[] = {
     // Here we define the methods we want to expose to Python:
-    {"multiplier", _multiplier, METH_VARARGS, "Multiply two numbers."},
+    {"multiplier", c_multiplier, METH_VARARGS, "Multiply two numbers."},
     {NULL, NULL, 0, NULL}}; // signal the end of the method definitions
 
 // Define the module struct:
