@@ -31,7 +31,7 @@ static PyMethodDef module_methods[] = {
     {NULL, NULL, 0, NULL}}; // signal the end of the method definitions
 
 // Define the module struct:
-static struct PyModuleDef c_functions =
+static struct PyModuleDef c_extension =
     {
         PyModuleDef_HEAD_INIT,
         "c_extension", // the name of the module in Python
@@ -40,7 +40,8 @@ static struct PyModuleDef c_functions =
         module_methods};
 
 // Define the module initialization function:
-PyMODINIT_FUNC PyInit_c_functions(void)
+PyMODINIT_FUNC PyInit_c_extension(void)
 {
-    return PyModule_Create(&c_functions);
+    return PyModule_Create(&c_extension);
 }
+// Note that the 'c_extension'
