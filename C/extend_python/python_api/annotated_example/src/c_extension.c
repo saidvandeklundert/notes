@@ -34,9 +34,9 @@ static PyMethodDef module_methods[] = {
 static struct PyModuleDef c_functions =
     {
         PyModuleDef_HEAD_INIT,
-        "c_extension",                                          // the name of the module in Python
-        "This is the documentation for this extension module.", // The docstring in Python
-        -1,                                                     /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+        "c_extension", // the name of the module in Python
+        "",            // The docstring in Python
+        -1,            /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
         module_methods};
 
 // Define the module initialization function:
