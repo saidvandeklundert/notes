@@ -1,3 +1,7 @@
+"""
+pip install -e src/
+python3 src/test.py
+"""
 from distutils.core import setup, Extension
 
 module = Extension("c_extension", sources=["c_extension.c"])
