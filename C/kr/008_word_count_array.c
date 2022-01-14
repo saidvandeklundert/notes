@@ -2,6 +2,7 @@
 /* count digits, white space, others */
 main()
 {
+    printf("start\n");
     int c, i, nwhite, nother;
     int ndigit[10];
     nwhite = nother = 0;
