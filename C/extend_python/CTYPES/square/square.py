@@ -16,6 +16,6 @@ c_lib = ctypes.CDLL("./square.so")
 
 print(c_lib.square(2))
 
-for i in range(10):
+for i in range(3):
     x = c_lib.square(i)
     print(x)

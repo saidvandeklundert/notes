@@ -41,7 +41,7 @@ int square(int i)
 Before we can call this function from our Python code, we need to compile it. And when we compile the code, we also need to pass in a flag so that the produced file can be imported. So after we put in place the C file, run the following command:
 
 ```
-gcc -shared -o `square.so` square.c
+gcc -shared -o square.so square.c
 ```
 
 This will output a file called `square.so`. This file is something we can import into our Python script. Let's put a `square.py` script in the same directory:
@@ -53,7 +53,7 @@ c_lib = ctypes.CDLL("./square.so")
 
 print(c_lib.square(2))
 
-for i in range(10):
+for i in range(3):
     x = c_lib.square(i)
     print(x)
 ```
