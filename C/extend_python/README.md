@@ -56,14 +56,75 @@ print(c_lib.square(2))
 
 That is it!
 
-We import `ctypes` so that we can use `ctypes.CDLL` to load the binary we produced as a module in Python. In the example, that 'module' is stored in the `c_lib` variable. The C functions, or in our case function, can then be called like so: `c_lib.square()`.
+What happes in the above is we import `ctypes` so that we can use `ctypes.CDLL` to load the shared object library we produced as a module in Python. In the example, that 'module' is stored in the `c_lib` variable. The C functions, or in our case function, can then be called like so: `c_lib.square()`.
 
 
 # Python API
 
-The Python API is usable by C and C++. It is a maintained feature of Python and it is documented [here](https://docs.python.org/3/c-api/index.html). In case you want to have your C extensions added to Python, it is worth noting that you have to following [PEP 7](https://www.python.org/dev/peps/pep-0007/). It might also be worth knowing this PEP exists as it clarifies some of the existing C code.
+The Python API is usable from C and C++. It is a maintained feature of Python and it is documented [here](https://docs.python.org/3/c-api/index.html). In case you want to have your C extensions added to Python, it is worth noting that you have to following [PEP 7](https://www.python.org/dev/peps/pep-0007/). It might also be worth knowing this PEP exists as helps clarify the formatting and style of the existing C code.
 
-## A small example
+# Python API example
+
+There are a number of steps to follow before you can call a C function from Python using the Python API. 
+
+In your C file you need to:
+- include the proper header file (`Python.h`)
+- write a function
+- put the function in a PyObject
+- handle stuff like 'receiving' and 'returing' values from the Python runtime inside the PyObject
+- add the PyObject to an array inside 'PyMethodDef'
+- build the 'PyModuleDef' struct
+- define 'PyMODINIT_FUNC' so that the module can be initialized
+
+
+After this, you can make things easy for yourself and put in place a `setup.py` file that compiles the source code and installs it as a module for you. If you do this, you do not have to worry about whereto you are compiling or where the file you need to import is.
+
+Let's first focus on the necessary C code.
+
+## The C extension
+
+Our C-extension will provide a function that will be called `multiplier`. The C code is the following:
+
+```c
+#define PY_SSIZE_T_CLEAN
+#include <Python.h>
+
+int multiplier(int a, int b)
+{
+    return a * b;
+}
+
+static PyObject *c_multiplier(PyObject *self, PyObject *args)
+{
+    int a;
+    int b;
+    int ret;
+    if (!PyArg_ParseTuple(args, "ii", &a, &b))
+    {
+        return NULL;
+    }
+    ret = multiplier(a, b);
+    return Py_BuildValue("i", ret);
+}
+
+static PyMethodDef module_methods[] = {
+    {"multiplier", c_multiplier, METH_VARARGS, "Multiply two numbers."},
+    {NULL, NULL, 0, NULL}};
+
+static struct PyModuleDef c_extension =
+    {
+        PyModuleDef_HEAD_INIT,
+        "c_extension", // the name of the module in Python
+        "",            // The docstring in Python
+        -1,            /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+        module_methods};
+
+PyMODINIT_FUNC PyInit_c_extension(void)
+{
+    return PyModule_Create(&c_extension);
+}
+```
+
 
 At the top of the file, you need to pull in the Python API:
 
