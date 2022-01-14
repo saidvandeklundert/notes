@@ -1,28 +1,35 @@
-# Extending Python with C
+A good deal of Python, or at least [CPython](https://github.com/python/cpython), is written in C. Many things have been written about how C is used in Python. Once that I really enjoyed is the `CPython internals` book, written by Anthony Shaw.
+
+What I was missing though, was something that explained in simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. It seemed like a nice project for me to entertain myself while being in between jobs.
 
 
-https://realpython.com/cpython-source-code-guide/:
-```
-Python code is not compiled into machine-code. It is compiled into a special low-level intermediary language called bytecode that only CPython understands. This code is stored in .pyc files in a hidden directory and cached for execution. If you run the same Python application twice without changing the source code, it’ll always be much faster the second time. This is because it loads the compiled bytecode and executes it directly.
-```
+In case you are interested in extending Python with Rust, that is described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/).
 
-Still faster then running the same app twice would be to have Python call functions that are compiled to machine code. You can use C, C++ or Rust to extend Python. This is about extending Python with C. Extending Python with Rust is described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/).
 
-Options to extend/speed up Python with C:
+
+You can extend Python with your own C code. Python can call C functions that are compiled to machine code. 
+# Why extend Python with C?
+
+C is a compiled language that is very fast and efficient. It gives you low-level control over the hardware and you can run C programs on almost anything. 
+
+Another valid reason could be to learn about C and better understand Python / certain parts of Linux.
+
+
+# How to extend Python with C?
+
+There are multiple options available to call C code from Python. The options are the following:
 - using ctypes: https://docs.python.org/3/library/ctypes.html#module-ctypes
 - cffi library: https://cffi.readthedocs.io/en/latest/index.html
 - Python API: https://docs.python.org/3/c-api/intro.html
 
-
+ First, I will give a small example on how to call a C function using ctypes. After this, I will move on to using the Python API.
 
 # Using ctypes
 
 
 When we use `ctypes`, we can write some C, compile it and then import the compiled C into our Python.
 
-## A small example
-
-An example would be the following C file called `square.c`:
+Let's look at an example function in a file called `square.c`:
 
 ```c
 int square(int i)
@@ -31,21 +38,29 @@ int square(int i)
 }
 ```
 
-We can compile this file as follows:
+Before we can call this function from our Python code, we need to compile it. And when we compile the code, we also need to pass in a flag so that the produced file can be imported. So after we put in place the C file, run the following command:
+
 ```
 gcc -shared -o clib.so square.c
 ```
 
-
-This gives us a `clib.so` file that we can import into our Python script that could be as straightforward as the following code:
+This will output a `clib.so` file. This file is something we can import into our Python script. Let's put a `square.py` script in the same directory:
 
 ```python
 import ctypes
 
-c_lib = ctypes.CDLL("./clib.so")
-x = c_lib.square(40)
-print(x)
+c_lib = ctypes.CDLL("./square.so")
+
+print(c_lib.square(2))
+
+for i in range(10):
+    x = c_lib.square(i)
+    print(x)
 ```
+
+That is it!
+
+We import `ctypes` so that we can use `ctypes.CDLL` to load the binary we produced as a module in Python. In the example, that 'module' is stored in the `c_lib` variable. The C functions, or in our case function, can then be called like so: `c_lib.square()`.
 
 
 # Python API
