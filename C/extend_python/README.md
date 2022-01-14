@@ -1,14 +1,14 @@
-A good deal of Python, or at least [CPython](https://github.com/python/cpython), is written in C. Many things have been written about how C is used in Python. Once that I really enjoyed is the `CPython internals` book, written by Anthony Shaw.
+A good deal of Python, or at least [CPython](https://github.com/python/cpython), is written in C. It is not only the languages and the interpreter that are powered by C. You can also find a lot of modules in the Python standard library powered by C right [here](https://github.com/python/cpython/tree/main/Modules).
 
-What I was missing though, was something that explained in simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. It seemed like a nice project for me to entertain myself while being in between jobs.
+Many things have been written about how C is used in Python. Once that I really enjoyed is the `CPython internals` book, written by Anthony Shaw.
+
+What I was missing though, was something that explained in simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. After hainv played with calling Rust from Python, described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/), it seemed like a nice project for me to entertain myself while being in between jobs.
 
 
-In case you are interested in extending Python with Rust, that is described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/).
-
+# Why extend Python with C?
 
 
 You can extend Python with your own C code. Python can call C functions that are compiled to machine code. 
-# Why extend Python with C?
 
 C is a compiled language that is very fast and efficient. It gives you low-level control over the hardware and you can run C programs on almost anything. 
 
@@ -79,9 +79,17 @@ In your C file you need to:
 
 After this, you can make things easy for yourself and put in place a `setup.py` file that compiles the source code and installs it as a module for you. If you do this, you do not have to worry about whereto you are compiling or where the file you need to import is.
 
-Let's first focus on the necessary C code.
 
-## The C extension
+
+
+Some things about the C-extension up front:
+- the C extension will be 1 file called `c_extension.c`
+- the Python setup file will be used to build the extension and install it as a module called `c_extension`
+- the function that we will expose from C to Python will be called `multiplier`
+
+Let's first focus on the necessary C code.
+## Creating the C extension
+
 
 Our C-extension will provide a function that will be called `multiplier`. The C code is the following:
 
@@ -136,8 +144,10 @@ At the top of the file, you need to pull in the Python API:
 On Windows, you will find an 'include' directory where Python is installed. On my system for instance, it was `C:\Python39\include`. On a Linux system, you might need to install the `python-dev` package.
 
 
-# Using the example extensions
+## The setup script
 
+
+## Calling the function
 
 There are several example extensions in this folder. Here is an example on how to install and run the `functions` example:
 
@@ -165,26 +175,12 @@ pip install -e src/
 ```
 
 When you run `python setup.py build`, the package will be built into a 'build' subdir and python will not import this file 'automatically' when it starts. 
-# C modules:
+# Links relevant to the article:
 
-```
-Source files for standard library extension modules,
-and former extension modules that are now builtin modules.
-```
+
 [c modules](https://github.com/python/cpython/tree/main/Modules)
-
-# C header files:
-
-
 [header files](https://github.com/python/cpython/tree/main/Include)
-
-# C-API:
-
 [api docs](https://docs.python.org/3/c-api/index.html)
-
 [structures](https://docs.python.org/3/c-api/structures.html)
-
 [PyArg_ParseTuple arguments](https://docs.python.org/3/c-api/arg.html)
-# C coding standards PEP:
-
 [PEP 7](https://www.python.org/dev/peps/pep-0007/)
