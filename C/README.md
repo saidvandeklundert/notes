@@ -13,6 +13,7 @@ In many ways, C is a permissive language; programmers are allowed to shoot thems
 ```
 ### Grammer and stuff
 
+`Constant expression`: an expression that evaluates to a constant that is computed at compile time. A constant expression only involves constants. 
 
 `Declarations`: All identifiers in a program have to be declared. Keywords of the C language are predefined and need no declaration. 
 
@@ -76,7 +77,7 @@ int foo(int x);  /* An example function declaration */
 
 The C standard: https://stackoverflow.com/questions/81656/where-do-i-find-the-current-c-or-c-standard-documents
 
-`Cast`: converting one datatype into another. Also known as type casting or type-conversion. Type conversions can be implicit (performed by the compiler) or explicit (use of the cast operator). A cast operator consists of a type name, in parentheses:
+`Cast`: explicitly converting one datatype into another. Also known as type casting or type-conversion. Type conversions can be implicit (performed by the compiler) or explicit (use of the cast operator). A cast operator consists of a type name, in parentheses:
 
 ```c
 int people = 4;
@@ -125,6 +126,8 @@ if (puts("hello world") == EOF) {
 ```
 
 `Opaque types`: types specified through functional interfaces.
+
+`String constant` or `string literal`: 0 or more characters surrounded by double quotes. 
 
 ### print formatters
 
@@ -238,6 +241,11 @@ There are 4 main type classes:
 - real floating-point numbers
 - complex floating-point numbers:
 
+Basic data types, as described by KR:
+- char: byte that can hold a charater
+- int: integer typically reflecting the natural size of the integers on the host machie
+- float: sinle precision floating point
+- double: double-precision floating point
 
 There is also [C types](https://en.wikipedia.org/wiki/C_data_types) on wikipedia. There it says that 'The C language provides the four basic arithmetic type specifiers char, int, float and double, and the modifiers signed, unsigned, short, and long'.
 
@@ -261,6 +269,12 @@ int const SIDE = 10;
 `string literals` read-only values. Were they introduced after constants in the language, probably this would have been a better choice.
 
 `enum`: the first value in an enum has value 0, the next 1, and so on. Enumeration constants have either an explicit or a positional value.
+
+
+`bit pattern`: written like so: `'\000'`:
+```c 
+#define VTAB '\013'
+```
 
 ```c
 enum color
@@ -362,6 +376,7 @@ int * ip_3;     // third variable declaration
 ### Functions
 
 Example of a function:
+
 ```c
 int multiply(int a, int b)
 {
@@ -378,6 +393,10 @@ _return-type function-name (parameter declarations, if any)_
   _statements_
   _return expression_ 
 }
+
+Typically, a return value of 0 implies normal termination. Non-zero values are indicative of some sort of error.
+
+Typical to C is that arguments are passed by "value". Exception to this rule is when an array is used as an argument to a function. Instead of passing in the array, a pointer to the start of the array is made available inside the function.
 
 Use `void` in case:
 - the function is to be called with no parameter
@@ -432,7 +451,22 @@ gcc -c -fpic add.c
 gcc -shared -o libadd1.so add.o
 ```
 
+## increment and decrement operator
 
+There is a quirck, `++i` and `i++` will increment i by 1 but there is a small difference.
+
+The `++i` will increment _before_ the value is used whereas `i++` will increment _after_ the value is used (same applies to decrement).
+
+```c
+int n 5;
+x = n++;
+```
+The value x will be 5 and n will be 6.
+```c
+int n 5;
+x = ++n;
+```
+The value x will be 6 and n will be 6.
 
 # to check
 
@@ -457,3 +491,6 @@ C coding style from Linus:
 https://www.kernel.org/doc/Documentation/process/coding-style.rst
 
 https://stackoverflow.com/questions/11182765/how-can-i-build-my-c-extensions-with-mingw-w64-in-python
+
+
+https://github.com/bagder/libcurl-video-tutorials

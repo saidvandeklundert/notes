@@ -1,0 +1,32 @@
+
+{{data }}
+
+
+
+
+IOSXR VRF:
+
+vrf cust-2 rd 2:2
+vrf cust-2 address-family ipv4 unicast import route-target 2:2
+vrf cust-2 address-family ipv4 unicast export route-target 2:2
+vrf cust-2 address-family ipv6 unicast import route-target 2:2
+vrf cust-2 address-family ipv6 unicast export route-target 2:2
+
+interface GigabitEthernet0/0/0/2.2004 description c2-1
+interface GigabitEthernet0/0/0/2.2004 vrf cust-2
+interface GigabitEthernet0/0/0/2.2004 ipv4 address 10.0.0.17 255.255.255.252
+interface GigabitEthernet0/0/0/2.2004 ipv6 address 2001:db8:1::9/127
+interface GigabitEthernet0/0/0/2.2004 encapsulation dot1q 2004
+
+Juniper VRF:
+
+set interfaces ge-0/0/1 unit 2007 description c2-4
+set interfaces ge-0/0/1 unit 2007 vlan-id 2007
+set interfaces ge-0/0/1 unit 2007 family inet address 10.0.0.29/30
+set interfaces ge-0/0/1 unit 2007 family inet6 address 2001:db8:1::15/127
+
+set routing-instances cust-2 instance-type vrf
+set routing-instances cust-2 interface ge-0/0/1.2007
+set routing-instances cust-2 route-distinguisher 2:2
+set routing-instances cust-2 vrf-target target:2:2
+set routing-instances cust-2 vrf-table-label

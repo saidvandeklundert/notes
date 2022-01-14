@@ -1,4 +1,8 @@
-/***************************************************************************
+/*
+Source: https://github.com/bagder/libcurl-video-tutorials
+
+
+ ***************************************************************************
  *                                  _   _ ____  _
  *  Project                     ___| | | |  _ \| |
  *                             / __| | | | |_) | |
@@ -18,7 +22,8 @@
  * This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
  * KIND, either express or implied.
  *
- ***************************************************************************/
+ ***************************************************************************
+ */
 
 #include <stdio.h>
 #include <curl/curl.h>
@@ -31,13 +36,14 @@ int main(void)
   curl_global_init(CURL_GLOBAL_ALL);
 
   curl = curl_easy_init();
-  if(curl) {
+  if (curl)
+  {
     curl_easy_setopt(curl, CURLOPT_URL, "https://example.com");
 
     /* Perform the request, res will get the return code */
     res = curl_easy_perform(curl);
     /* Check for errors */
-    if(res != CURLE_OK)
+    if (res != CURLE_OK)
       fprintf(stderr, "curl_easy_perform() failed: %s\n",
               curl_easy_strerror(res));
 
