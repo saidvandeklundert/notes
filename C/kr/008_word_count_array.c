@@ -1,13 +1,16 @@
 #include <stdio.h>
-/* count digits, white space, others */
+
 main()
 {
-    printf("start\n");
     int c, i, nwhite, nother;
-    int ndigit[1000];
+    int ndigit[10];
+
     nwhite = nother = 0;
     for (i = 0; i < 10; ++i)
         ndigit[i] = 0;
+
+    for (i = 0; i < 10; ++i)
+        printf(" %d", ndigit[i]);
     while ((c = getchar()) != EOF)
         if (c >= '0' && c <= '9')
             ++ndigit[c - '0'];
@@ -15,8 +18,13 @@ main()
             ++nwhite;
         else
             ++nother;
+
     printf("digits =");
+
     for (i = 0; i < 10; ++i)
         printf(" %d", ndigit[i]);
-    printf(", white space = %d, other = %d\n", nwhite, nother);
+
+    printf("digits =");
+    printf(", whitespace = %d, other = %d\n",
+           nwhite, nother);
 }
