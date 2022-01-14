@@ -3,8 +3,7 @@ Ensure the square.c is present and you are on a system that can run gcc.
 
 Then compile the C programm:
 
-gcc -c -fpic square.c
-gcc -shared -o square.so square.o
+gcc -shared -o square.so square.c
 
 After having done this, you can execute the square.py script.
 
