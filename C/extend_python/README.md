@@ -136,10 +136,28 @@ PyMODINIT_FUNC PyInit_c_extension(void)
 
 There is a lot going on here, so let's break it apart.
 
-```python
+### include the proper header file
+
+At the top of the file, we include the proper header file:
+
+```c
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 ```
+
+
+### The C function
+### The PyObject
+
+Here we handle stuff like 'receiving' and 'returing' values from the Python runtime inside the PyObject.
+
+### Adding the PyObject to 'PyMethodDef'
+
+Adding the PyObject to an array inside 'PyMethodDef'.
+
+### Define the 'PyModuleDef' struct
+### Define 'PyMODINIT_FUNC' so that the module can be initialized
+
 
 
 
