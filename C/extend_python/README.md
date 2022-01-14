@@ -134,20 +134,31 @@ PyMODINIT_FUNC PyInit_c_extension(void)
 ```
 
 
-At the top of the file, you need to pull in the Python API:
+There is a lot going on here, so let's break it apart.
 
 ```python
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 ```
 
-On Windows, you will find an 'include' directory where Python is installed. On my system for instance, it was `C:\Python39\include`. On a Linux system, you might need to install the `python-dev` package.
+
 
 
 ## The setup script
 
+```python
+from distutils.core import setup, Extension
 
-## Calling the function
+module = Extension("c_extension", sources=["c_extension.c"])
+
+setup(
+    name="c_extension",
+    version="0.1",
+    description="An example of C extension made callable to the Python API.",
+    ext_modules=[module],
+)
+```
+## Installing and calling the function
 
 There are several example extensions in this folder. Here is an example on how to install and run the `functions` example:
 
@@ -175,6 +186,14 @@ pip install -e src/
 ```
 
 When you run `python setup.py build`, the package will be built into a 'build' subdir and python will not import this file 'automatically' when it starts. 
+
+
+# Some FYIs
+
+On Windows, you will find an 'include' directory where Python is installed. On my system for instance, it was `C:\Python39\include`. Pointing your IDE to this directory makes coding easier.
+
+On a Linux system, you might need to install the `python-dev` package. 
+
 # Links relevant to the article:
 
 
