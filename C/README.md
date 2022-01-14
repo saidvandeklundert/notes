@@ -311,6 +311,10 @@ struct Person
 };
 ```
 
+Zero initialize all members:
+```c
+struct Point aPoint = {0};
+```
 ##### Other derived types:
 
 `unions`: overlay items of different base types in the same memory location.
