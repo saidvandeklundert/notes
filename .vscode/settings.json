@@ -4,6 +4,7 @@
         "stdlib.h": "c",
         "example.h": "c",
         "string.h": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "stdio.h": "c"
     }
 }

@@ -1,5 +1,10 @@
 #include <stdio.h>
+/*
+ctrl+d to exit on linux
+ctrl-z to exit on windows
 
+If you do not do the above, you will not see anything printed to screen.
+*/
 main()
 {
     int c, i, nwhite, nother;
@@ -24,7 +29,6 @@ main()
     for (i = 0; i < 10; ++i)
         printf(" %d", ndigit[i]);
 
-    printf("digits =");
     printf(", whitespace = %d, other = %d\n",
            nwhite, nother);
 }

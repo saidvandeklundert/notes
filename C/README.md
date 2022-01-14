@@ -369,6 +369,16 @@ int multiply(int a, int b)
 }
 ```
 
+Function syntax:
+
+
+_return-type function-name (parameter declarations, if any)_
+{
+  _declarations_
+  _statements_
+  _return expression_ 
+}
+
 Use `void` in case:
 - the function is to be called with no parameter
 - the function does not return a value
