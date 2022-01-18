@@ -25,3 +25,8 @@ Cargo.lock
 characters.txt
 test.txt
 *.p
+
+
+# C extension fluff from Windows
+build
+*egg-info
