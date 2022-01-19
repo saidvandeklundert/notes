@@ -2,27 +2,27 @@ A good deal of Python, or at least [CPython](https://github.com/python/cpython),
 
 Many things have been written about how C is used in Python. Once that I really enjoyed is the `CPython internals` book, written by Anthony Shaw.
 
-What I was missing though, was something that explained in simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. After hainv played with calling Rust from Python, described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/), it seemed like a nice project for me to entertain myself while being in between jobs.
+What I was missing though, was something that explained in simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. After having played with calling Rust from Python, described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/), it seemed like a nice project for me to entertain myself while being in between jobs.
 
 
 # Why extend Python with C?
 
 
-You can extend Python with your own C code. Python can call C functions that are compiled to machine code. 
-
-C is a compiled language that is very fast and efficient. It gives you low-level control over the hardware and you can run C programs on almost anything. 
-
-Another valid reason could be to learn about C and better understand Python / certain parts of Linux.
+C is a compiled language that is very fast and efficient. It gives you low-level control over the hardware and you can run C programs on almost anything. It is possible to use C modules, that are compiled to machine code, directly in your Python programs.
+ 
+Another valid reason for extending Python with C could be to learn about C and better understand Python.
 
 
 # How to extend Python with C?
 
-There are multiple options available to call C code from Python. The options are the following:
+There are multiple options available to call C code from Python. The options that come with CPython by default are the following:
 - using ctypes: https://docs.python.org/3/library/ctypes.html#module-ctypes
-- cffi library: https://cffi.readthedocs.io/en/latest/index.html
 - Python API: https://docs.python.org/3/c-api/intro.html
 
- First, I will give a small example on how to call a C function using ctypes. After this, I will move on to using the Python API.
+In addition to these 2 options there is also the 'cffi', or 'C Foreign Function Interface' for Python. This package needs to be installed before you can use it. It is still maintained and usable with Python 3.10. You can find more information on cffi here: https://cffi.readthedocs.io/en/latest/index.html.
+
+
+In this article, I will give a small example on how to call a C function using ctypes and after that, I will move on to using the Python API.
 
 # Using ctypes
 
