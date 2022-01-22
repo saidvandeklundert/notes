@@ -65,6 +65,21 @@ The Python API is usable from C and C++. It is a maintained feature of Python an
 
 # Python API example
 
+
+What we will end up having is a C extension module called `c_extension` with a function called `multiplier`. We will end up being able to do the following:
+
+```python
+PS C:\> python
+
+>>> from c_extension import multiplier
+>>> multiplier(2,2)
+4
+>>> multiplier(200,200)
+40000
+```
+
+
+
 There are a number of steps to follow before you can call a C function from Python using the Python API. 
 
 In your C file you need to:
@@ -284,6 +299,9 @@ Also, much to my own surprise, I did not run into any issues on Windows. I insta
 
 I also tried out the example repo on Ubuntu. The only thing I needed to install was the `python-dev` package. 
 
+# Next steps
+
+In case you are interested in creating more serious C extension for Python, I think the official Python documentation is quite good, you can find the documentation on the API [here](https://docs.python.org/3/c-api/index.html). Additionally, there is a good talk you could look at [Paul Ross - Here be Dragons PyCon 2016](https://www.youtube.com/watch?v=Yq__HtUIH5Y). This person has put up quite a few examples and patterns for others to learn from right [here](https://pythonextensionpatterns.readthedocs.io/en/latest/index.html).
 # Closing thoughts.
 
 This was a nice excercise. I read K&R and played with C. I (tried) reading parts of CPython and I investigated how to extend Python with some C code.
@@ -304,3 +322,7 @@ Few personal things I learned:
 [structures](https://docs.python.org/3/c-api/structures.html)
 [PyArg_ParseTuple arguments](https://docs.python.org/3/c-api/arg.html)
 [PEP 7](https://www.python.org/dev/peps/pep-0007/)
+[Paul Ross - Here be Dragons PyCon 2016](https://www.youtube.com/watch?v=Yq__HtUIH5Y)
+[Paul Ross - A faster Python? You Have These Choices](https://www.youtube.com/watch?v=5js_-pLGqwA)
+[Python Extension Patters](https://pythonextensionpatterns.readthedocs.io/en/latest/index.html)
+[CPython internals](https://www.amazon.com/CPython-Internals-Guide-Python-Interpreter/dp/1775093344)
