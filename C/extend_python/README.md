@@ -147,22 +147,103 @@ At the top of the file, we include the proper header file:
 
 
 ### The C function
+
+The following is the actual C function that we will be able to call from Python:
+
+```c
+int multiplier(int a, int b)
+{
+    return a * b;
+}
+```
+
+Lame, I know. But again, the point here is sharing how to extend Python.
 ### The PyObject
 
-Here we handle stuff like 'receiving' and 'returing' values from the Python runtime inside the PyObject.
+Next up is the PyObject. The PyObject is the base struct of which all other Python objects are an extension. Here we define what the function receives and returns from Python:
+
+```c
+static PyObject *c_multiplier(PyObject *self, PyObject *args)
+{
+    int a;
+    int b;
+    int ret;
+    if (!PyArg_ParseTuple(args, "ii", &a, &b))
+    {
+        return NULL;
+    }
+    ret = multiplier(a, b);
+    return Py_BuildValue("i", ret);
+}
+```
+
+The first three lines define the integers 'a', 'b' and 'ret'. The values of 'a' and 'b' will be passed to the `multiplier` function, and the `ret` value will hold the return value of the `multiplier` function.
+
+After our declarations, we see a call to `PyArg_ParseTuple()`. This will parse the arguments received from Python (`args`). The `ii` specifies that we are expecting 2 integer values. The `&a` and `&b` are the pointers that will come to contain the parsed values. These are pointing to the variables we declared earlier.
+
+In case you want to use values other then integer values in your C extension, you can check the [PyArg_ParseTuple arguments](https://docs.python.org/3/c-api/arg.html) to understand what arguments you need to pass.
+
+After this, we run the function and return `ret` to Python. For this, we use `Py_BuildValue()`, which is the counterpart of `PyArg_ParseTuple`. Where `PyArg_ParseTuple` translates something from Python to C, `Py_BuildValue` does the opposite. In our case, we indicate that we will return the value in `ret` as an integer object.
 
 ### Adding the PyObject to 'PyMethodDef'
 
-Adding the PyObject to an array inside 'PyMethodDef'.
+Next up is putting everything we want to expose to Python in the 'method table', or `PyMethodDef`:
+
+```c
+static PyMethodDef module_methods[] = {
+    {"multiplier", c_multiplier, METH_VARARGS, "Multiply two numbers."},
+    {NULL, NULL, 0, NULL}};
+
+```
+
+In the above example, `module_methods` is an array containing `PyMethodDef` structs. Since we only want to expose 1 function, we only put in the following entry:
+```
+{"multiplier", c_multiplier, METH_VARARGS, "Multiply two numbers."}
+```
+These values signify the following:
+- multiplier: the name the function will have in Python
+- c_multiplier: the PyObject we created that calls the C function
+- METH_VARARGS:
+- "Multiply two numbers.": the docstring for the Python function
+
+More information can be found [here](https://docs.python.org/3/c-api/structures.html#c.PyMethodDef).
+
+The other line, `{NULL, NULL, 0, NULL}`, is a sentinal value, indicating that the preceeding value was the last relevant item in the array.
 
 ### Define the 'PyModuleDef' struct
+
+Now, we define the `PyModuleDef` struct, which will describe our Python C extension module:
+
+```c
+static struct PyModuleDef c_extension =
+    {
+        PyModuleDef_HEAD_INIT,
+        "c_extension", // the name of the module in Python
+        "",            // The docstring in Python
+        -1,            /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+        module_methods};
+```
+
+The [doc](https://docs.python.org/3/c-api/module.html) says to always initialize the first member of this struct to 'PyModuleDef_HEAD_INIT', so I did that (without being able to figure out why).
+
+The other lines are annotated and the final field is a pointer to the method table we defined earlier. This was the array of `PyMethodDef`, which contains all the functions (or 1 function in our case) that we want to expose to Python.
+
+
+
 ### Define 'PyMODINIT_FUNC' so that the module can be initialized
 
+Lastely, we define the `PyMODINIT_FUNC` function, which is called when Python imports the extension module. This function returns the module struct that we defined previously:
 
+```c
+PyMODINIT_FUNC PyInit_c_extension(void)
+{
+    return PyModule_Create(&c_extension);
+}
+```
 
+## Installing and calling the function
 
-
-## The setup script
+Creating a `setup.py` will make things easier as you will be able to 'pip install' it and make it available to your local instance of Python. I put in place the following:
 
 ```python
 from distutils.core import setup, Extension
@@ -176,41 +257,43 @@ setup(
     ext_modules=[module],
 )
 ```
-## Installing and calling the function
 
-There are several example extensions in this folder. Here is an example on how to install and run the `functions` example:
-
-```
-root@pyo3:/var/tmp/python/C/extend_python/python_api# pip install -e functions/src/
-```
-
-Most extension modules have an `example.py` and a `test.py` file that you can run:
-
-```
-root@pyo3:/var/tmp/python/C/extend_python/python_api# python3 functions/src/example.py 
-Hello from C
-root@pyo3:/var/tmp/python/C/extend_python/python_api# python3 functions/src/test.py    
-Hello from C
-```
-
-
-
-# making an extension module:
-
-Let's say the package is located in the `src/` directory. If it has the `setup.py` file, then the following will build and install the package:
+After cloning the repo, all I have to do is the following:
 
 ```
 pip install -e src/
 ```
 
-When you run `python setup.py build`, the package will be built into a 'build' subdir and python will not import this file 'automatically' when it starts. 
+This will compile the source file and install the C extension module. You will see the packages installed when you run `pip freeze`.
+
+We can now run the test script and observe the following:
+
+```
+python .\test.py
+100
+```
+
 
 
 # Some FYIs
 
-On Windows, you will find an 'include' directory where Python is installed. On my system for instance, it was `C:\Python39\include`. Pointing your IDE to this directory makes coding easier.
+On Windows, you will find an 'include' directory where Python is installed. On my system for instance, it was `C:\Python39\include`. Pointing your IDE to this directory makes coding easier as this is where the header files are.
 
-On a Linux system, you might need to install the `python-dev` package. 
+Also, much to my own surprise, I did not run into any issues on Windows. I installed Visual Studio Build tools 2019 and everything just worked.
+
+
+I also tried out the example repo on Ubuntu. The only thing I needed to install was the `python-dev` package. 
+
+# Closing thoughts.
+
+This was a nice excercise. I read K&R and played with C. I (tried) reading parts of CPython and I investigated how to extend Python with some C code.
+
+Few personal things I learned:
+- C may be a small language, reading and working with C can be quite challenging
+- the C Python source code is not for the faint of heart
+- extending Python with Rust was a lot easier due to the ergonomics put in place by PyO3
+
+
 
 # Links relevant to the article:
 
