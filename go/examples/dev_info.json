@@ -1,0 +1,18 @@
+{
+  "datacenter": "ams01",
+  "hostname": "sr01.ams01",
+  "model": "mx960",
+  "neighbors": [
+    "br01.ams",
+    "r01.sr01.ams",
+    "lr01.ams",
+    "bs01.eq01.ams",
+    "bs01.eq01.ams"
+  ],
+  "os": "junos",
+  "serial": "JN22CB930EFB",
+  "software-version": "17.4R2-S11",
+  "type": "dar",
+  "uptime-seconds": "3963073",
+  "vendor": "juniper"
+}

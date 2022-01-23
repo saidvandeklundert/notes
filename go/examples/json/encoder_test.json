@@ -1,0 +1,1 @@
+{"Integer":100,"Float":15.12,"String":"Word","Bool":false,"Slice":["go","python","c"],"Map":{"a":1,"b":2,"c":3},"embedded_struct":{"String":"abcdefg","IntSlice":[1,2,3,4],"omitempty":"","NotOmitted":""}}

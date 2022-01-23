@@ -1,0 +1,30 @@
+[
+    {
+      "from_device_id": "pr01.dal",
+      "from_port": "et-3/0/26",
+      "to_device_id": "cr02b.dal",
+      "to_port": "Eth3/1",
+      "comments": "DESCRIPTION"
+    },
+    {
+      "from_device_id": "pr01.dal",
+      "from_port": "et-2/0/21",
+      "to_device_id": "cr02a.dal",
+      "to_port": "Eth3/2",
+      "comments": "DESCRIPTION"
+    },
+    {
+      "from_device_id": "pr01.dal",
+      "from_port": "et-0/0/21",
+      "to_device_id": "cr01a.dal",
+      "to_port": "Eth4/1",
+      "comments": "DESCRIPTION"
+    },
+    {
+      "from_device_id": "pr01.dal",
+      "from_port": "et-0/0/26",
+      "to_device_id": "cr01b.dal",
+      "to_port": "Eth4/2",
+      "comments": "DESCRIPTION"
+    }
+  ]

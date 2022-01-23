@@ -1,0 +1,4 @@
+said@junipar-re0> show version 
+Hostname: junipar-re0
+Model: mx960
+Junos: 17.4R2-S11
