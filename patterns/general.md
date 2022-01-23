@@ -1,0 +1,1 @@
+[Design Principles and Design Patterns article by Robert Martin](http://staff.cs.utu.fi/~jounsmed/doos_06/material/DesignPrinciplesAndPatterns.pdf)
