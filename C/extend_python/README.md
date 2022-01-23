@@ -8,23 +8,29 @@ What I was missing though, was something that explained in simple terms how to e
 # Why extend Python with C?
 
 
-C is a compiled language that is very fast and efficient. It gives you low-level control over the hardware and you can run C programs on almost anything. It is possible to use C modules, that are compiled to machine code, directly in your Python programs.
+C is a compiled language that is very fast and efficient. In some cases, the speed of a program can be increased 10x to 100x. Additionally, using a C extension module can unlock some of the other advantages that C brings. To name 2:
+- C gives you low-level control over the hardware 
+- there are a log of other C modules that you will be able to leverage directly in your code
  
-Another valid reason for extending Python with C could be to learn about C and better understand Python.
+In my case, the only valid reason I really have is getting more familiar with C and CPython.
 
 
 # How to extend Python with C?
 
 There are multiple options available to call C code from Python. The options that come with CPython by default are the following:
-- using ctypes: https://docs.python.org/3/library/ctypes.html#module-ctypes
-- Python API: https://docs.python.org/3/c-api/intro.html
+- `ctypes`: https://docs.python.org/3/library/ctypes.html#module-ctypes
+- `Python API`: https://docs.python.org/3/c-api/intro.html
 
 In addition to these 2 options there is also the 'cffi', or 'C Foreign Function Interface' for Python. This package needs to be installed before you can use it. It is still maintained and usable with Python 3.10. You can find more information on cffi here: https://cffi.readthedocs.io/en/latest/index.html.
 
 
-In this article, I will give a small example on how to call a C function using ctypes and after that, I will move on to using the Python API.
+In this article, I will give a short example on how to call a C function using ctypes. After that, I will move on to using the Python API and do a detailed walkthrough. In closing, I will list some interested docs and things to checkout as next steps.
 
-# Using ctypes
+The ctypes part I did on Ubuntu (20.04.3 LTS) using Python 3.10. I did not have to install anything other that Python in order to get this to work. 
+
+The Python API part was done on Ubuntu as well. In order to get that to work, I had to pip-install `python-dev`. On Windows, I had to install Python 3.10 and Visual Studio Build tools 2019. Much to my amazement, it worked without any issues!
+
+#  Extending Pythong with C using ctypes
 
 
 When we use `ctypes`, we can write some C, compile it and then import the compiled C into our Python.
@@ -59,7 +65,8 @@ That is it!
 What happes in the above is we import `ctypes` so that we can use `ctypes.CDLL` to load the shared object library we produced as a module in Python. In the example, that 'module' is stored in the `c_lib` variable. The C functions, or in our case function, can then be called like so: `c_lib.square()`.
 
 
-# Python API
+
+# Extending Pythong with C using the Python API
 
 The Python API is usable from C and C++. It is a maintained feature of Python and it is documented [here](https://docs.python.org/3/c-api/index.html). In case you want to have your C extensions added to Python, it is worth noting that you have to following [PEP 7](https://www.python.org/dev/peps/pep-0007/). It might also be worth knowing this PEP exists as helps clarify the formatting and style of the existing C code.
 
@@ -93,8 +100,6 @@ In your C file you need to:
 
 
 After this, you can make things easy for yourself and put in place a `setup.py` file that compiles the source code and installs it as a module for you. If you do this, you do not have to worry about whereto you are compiling or where the file you need to import is.
-
-
 
 
 Some things about the C-extension up front:
@@ -160,6 +165,12 @@ At the top of the file, we include the proper header file:
 #include <Python.h>
 ```
 
+This header file contains C declarations and macros. In this case, the `python.h` header file contains a lot of declarations that are relevant for us to be able to use the Python API.
+
+Directing the C preprocessor to include this header file is like pasting in the code itself.
+
+This header file is located in the `include` directory where you have installed Python. A good idea would be to point your idea to also use header files from this location. This way, you can hover over the structs and functions etc. and 
+
 
 ### The C function
 
@@ -172,7 +183,7 @@ int multiplier(int a, int b)
 }
 ```
 
-Lame, I know. But again, the point here is sharing how to extend Python.
+Lame, I know. But the point here is me sharing how to extend Python.
 ### The PyObject
 
 Next up is the PyObject. The PyObject is the base struct of which all other Python objects are an extension. Here we define what the function receives and returns from Python:
