@@ -1,6 +1,7 @@
 # Repository pattern
 
-The repository pattern is a strategy for abstracting data access.
+The repository pattern is a strategy for abstracting data access. Simplifying abstraction over data storage allows us to decouple our model layer from the data layer.
+
 
 The repository pattern has two purposes:
 1. it is an abstraction of the data layer 
@@ -22,6 +23,7 @@ Benefits:
   - easier to change the database backend
   - easier to reason about/change the domain models
 - better flexibility, scalability and maintainability
+- minimize duplicate query logic
 
 
 
