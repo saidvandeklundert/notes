@@ -49,6 +49,7 @@ class MyClass:
         self.attribute_1 = attribute_1
 ```
 
+### The __post_init__ dunder method
 #### Static methods
 
 Static methods cannot access attributes or methods that belong to the class or object. 

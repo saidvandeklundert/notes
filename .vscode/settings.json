@@ -6,5 +6,6 @@
         "string.h": "c",
         "*.tcc": "c",
         "stdio.h": "c"
-    }
+    },
+    "python.formatting.provider": "black"
 }
