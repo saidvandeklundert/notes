@@ -4,7 +4,9 @@ On using exceptions:
 - capture the exception if you can write somthing to handle it or to log it
 - use Exceptions you wrote
 
+Note!!
 
+Exceptions are expensive. It is faster to avoid Exceptions and never to write code that relies on them or triggers them often.
 https://realpython.com/python-exceptions/
 
 """
