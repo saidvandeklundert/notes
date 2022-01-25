@@ -30,3 +30,12 @@ def greet(person: Speaker):
     print(greeting)
 
 ```
+
+Protocols PEP: https://www.python.org/dev/peps/pep-0544
+
+From the mypy docs:
+```
+Structural subtyping can also be useful. Class D is a structural subtype of class C if the former has all attributes and methods of the latter, and with compatible types.
+
+Structural subtyping can be seen as a static equivalent of duck typing, which is well known to Python programmers. Mypy provides support for structural subtyping via protocol classes described below. See PEP 544 for the detailed specification of protocols and structural subtyping in Python.
+```
