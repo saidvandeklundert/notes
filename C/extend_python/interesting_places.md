@@ -12,12 +12,38 @@
 
 # Interesting locations for specific things:
 
+Interesting modules:
+[builtins module](https://github.com/python/cpython/blob/main/Python/bltinmodule.c)
+
+Here, all the builtin functions etc are defined. At the bottom, after the module definition, there is the definition of all the builtin names that you use in Python. Part of the code:
+```c
+#define SETBUILTIN(NAME, OBJECT) \
+
+    SETBUILTIN("False",                 Py_False);
+    SETBUILTIN("True",                  Py_True);
+    SETBUILTIN("bool",                  &PyBool_Type);
+    SETBUILTIN("bytearray",             &PyByteArray_Type);
+    SETBUILTIN("bytes",                 &PyBytes_Type);
+    SETBUILTIN("dict",                  &PyDict_Type);
+    SETBUILTIN("enumerate",             &PyEnum_Type);
+    SETBUILTIN("float",                 &PyFloat_Type);
+    SETBUILTIN("int",                   &PyLong_Type);
+    SETBUILTIN("list",                  &PyList_Type);   
+    SETBUILTIN("set",                   &PySet_Type);
+    SETBUILTIN("str",                   &PyUnicode_Type);
+    SETBUILTIN("tuple",                 &PyTuple_Type);
+
+    return mod;
+```
+
+You can check it out and then at least you know what to look for as it offers some nice clues as to what specific object a keyword is implemented with.
+
 Some interesting objects:
 [Enum](https://github.com/python/cpython/blob/main/Objects/enumobject.c)
 [List](https://github.com/python/cpython/blob/main/Objects/listobject.c)
 [int](https://github.com/python/cpython/blob/main/Objects/longobject.c)
 
-[builtins module](https://github.com/python/cpython/blob/main/Python/bltinmodule.c)
+
 
 
 # Finding the source code for something.

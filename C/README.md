@@ -481,7 +481,10 @@ The value x will be 6 and n will be 6.
 typedef struct
 #define
 
-
+```
+Oh that’s another rule with network code - dynamic memory allocation is a massive no no
+Pre-allocate and use allocated memory - dynamic allocation is extremely expensive
+```
 
 
 # Resources
