@@ -70,6 +70,8 @@ What happes in the above is we import `ctypes` so that we can use `ctypes.CDLL` 
 
 The Python API is usable from C and C++. It is a maintained feature of Python and it is documented [here](https://docs.python.org/3/c-api/index.html). In case you want to have your C extensions added to Python, it is worth noting that you have to following [PEP 7](https://www.python.org/dev/peps/pep-0007/). It might also be worth knowing this PEP exists as helps clarify the formatting and style of the existing C code.
 
+Interestingly enough, CPython also leverages this very same API. THough, it is not for the faint of heart, you can check out the source code for the builtins for instance right [here](https://github.com/python/cpython/blob/main/Python/bltinmodule.c). This is a whopping 3.000 lines of code at the time of writing. The next example I will walk through next is a little lighter. It does however follow a similar flow.
+
 # Python API example
 
 
@@ -89,7 +91,13 @@ PS C:\> python
 
 There are a number of steps to follow before you can call a C function from Python using the Python API. 
 
-In your C file you need to:
+The high level steps I am taking in the C file are the following:
+- write a function and put the function in a PyObject
+- add the PyObject to an array inside 'PyMethodDef'
+- build the 'PyModuleDef' struct
+- define 'PyMODINIT_FUNC' so that the module can be initialized
+
+There are also some smaller things that I will take into account. When I include those smaller things, the following becomes the 'todo' when creating the C extension:
 - include the proper header file (`Python.h`)
 - write a function
 - put the function in a PyObject
@@ -99,7 +107,7 @@ In your C file you need to:
 - define 'PyMODINIT_FUNC' so that the module can be initialized
 
 
-After this, you can make things easy for yourself and put in place a `setup.py` file that compiles the source code and installs it as a module for you. If you do this, you do not have to worry about whereto you are compiling or where the file you need to import is.
+After running through these steps, you can make things easy for yourself and put in place a `setup.py` file that compiles the source code and installs it as a module for you. If you do this, you do not have to worry about whereto you are compiling or where the file you need to import is.
 
 
 Some things about the C-extension up front:
