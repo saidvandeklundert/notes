@@ -70,7 +70,7 @@ What happes in the above is we import `ctypes` so that we can use `ctypes.CDLL` 
 
 The Python API is usable from C and C++. It is a maintained feature of Python and it is documented [here](https://docs.python.org/3/c-api/index.html). In case you want to have your C extensions added to Python, it is worth noting that you have to following [PEP 7](https://www.python.org/dev/peps/pep-0007/). It might also be worth knowing this PEP exists as helps clarify the formatting and style of the existing C code.
 
-Interestingly enough, CPython also leverages this very same API. THough, it is not for the faint of heart, you can check out the source code for the builtins for instance right [here](https://github.com/python/cpython/blob/main/Python/bltinmodule.c). This is a whopping 3.000 lines of code at the time of writing. The next example I will walk through next is a little lighter. It does however follow a similar flow.
+Interestingly enough, CPython also leverages this very same API. It is not for the faint of heart, but if you want to, you can check out the source code for the builtins for instance right [here](https://github.com/python/cpython/blob/main/Python/bltinmodule.c). This is a whopping 3.000 lines of code at the time of writing. The next example I will walk through next is a little lighter. It does however follow a similar flow.
 
 # Python API example
 
@@ -173,11 +173,11 @@ At the top of the file, we include the proper header file:
 #include <Python.h>
 ```
 
-This header file contains C declarations and macros. In this case, the `python.h` header file contains a lot of declarations that are relevant for us to be able to use the Python API.
+This header file contains C declarations and macros. Basically, this pulls in the C-API. In this case, the `python.h` header file contains a lot of declarations that are relevant for us to be able to use the Python API.
 
 Directing the C preprocessor to include this header file is like pasting in the code itself.
 
-This header file is located in the `include` directory where you have installed Python. A good idea would be to point your idea to also use header files from this location. This way, you can hover over the structs and functions etc. and 
+This header file is located in the `include` directory where you have installed Python. A good idea would be to point your idea to also use header files from this location. This way, you can hover over the structs and functions etc. On the same note, another good idea for when you like to explore the CPython source code, is to clone the CPython repo and browse the code base using your IDE. This will make it easier to see how the whole code base is glued together.
 
 
 ### The C function
@@ -230,14 +230,16 @@ static PyMethodDef module_methods[] = {
 
 ```
 
-In the above example, `module_methods` is an array containing `PyMethodDef` structs. Since we only want to expose 1 function, we only put in the following entry:
-```
+In the above example, `module_methods` is a static array containing `PyMethodDef` structures. Since we only want to expose 1 function, we only put in the following entry:
+
+```c
 {"multiplier", c_multiplier, METH_VARARGS, "Multiply two numbers."}
 ```
+
 These values signify the following:
 - multiplier: the name the function will have in Python
 - c_multiplier: the PyObject we created that calls the C function
-- METH_VARARGS:
+- METH_VARARGS: bitfield, indicating the calling convention
 - "Multiply two numbers.": the docstring for the Python function
 
 More information can be found [here](https://docs.python.org/3/c-api/structures.html#c.PyMethodDef).
@@ -275,6 +277,7 @@ PyMODINIT_FUNC PyInit_c_extension(void)
 }
 ```
 
+Ensure that the `PyMODINIT_FUNC` is correctly named. The last part should be the same as the module name (in this case, `c_extension`). 
 ## Installing and calling the function
 
 Creating a `setup.py` will make things easier as you will be able to 'pip install' it and make it available to your local instance of Python. I put in place the following:
@@ -292,7 +295,7 @@ setup(
 )
 ```
 
-After cloning the repo, all I have to do is the following:
+After cloning the repo, all I had to do is the following:
 
 ```
 pip install -e src/
@@ -306,6 +309,8 @@ We can now run the test script and observe the following:
 python .\test.py
 100
 ```
+
+Awesome!
 
 
 
@@ -339,9 +344,11 @@ Few personal things I learned:
 [header files](https://github.com/python/cpython/tree/main/Include)
 [api docs](https://docs.python.org/3/c-api/index.html)
 [structures](https://docs.python.org/3/c-api/structures.html)
+[Extending Python with new types tutorial](https://docs.python.org/3/extending/newtypes_tutorial.html)
 [PyArg_ParseTuple arguments](https://docs.python.org/3/c-api/arg.html)
 [PEP 7](https://www.python.org/dev/peps/pep-0007/)
 [Paul Ross - Here be Dragons PyCon 2016](https://www.youtube.com/watch?v=Yq__HtUIH5Y)
 [Paul Ross - A faster Python? You Have These Choices](https://www.youtube.com/watch?v=5js_-pLGqwA)
 [Python Extension Patters](https://pythonextensionpatterns.readthedocs.io/en/latest/index.html)
 [CPython internals](https://www.amazon.com/CPython-Internals-Guide-Python-Interpreter/dp/1775093344)
+[PyCon 2009 - nedbatchelder](https://nedbatchelder.com/text/whirlext.html)

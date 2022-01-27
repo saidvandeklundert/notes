@@ -315,6 +315,9 @@ Zero initialize all members:
 ```c
 struct Point aPoint = {0};
 ```
+
+Somtimes, you can also see a `static` as part of a struct definition. In some cases, this is to ensure that the struct is visible to the file in which it is declared. https://stackoverflow.com/questions/7259830/why-and-when-to-use-static-structures-in-c-programming/7259892
+
 ##### Other derived types:
 
 `unions`: overlay items of different base types in the same memory location.
