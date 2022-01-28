@@ -3,7 +3,8 @@ On using exceptions:
 - be as precise about the exception as possible
 - capture the exception if you can write somthing to handle it or to log it
 - use Exceptions you wrote
-
+- if there is nothing usefull you can do with the exception, let it bubble up
+- do not use catch all except statements or except statements that are too generic
 Note!!
 
 Exceptions are expensive. It is faster to avoid Exceptions and never to write code that relies on them or triggers them often.

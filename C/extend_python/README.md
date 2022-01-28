@@ -2,18 +2,19 @@ A good deal of Python, or at least [CPython](https://github.com/python/cpython),
 
 Many things have been written about how C is used in Python. One that I really enjoyed is the `CPython internals` book, written by Anthony Shaw.
 
-What I was missing though, was something that explained in detailed and simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. After having played with calling Rust from Python, described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/), it seemed like a nice project for me to entertain myself while being in between jobs. What I wanted to get out of this was to understand a bit more about Python and to be able to read and browse the Python source code. 
+What I was missing though, was something that explained in detailed and simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. After having played with calling Rust from Python, described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/), it seemed like a nice project for me to entertain myself while being in between jobs. What I wanted to get out of this was to understand a bit more about Python and to be able to read and browse some of the Python source code that is written in C. 
 
-In this article, I will extend Python with a C function using `ctypes` and the `Python C API`. After this, I will go over some (in my opinion) interesting places to browse in the CPython repository. I will wrap up with some interesting links to resources that can possibly help you further along in case you want to move past the toy examples and start using it more seriously.
+In this article, I will extend Python with a C function using `ctypes` and the `Python C API`. After this, I will wrap up by giving (in my opinion) links to some interesting places to browse in the CPython repository and conclude with some interesting links to resources that can possibly help you further along in case you want to move past the toy examples and start using it more seriously.
 
 # Why extend Python with C?
 
 
-C is a compiled language that is very fast and efficient. In some cases, the speed of a program can be increased 10x to 100x. Additionally, using a C extension module can unlock some of the other advantages that C brings. To name 2:
-- C gives you low-level control over the hardware 
-- there are a log of other C modules that you will be able to leverage directly in your code
+C is a compiled language that is very fast and efficient. In some cases, the speed of a Python program can be increased 10x to 100x. Additionally, using a C extension module can unlock some of the other advantages that C brings. To name a few in addition to simply speeding things up:
+- C gives you low-level control over the hardware and memory allocations (which is also a bit of a downside)
+- there is no GIL
+- there are a lot of other C libraries that you will be able to leverage 
  
-For me personally, the only reason I have is getting more familiar with C and CPython. If I _really_ had to extend Python to speed things up, I would probably turn to Rust.
+For me personally though, the only reason I have is getting more familiar with C and CPython. If I _really_ had to extend Python to speed things up, I would probably turn to Rust and use PyO3. 
 
 
 # How to extend Python with C?
@@ -29,7 +30,7 @@ In this article, I will give a short example on how to call a C function using c
 
 The ctypes part I did on Ubuntu (20.04.3 LTS) using Python 3.10. I did not have to install anything other that Python in order to get this to work. 
 
-The Python API part was done on Ubuntu as well. In order to get that to work, I had to pip-install `python-dev`. On Windows, I had to install Python 3.10 and Visual Studio Build tools 2019. Much to my amazement, it worked without any issues!
+The Python API part was done on Ubuntu as well. In order to get that to work, I had to pip-install `python-dev`. I also did this part on Windows. I had to install Python 3.10 and Visual Studio Build tools 2019. Much to my amazement, it worked without any issues!
 
 #  Extending Pythong with C using ctypes
 
@@ -63,7 +64,7 @@ print(c_lib.square(2))
 
 That is it!
 
-What happes in the above is we import `ctypes` so that we can use `ctypes.CDLL` to load the shared object library we produced as a module in Python. In the example, that 'module' is stored in the `c_lib` variable. The C functions, or in our case function, can then be called like so: `c_lib.square()`.
+What happens in the above is we import `ctypes` so that we can use `ctypes.CDLL` to load the shared object library we produced as a module in Python. In the example, that 'module' is stored in the `c_lib` variable. The C functions, or in our case function, can then be called like so: `c_lib.square()`.
 
 
 
@@ -338,7 +339,7 @@ Few personal things I learned:
 
 
 
-# Links relevant to the article:
+# Links relevant to this article:
 
 
 [c modules](https://github.com/python/cpython/tree/main/Modules)
