@@ -1,9 +1,10 @@
-A good deal of Python, or at least [CPython](https://github.com/python/cpython), is written in C. It is not only the languages and the interpreter that are powered by C. You can also find a lot of modules in the Python standard library powered by C right [here](https://github.com/python/cpython/tree/main/Modules).
+A good deal of Python, or at least [CPython](https://github.com/python/cpython), is written in C. The language and the interpreter are implemented in C and in addition to this, you can also find a lot of modules in the Python standard library powered by C.
 
-Many things have been written about how C is used in Python. Once that I really enjoyed is the `CPython internals` book, written by Anthony Shaw.
+Many things have been written about how C is used in Python. One that I really enjoyed is the `CPython internals` book, written by Anthony Shaw.
 
-What I was missing though, was something that explained in simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. After having played with calling Rust from Python, described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/), it seemed like a nice project for me to entertain myself while being in between jobs.
+What I was missing though, was something that explained in detailed and simple terms how to extend Python using C. Additionally, I was also curious about the C language myself. So I picked up a copy of 'The C programming language' and set out to write some basic C extensions. After having played with calling Rust from Python, described [here](http://saidvandeklundert.net/learn/2021-11-18-calling-rust-from-='[ython-using-pyo3/), it seemed like a nice project for me to entertain myself while being in between jobs. What I wanted to get out of this was to understand a bit more about Python and to be able to read and browse the Python source code. 
 
+In this article, I will extend Python with a C function using `ctypes` and the `Python C API`. After this, I will go over some (in my opinion) interesting places to browse in the CPython repository. I will wrap up with some interesting links to resources that can possibly help you further along in case you want to move past the toy examples and start using it more seriously.
 
 # Why extend Python with C?
 
@@ -12,7 +13,7 @@ C is a compiled language that is very fast and efficient. In some cases, the spe
 - C gives you low-level control over the hardware 
 - there are a log of other C modules that you will be able to leverage directly in your code
  
-In my case, the only valid reason I really have is getting more familiar with C and CPython.
+For me personally, the only reason I have is getting more familiar with C and CPython. If I _really_ had to extend Python to speed things up, I would probably turn to Rust.
 
 
 # How to extend Python with C?
@@ -298,7 +299,7 @@ setup(
 After cloning the repo, all I had to do is the following:
 
 ```
-pip install -e src/
+pip install src/
 ```
 
 This will compile the source file and install the C extension module. You will see the packages installed when you run `pip freeze`.
