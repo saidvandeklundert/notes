@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
     original: str = (
         "TATAGGGTATGATATCCCGATTTTTGGGGGAAAACACACAGCTACGTGTGTGATCGGCTGTCA"
-        * 10000
+        * 100
         # "TATA"
     )
     print(f"original is {getsizeof(original)} bytes")
