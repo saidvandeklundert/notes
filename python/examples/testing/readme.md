@@ -22,6 +22,12 @@ For patch, scope matters.
 
 start and stop is manually done.
 
+Decorator example:
+```py
+    @patch('patch_source.Human') 
+    def test_human_on_holiday(self, mock_human):
+```
+
 Lisa Roach - Demystifying the Patch Function - PyCon 2018
 https://www.youtube.com/watch?v=ww1UsGZV8fQ
 
