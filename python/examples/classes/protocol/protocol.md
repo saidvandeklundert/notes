@@ -25,10 +25,9 @@ class Human:
     name: str
     age: int
 
-    def say_hi(
-        self,
-    ) -> str:
+    def say_hi(self) -> str:
         return "Hi, how are you?"
+        
 
 def greet(person: Speaker):
     greeting = person.say_hi()
