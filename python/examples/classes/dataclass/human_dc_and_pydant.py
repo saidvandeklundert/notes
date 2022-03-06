@@ -17,8 +17,9 @@ if __name__ == "__main__":
     human_1_1 = Human(name="Jan", age=6)
 
     human_1_2 = Humandantic(name="Jan", age=6)
+    try:
+        human_2_1 = Human(name="Jan", age="Six")
 
-    human_2_1 = Human(name=12, age=6)
-
-    human_2_2 = Humandantic(name=12, age=6)
-    print(human_2_1, human_2_2)
+        human_2_2 = Humandantic(name="Jan", age="six")
+    except Exception as err:
+        print(err)
