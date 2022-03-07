@@ -41,35 +41,28 @@ def test_customers():
     response = requests.get(api_url)
     print(response.json())
     print(type(response.json()))
-    assert response.json() == [
-        {
-            "last_name": "Smith",
-            "first_name": "John",
-            "id": 1,
-            "email_address": "email@email.com",
-        },
-        {
-            "last_name": "Doe",
-            "first_name": "Jane",
-            "id": 2,
-            "email_address": "jane@hotmail.com",
-        },
-        {
-            "last_name": "Black",
-            "first_name": "Jack",
-            "id": 3,
-            "email_address": "jack@black.com",
-        },
-        {
-            "last_name": "White",
-            "first_name": "Jill",
-            "id": 4,
-            "email_address": "jill@gmail.com",
-        },
-        {
-            "last_name": "Codes",
-            "first_name": "Arjan",
-            "id": 5,
-            "email_address": "hi@arjancodes.com",
-        },
-    ]
+
+    assert {
+        "last_name": "Smith",
+        "first_name": "John",
+        "id": 1,
+        "email_address": "email@email.com",
+    } in response.json()
+    assert {
+        "last_name": "White",
+        "first_name": "Jill",
+        "id": 4,
+        "email_address": "jill@gmail.com",
+    } in response.json()
+
+
+def test_create_customer():
+    api_url = "http://127.0.0.1:8000/customer"
+    todo = {
+        "last_name": "van de Klundert",
+        "first_name": "Marie",
+        "email_address": "mvdk@gmail.com",
+    }
+    response = requests.post(api_url, json=todo)
+    print(response.json())
+    assert True is False
