@@ -56,7 +56,7 @@ def test_customers():
     } in response.json()
 
 
-def test_create_customer():
+def __test_create_customer():
     api_url = "http://127.0.0.1:8000/customer"
     todo = {
         "last_name": "van de Klundert",

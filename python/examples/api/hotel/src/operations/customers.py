@@ -1,4 +1,3 @@
-from src.routers import customers
 from src.db.engine import DBSession
 from src.db.models import DBCustomer, to_dict
 from pydantic import BaseModel
