@@ -30,3 +30,6 @@ test.txt
 # C extension fluff from Windows
 build
 *egg-info
+play.py
+test.py
+private.py
