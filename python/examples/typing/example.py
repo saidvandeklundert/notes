@@ -3,6 +3,7 @@ From current dir:
 mypy.exe .\example.py
 """
 from typing import Callable
+from typing import NewType
 
 
 def add_int(x: int) -> int:
@@ -33,3 +34,7 @@ class Branata:
 def user_of_branata(x: str) -> object:
     b = Branata(x)
     return b
+
+
+# defining a new 'type':
+StreamName = NewType("StreamName", str)
