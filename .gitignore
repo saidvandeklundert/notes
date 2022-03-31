@@ -33,3 +33,4 @@ build
 play.py
 test.py
 private.py
+/private
