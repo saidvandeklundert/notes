@@ -41,7 +41,7 @@ enum MageType{
 
 struct MageFactory;
 impl MageFactory{
-    fn new_mage(mage_type:&MageType, name:String)-> Box<dyn Mage>{
+    fn get_mage(mage_type:&MageType, name:String)-> Box<dyn Mage>{
         match mage_type{
             MageType::FireMage =>Box::new(FireMage{
                 damage:32,
@@ -75,7 +75,7 @@ fn main() {
     ice_mage.cast_spell();
     ice_mage.greet();
 
-    let factory_made = MageFactory::new_mage(
+    let factory_made = MageFactory::get_mage(
         &MageType::IceMage, String::from("Factory made")
     );
     factory_made.greet();

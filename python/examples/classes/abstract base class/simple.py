@@ -5,7 +5,9 @@ from dataclasses import dataclass
 class Greeter(ABC):
     @abstractmethod
     def good_day(self) -> str:
-        pass
+        """Property to set the BR WF name which will be started
+        User must implement this property in their subclass as their WF name is a variable
+        """
 
 
 @dataclass
