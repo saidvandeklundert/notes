@@ -13,35 +13,37 @@ the task and it is passed into the task object.
 
 
 """
-Two algorithms are defined:
+Three algorithms are defined:
 """
-from dataclasses import dataclass
-from typing import Protocol
+
+from abc import ABC, abstractmethod
 
 
-class Algorithm(Protocol):
-    def run_algorithm(self) -> int:
-        ...
+class Algorithm(ABC):
+    @abstractmethod
+    def run_algorithm(self, x, y) -> int:
+        pass
 
 
-class Multiply:
-    def run_algorithm(self) -> int:
-        return self.x * self.y
+class Multiply(Algorithm):
+    def run_algorithm(self, x, y) -> int:
+        return x * y
 
 
-class Add:
-    def run_algorithm(self) -> int:
-        return self.x + self.y
+class Add(Algorithm):
+    def run_algorithm(self, x, y) -> int:
+        return x + y
 
 
-class SomethingMoreComplex:
-    def run_algorithm(self) -> int:
-        return self.x + self.y * (self.x + self.y)
+class SomethingMoreComplex(Algorithm):
+    def run_algorithm(self, x, y) -> int:
+        return x + y * (x + y)
 
 
 """
 The class that can execute a variety of algorithms:
 """
+from dataclasses import dataclass
 
 
 @dataclass
@@ -53,7 +55,7 @@ class Executor:
     def execute(self) -> int:
         """Execute an injected algorithm that satisfies the
         'Algorithm' protocol."""
-        algorithm_result = self.algorithm.run_algorithm(self)
+        algorithm_result = self.algorithm.run_algorithm(self.x, self.y)
         return algorithm_result
 
 
@@ -63,11 +65,11 @@ if __name__ == "__main__":
      algorithms.
     """
     # Multiply example:
-    example_1 = Executor(x=4, y=4, algorithm=Multiply)
+    example_1 = Executor(x=4, y=4, algorithm=Multiply())
     print(example_1.execute())
     # Addition example:
-    example_2 = Executor(x=4, y=4, algorithm=Add)
+    example_2 = Executor(x=4, y=4, algorithm=Add())
     print(example_2.execute())
     # SomethingMoreComplex example:
-    example_3 = Executor(x=4, y=4, algorithm=SomethingMoreComplex)
+    example_3 = Executor(x=4, y=4, algorithm=SomethingMoreComplex())
     print(example_3.execute())
