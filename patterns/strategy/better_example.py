@@ -1,11 +1,10 @@
 """
 Strategy pattern example:
-- each algorithm is put into it's own class
-- the algorithms can be passed into a class that is performing a task
+- each algorithm is placed in it's own class and needs to satisfy the 'Strategy' interface
+- the algorithms can be passed into a class that is performing a task, in this case the 'Executor' class
 
-This is also displaying 'dependancy inversion'.
-
-The class that is performing the task is not depending on any concrete algorithm.
+This is also displaying 'dependancy inversion'. The class that is performing the task
+ is not depending on any concrete algorithm.
 
 The dependancy is inverted since the algorithm is constructed outside of
 the task and it is passed into the task object.
@@ -13,7 +12,7 @@ the task and it is passed into the task object.
 
 
 """
-Three algorithms are defined:
+The algorithm interface is defined:
 """
 
 from abc import ABC, abstractmethod
@@ -23,6 +22,11 @@ class Algorithm(ABC):
     @abstractmethod
     def run_algorithm(self, x, y) -> int:
         pass
+
+
+"""
+Three algorithms are defined:
+"""
 
 
 class Multiply(Algorithm):
@@ -53,8 +57,7 @@ class Executor:
     algorithm: Algorithm
 
     def execute(self) -> int:
-        """Execute an injected algorithm that satisfies the
-        'Algorithm' protocol."""
+        """Execute an injected algorithm."""
         algorithm_result = self.algorithm.run_algorithm(self.x, self.y)
         return algorithm_result
 
