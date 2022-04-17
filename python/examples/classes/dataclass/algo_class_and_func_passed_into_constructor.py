@@ -30,17 +30,17 @@ def add(x: int, y: int) -> int:
 
 
 class Multiplier:
-    def execute_algorithm(x: int, y: int) -> int:
+    def execute_algorithm(self, x: int, y: int) -> int:
         return x * y
 
 
 class Addition:
-    def execute_algorithm(x: int, y: int) -> int:
+    def execute_algorithm(self, x: int, y: int) -> int:
         return x + y
 
 
 if __name__ == "__main__":
-    task = TaskAtHand(x=4, y=4, task=multiply, algorithm=Multiplier)
+    task = TaskAtHand(x=4, y=4, task=multiply, algorithm=Multiplier())
     print(task.execute_task_and_algorithm())
-    task = TaskAtHand(x=4, y=4, task=add, algorithm=Addition)
+    task = TaskAtHand(x=4, y=4, task=add, algorithm=Addition())
     print(task.execute_task_and_algorithm())
