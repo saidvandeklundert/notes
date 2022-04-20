@@ -1,5 +1,12 @@
 """
 https://github.com/ArjanCodes/betterpython/blob/main/8%20-%20mvc/mvc-after.py
+
+Model: deals with the data.
+
+View: presentation of the model in a particular format.
+
+Controller: the logic that binds the Model and the View.
+
 """
 import tkinter as tk
 import uuid
@@ -7,6 +14,10 @@ from abc import ABC, abstractmethod
 
 
 class Model:
+    """
+    Simple Model containing a list of uuid's
+    """
+
     def __init__(self):
         self.uuid = []
 
@@ -18,11 +29,20 @@ class Model:
 
 
 class Controller:
+    """
+    Binds the Model and the View.
+
+    In this case, they are passed into the contstructor.
+    """
+
     def __init__(self, model, view):
         self.model = model
         self.view = view
 
     def start(self):
+        """
+        Setup the View and start the main loop.
+        """
         self.view.setup(self)
         self.view.start_main_loop()
 
@@ -39,6 +59,10 @@ class Controller:
 
 
 class View(ABC):
+    """
+    The View interface that needs to be satisfied.
+    """
+
     @abstractmethod
     def setup(self, controller):
         pass
@@ -57,11 +81,18 @@ class View(ABC):
 
 
 class TkView(View):
+    """
+    Class that implements the View interface, satisfying all methods.
+
+    This class can offer a View into the Model. The Controller
+     is the class that makes this possible.
+    """
+
     def setup(self, controller):
 
         # setup tkinter
         self.root = tk.Tk()
-        self.root.geometry("400x400")
+        self.root.geometry("260x700")
         self.root.title("UUIDGen")
 
         # create the gui
