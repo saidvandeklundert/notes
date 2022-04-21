@@ -2,8 +2,7 @@
 python -m pytest example.py
 """
 import os
-from unittest import TestCase, mock
-import unittest
+from unittest import mock
 
 
 def some_func():
