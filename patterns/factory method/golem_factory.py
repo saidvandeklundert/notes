@@ -11,18 +11,18 @@ class Golem(ABC):
     """The base class for a Golem"""
 
     @abstractmethod
-    def great(self) -> str:
+    def greet(self) -> str:
         """give greeting"""
         pass
 
 
 class FireGolem(Golem):
-    def great(self) -> str:
+    def greet(self) -> str:
         return """FireGolem ready"""
 
 
 class ClayGolem(Golem):
-    def great(self) -> str:
+    def greet(self) -> str:
         return """ClayGolem ready"""
 
 
@@ -62,22 +62,22 @@ def main(factory: GolemFactory):
     by depending on an abstract class that is a factory
     that returns a conrete class."""
     golem = factory.get_golem()
-    print(golem.great())
+    print(golem.greet())
 
 
 if __name__ == "__main__":
     clay = ClayGolem()
-    print(clay.great())
+    print(clay.greet())
     fire = FireGolem()
-    print(fire.great())
+    print(fire.greet())
 
     # now using the read_factory
     clay_factory = read_factory("clay")
     clay_1 = clay_factory.get_golem()
-    print(clay_1.great())
+    print(clay_1.greet())
     fire_factory = read_factory("fire")
     fire_1 = fire_factory.get_golem()
-    print(fire_1.great())
+    print(fire_1.greet())
 
     # now passing a factory into main:
     fac_result = read_factory("fire")

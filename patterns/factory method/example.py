@@ -3,6 +3,17 @@ Factory Method Design Pattern
 
 Intent: Provides an interface for creating objects in a superclass, but allows
 subclasses to alter the type of objects that will be created.
+
+
+To inject objects of a certain subtype into a part of an application that then
+uses those objects without knowing what they are exactly.
+
+Makes things adhere to SRP:
+- making, using/being something are different things
+
+Makes things adhere to Open Closed, as we can extend the application without 
+ changing existing code.
+
 """
 """
 NOTE:
