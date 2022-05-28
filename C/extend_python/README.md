@@ -328,6 +328,7 @@ I also tried out the example repo on Ubuntu. The only thing I needed to install 
 # Next steps
 
 In case you are interested in creating more serious C extension for Python, I think the official Python documentation is quite good, you can find the documentation on the API [here](https://docs.python.org/3/c-api/index.html). Additionally, there is a good talk you could look at [Paul Ross - Here be Dragons PyCon 2016](https://www.youtube.com/watch?v=Yq__HtUIH5Y). This person has put up quite a few examples and patterns for others to learn from right [here](https://pythonextensionpatterns.readthedocs.io/en/latest/index.html).
+
 # Closing thoughts.
 
 This was a nice excercise. I read K&R and played with C. I (tried) reading parts of CPython and I investigated how to extend Python with some C code.
