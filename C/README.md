@@ -425,6 +425,8 @@ A pure function has the following two properties:
 - the function return value depends only on the parameters
 
 Express small tasks as pure functions whenever possible.
+
+
 ### memory
 
 C is pass by value. You can (sort of) do pass by reference through the use of pointers.

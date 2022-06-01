@@ -1,3 +1,4 @@
+# python -m mypy .\typed_dict.py
 from typing import TypedDict
 
 
@@ -23,3 +24,10 @@ except KeyError as e:
     print(e, "as we expected")
 sales = sales_summary["sales"]
 print(type(sales_summary))  # this is still 'just' a dict
+
+"""
+>>> python -m mypy .\typed_dict.py
+typed_dict.py:21: error: TypedDict "SalesSummary" has no key "saldes"  [typeddict-item]
+typed_dict.py:21: note: Did you mean "sales"?
+Found 1 error in 1 file (checked 1 source file)
+"""
