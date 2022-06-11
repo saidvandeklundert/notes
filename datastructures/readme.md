@@ -1,0 +1,15 @@
+- array
+- graph
+- hash table
+    - regular               d
+    - with ll
+    - with other algo
+- linked list
+    - regular               d
+    - doubly linked list
+    - circular
+- queue                     
+- stack                     d
+- tree
+    - regular tree
+    - bin tree
