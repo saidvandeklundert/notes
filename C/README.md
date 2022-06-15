@@ -460,6 +460,11 @@ gcc -c -fpic add.c
 gcc -shared -o libadd1.so add.o
 ```
 
+With VS 2019 MS build tools:
+```
+cl main.c
+```
+
 ## increment and decrement operator
 
 There is a quirck, `++i` and `i++` will increment i by 1 but there is a small difference.

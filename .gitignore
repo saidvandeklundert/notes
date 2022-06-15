@@ -51,6 +51,6 @@ private.py
 #
 private
 *.exe
-
+*.obj
 #
 **/pyO3_examples/.env

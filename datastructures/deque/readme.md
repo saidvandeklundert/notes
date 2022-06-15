@@ -1,0 +1,1 @@
+A deque is a double-ended queue. (3.6)

@@ -4,7 +4,7 @@ from collections import deque
 """
 
 Deque is implemented in C. To view the source,
- go tohttps://github.com/python:
+ go to https://github.com/python:
     
     cpython/Modules/_collectionsmodule.c 
 
@@ -43,6 +43,12 @@ class Stack:
         the stack."""
         count = self._stack.count(item)
         return count
+
+    def is_empty() -> bool:
+        raise NotImplementedError
+
+    def size() -> int:
+        raise NotImplementedError
 
     def __str__(self):
         return str(self._stack)
