@@ -33,4 +33,7 @@ int main(){
     while ((temp = pop()) != STACK_EMPTY){
         printf("temp = %d\n", temp);
     }
+
+    temp = pop();
+    printf("temp = %d\n", temp); // Here the stack is empty so -1 is returned.
 }
