@@ -56,8 +56,6 @@ void free_vector(vector *v) {
   v=NULL;
 }
 
-
-
 int main() {
     int n;
     n = 10;

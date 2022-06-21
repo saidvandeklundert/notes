@@ -427,9 +427,9 @@ A pure function has the following two properties:
 Express small tasks as pure functions whenever possible.
 
 
-### memory
+### Memmory
 
-C is pass by value. You can (sort of) do pass by reference through the use of pointers.
+C is pass by value. You can do pass by reference through the use of pointers.
 
 `malloc`: allocate some memory
 
@@ -442,6 +442,14 @@ C does not include a garbage collector. You have to free the memory yourself usi
 ```c
 free(b);
 ```
+
+### Memmory management functions
+
+- `malloc`: allocates space for an object of a specified size whose initial value is indeterminate and returns a pointer to it.
+- `aligned_aloc`: similar to `malloc` but also requires you to define an alignment.
+- `calloc`: like `malloc`, but sets the memory value to 0.
+- `realloc`: use to increase or decrease the size of previously allocated storage.
+- `free`: deallocate memmory.
 
 
 
@@ -464,6 +472,42 @@ With VS 2019 MS build tools:
 ```
 cl main.c
 ```
+
+C is a high level language that is easy to write and read by humans. Computers cannot execute or run it though. The C source code needs to be translated to machine code. This is done by a compiler.
+
+When a compiler compiles source code, it runs through several stages.
+
+### 1 Lexical analysis
+
+That the source code, the entire list of characters, and chop it into tokens.
+
+### 2 Syntax analyzer
+
+Take the tokens and build an Abstract Syntax Tree.
+
+### 3 Semantic analysis
+
+Check the AST and verify that the types used are consistent.
+
+### 4 Instruction selection
+
+Take the AST and transform it into Internal Representation (almost assembly).
+
+### 5 Register Allocation
+
+Take temporary values and assign them to registers.
+
+
+### 6 Code generation
+
+Generate the Assembly.
+
+### 7 Assembly and linking
+
+Link the other files used by the source code.
+
+
+
 
 ## increment and decrement operator
 
