@@ -10,4 +10,4 @@ class TreeNode:
 
 
 if __name__ =="__main__":
-    #x = TreeNode({val: 1, left: TreeNode({val: 2, left: None, right: None}), right: TreeNode({val: 3, left: None, right: None}))
+    x = TreeNode({val: 1, left: TreeNode({val: 2, left: None, right: None}), right: TreeNode({val: 3, left: None, right: None}))

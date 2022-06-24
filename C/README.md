@@ -112,18 +112,7 @@ We don’t want the result of a computation to depend on the executable (which i
 
 A type’s binary representation is observable and determines the results of all operations.
 
-`Errors`: Generally, there are three different ways to generate or convey errors in C:
-- return a special value that indicates an error
-- return a special value that indicates a function was successful
-- return a positive number on succes and a negative number on failure
 
-Example on how error checking could be implemented in C:
-```c
-if (puts("hello world") == EOF) {
-  perror("can't output to terminal:");
-  exit(EXIT_FAILURE);
-}
-```
 
 `Opaque types`: types specified through functional interfaces.
 
@@ -506,8 +495,76 @@ Generate the Assembly.
 
 Link the other files used by the source code.
 
+[Nice video on LLVM](https://www.youtube.com/watch?v=BT2Cv-Tjq7Q&t=153s).
+
+## Error handling
+
+`Errors`: Generally, there are three different ways to generate or convey errors in C:
+- return a special value that indicates an error
+- return a special value that indicates a function was successful
+- return a positive number on succes and a negative number on failure
+
+Example on how error checking could be implemented in C:
+```c
+if (puts("hello world") == EOF) {
+  perror("can't output to terminal:");
+  exit(EXIT_FAILURE);
+}
+```
+
+### Exit a program in case a check is not satisfied:
+
+```c
+if (argc != 2) {
+  fprintf(stderr, "Please provide an argument");
+  exit(-1);
+}
+```
+
+### Check if a file exists:
+
+```c
+#include <errno.h>
+int fd;
+fd = open(argv[1], O_RDONLY);
+
+if (fd == -1){
+  fprintf(stderr, "errno = %i\n", errno );
+  exit(-1);  
+}
+```
+
+Or use the `strerror` function:
+
+```c
+#include <errno.h>
+int fd;
+fd = open(argv[1], O_RDONLY);
+
+if (fd == -1){
+  fprintf(stderr, "errno = %s\n", strerror(errno));
+  exit(-1);  
+}
+```
 
 
+## Structure of program
+
+`extern`: (thinking global variable) indicates that the variable is coming from another file. This way, the compiler knows that during linking, the variable is coming from another object file. The `extern` keyword is implicit.
+
+`static`: (think private) affects the scope of the variable. Making a function or a variable static means that it will only be visible withint its own translation unit. If a program has multiple source files, functions with the same name declared as static do not interfere with each other.
+
+## Debugging, testing and analysis
+
+### Assertions
+
+Compile-time assertions: `static_assert`.
+
+Run-time assertions: `assert`.
+
+Assert is a function with a boolean value and both assertion types come from `<assert.h>`.
+
+The `assrt` macro is implementation defined. Typically, if the assert produces a `0`, the macro expansion writes information about the failing call to `stderr`. After that, it calls the `abort` function.
 
 ## increment and decrement operator
 
@@ -555,3 +612,8 @@ https://stackoverflow.com/questions/11182765/how-can-i-build-my-c-extensions-wit
 
 
 https://github.com/bagder/libcurl-video-tutorials
+
+
+Also fun:
+
+[C in 100 seconds](https://www.youtube.com/watch?v=U3aXWizDbQ4)

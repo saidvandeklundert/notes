@@ -1,11 +1,9 @@
-
-
 # Interesting folders:
 
 /CPYTHON
     /include: header files. Include these in your IDE.
     /objects: object implementations. Here you will find the `int`, `str`, `list`, etc.
-    /python: interpreer, bytecode compiler & more infra
+    /python: interpreter, bytecode compiler & more infra
     /parser: parser, lexer and parser generator
     /modules: stdlib extensions and 'main.c'
     /programs: contains the 'real' main
@@ -39,9 +37,28 @@ Here, all the builtin functions etc are defined. At the bottom, after the module
 You can check it out and then at least you know what to look for as it offers some nice clues as to what specific object a keyword is implemented with.
 
 Some interesting objects:
+- dict:
+[Include/dictobject.h](https://github.com/python/cpython/blob/main/Include/dictobject.h)
+[Include/cpython/dictobject.h](https://github.com/python/cpython/blob/main/Include/cpython/dictobject.h)
+[Dictobject](https://github.com/python/cpython/blob/main/Objects/dictobject.c)
+[pycore dict](https://github.com/python/cpython/blob/main/Include/internal/pycore_dict.h)
+
+- enum:
 [Enum](https://github.com/python/cpython/blob/main/Objects/enumobject.c)
+
+- list:
 [List](https://github.com/python/cpython/blob/main/Objects/listobject.c)
+[Include/listobject.h](https://github.com/python/cpython/blob/main/Include/listobject.h)
+
+- int:
 [int](https://github.com/python/cpython/blob/main/Objects/longobject.c)
+
+- float:
+[PyFloatObject](https://github.com/python/cpython/blob/main/Include/floatobject.h)
+
+- object:
+[Generic PyObject](https://github.com/python/cpython/blob/main/Include/object.h)
+
 
 
 
@@ -70,3 +87,7 @@ When you use inspect, you can also check where a class or other type of object i
 
 
 https://stackoverflow.com/questions/8608587/finding-the-source-code-for-built-in-python-functions
+
+
+
+[Exploring CPython](https://devguide.python.org/exploring/)
