@@ -71,17 +71,17 @@ treenode *insert(treenode *root, int data){
 // Free all nodes:
 void purge_tree(treenode *root){
     if (root != NULL){
-        purge(root->left);
+        purge_tree(root->left);
     }
     if (root != NULL){
-        purge(root->right);
+        purge_tree(root->right);
     }     
     free(root);
     root = NULL;
 }
 
 // print the tree to screen in pre-order traversal:
-void print_tree_rec(treenode *node, int level){
+void pre_order_traversal_pretty(treenode *node, int level){
     if (node == NULL){
         print_tabs(level);
         printf("-- emptry tree --\n");
@@ -91,16 +91,41 @@ void print_tree_rec(treenode *node, int level){
     printf("value : %d\n", node->value);
     print_tabs((level +1));
     printf("left--\n");
-    print_tree_rec(node->left, (level +2));
+    pre_order_traversal_pretty(node->left, (level +2));
     print_tabs((level +1));
     printf("right--\n");
-    print_tree_rec(node->right, (level +2));
+    pre_order_traversal_pretty(node->right, (level +2));
+
+}
+
+// print the tree in pre-order traversal:
+void pre_order_traversal(treenode *node){
+    if (node == NULL){                
+        return;
+    }
+    
+    printf("value : %d\n", node->value);
+    pre_order_traversal(node->left);    
+    pre_order_traversal(node->right);
+
+}
+
+// print the tree to screen in post-order traversal:
+void post_order_traversal(treenode *node){
+    if (node == NULL){        
+        return;
+    }
+      
+    post_order_traversal(node->left);
+  
+    post_order_traversal(node->right);
+    printf("value : %d\n", node->value);
 
 }
 
 // print the root tree
 void print_tree_root(treenode *root){
-    print_tree_rec(root, 1);
+    pre_order_traversal_pretty(root, 1);
 }
 
 int main(){
@@ -122,6 +147,10 @@ int main(){
     print_tree_root(root);
     int tree_height = height(root);
     printf("Tree height is : %d", tree_height);
+    printf("Post-order traversal:\n");
+    post_order_traversal(root);
+    printf("Pre-order traversal:\n");
+    pre_order_traversal(root);
     purge_tree(root);
     
     return 1;

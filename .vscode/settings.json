@@ -6,7 +6,8 @@
         "string.h": "c",
         "*.tcc": "c",
         "stdio.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "assert.h": "c"
     },
     "python.formatting.provider": "black"
 }

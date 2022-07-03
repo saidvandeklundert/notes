@@ -11,6 +11,7 @@ uvicorn main:app --reload
 python -m uvicorn main:app --reload
 ```
 
+Then visit http://127.0.0.1:8000/customers
 
 Open another terminal and run the tests: 
 
