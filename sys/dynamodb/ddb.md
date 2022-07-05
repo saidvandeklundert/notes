@@ -77,6 +77,38 @@ Dynamo provides eventual consistency, which allows for updates to be propagated 
 
 Any node in Dynamo is eligable to recieve client get and put operations for any key.
 
-Continue 4.6
 
-https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf
+#### Handling failure: hinted handoff.
+
+Instead of strict quorum, Dynamo uses "sloppy quorum": all read and write operations are performed on the first N healthy nodes from the preference list, which may not always be the first N nodes encountered while walking the consistent hashing ring.
+
+Each object is replicated across multiple datacenters.
+
+#### Handling permanent failues: replica synchronization
+
+To detect the inconsistencies be tween replicas faster and to
+minimize the amount of transferred data, Dynamo uses Merkle
+trees. 
+
+A Merkle tree is a hash tree where leaves are hashes of the values of individual keys. Pare nt nodes higher in the tree are hashes of their respective children. The principal advantage of Merkle tree is that each branch of the tree can be checked independently without requiring nodes to download the entire tree or the entire data set. Moreover, Merkle trees help in reducing the amount of data that needs to be transferred while checking for inconsistencies among replicas. For in stance, if the hash values of the root of two trees are equal, then the values of the leaf nodes in the tree are equal and the nodes require no synchronization. If not, it implies that the values of some replicas are different. In such cases, the nodes may exchange the hash values of children and the process continues until it reaches the leaves of the trees, at which point the hosts can identify the keys that are “out of sync”. Merkle trees minimize the amount of data that needs to be transferred for synchronization and reduce the num ber of disk reads performed during the anti-entropy process.
+
+Dynamo uses Merkle trees for an ti-entropy as follows: Each node maintains a separate Merkle tree for each key range (the set of keys covered by a virtual node) it hosts. This allows nodes to compare whether the keys within a key range are up-to-date. In this scheme, two nodes exchange the root of the Merkle tree corresponding to the key ranges that they host in common.
+
+Subsequently, using the tree traversal scheme described above the nodes determine if they have any differences and perform the appropriate synchronization action. The disadvantage with this scheme is that many key ranges change when a node joins or leaves the system thereby requiring the tree(s) to be recalculated.
+
+This issue is addressed, however , by the refined partitioning scheme described in Section 6.2
+
+
+
+### Implementation
+
+In Dynamo, each storage node has three main software components: request coordinati on, membership and failure detection, and a local persistenc e engine. All these components are implemented in Java.
+
+Dynamo’s local persistence co mponent allows for different storage engines to be plugged in. Engines that are in use are Berkeley Database (BDB) Transactional Data Store 2, BDB Java Edition, MySQL, and an in-memory buffer with persistent backing store. 
+The majority of Dynamo's production instances use BDB Transactional Data Store.
+
+
+### Experience and lessons learned
+
+
+Excerpt from [this](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf).
