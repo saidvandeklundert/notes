@@ -1,5 +1,20 @@
+"""
+     1
+    / \
+   /   \
+  2     \
+ / \     4
+3   21   / \
+       5   \
+            6
+           / \
+          10  11
+
+
+"""
 from __future__ import annotations
-from typing import Any, Union, List
+from typing import Any, Union, List, Optional
+from dataclasses import dataclass
 
 
 class Node:
@@ -12,6 +27,25 @@ class Node:
         self.val = val
         self.left = left
         self.right = right
+
+
+class Queue:
+    def __init__(self):
+        self.nodes: List[Node] = []
+
+    def enqueu(self, item: Node) -> None:
+        self.nodes.append(item)
+
+    def dequeue(self) -> Optional[Node]:
+        if len(self.nodes):
+            return self.nodes.pop(0)
+
+    def peek(self) -> Optional[Node]:
+        if len(self.nodes):
+            return self.nodes[0].val
+
+    def __len__(self):
+        return len(self.nodes)
 
 
 class BinaryTree:
@@ -61,6 +95,25 @@ class BinaryTree:
 
         return traversal
 
+    def level_order(self, start: Node):
+        """
+        Level order search, aka Breadth-first search.
+        """
+        if start is None:
+            return
+        queue = Queue()
+        queue.enqueu(start)
+        traversal = []
+        while len(queue.nodes) > 0:
+            traversal.append(queue.peek())
+            node = queue.dequeue()
+            if node.left:
+                queue.enqueu(node.left)
+            if node.right:
+                queue.enqueu(node.right)
+
+        return traversal
+
 
 def in_order_traversal(node: Node, depth: int = 0) -> None:
     if node.left:
@@ -85,6 +138,10 @@ if __name__ == "__main__":
     node_4.right = node_6
     node_6.left = node_10
     node_6.right = node_11
+    node_3 = Node(val=3)
+    node_21 = Node(val=21)
+    node_2.left = node_3
+    node_2.right = node_21
     print(tree)
     tree.in_order_print()
     pre_order_list = tree.preorder_list([])
@@ -93,3 +150,6 @@ if __name__ == "__main__":
     print(pre_order_list)
     pre_order_list = tree.inorder_list([])
     print(pre_order_list)
+
+    breadth_first_search = tree.level_order(tree.root)
+    print(breadth_first_search)
