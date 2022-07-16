@@ -147,6 +147,7 @@ LIFO queue of functions calls. Typically, when a programm crashses, the stack tr
 ### Heap memory:
 
 Unordered, variable-size, unordered and slower.
+
 ### Stack memory:
 
 Stored in order, values are fixed-size, LIFO, Fast retrieval.
