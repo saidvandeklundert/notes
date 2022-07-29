@@ -17,7 +17,7 @@ def quicksort(items: list[int], left: None | int = None, right: None | int = Non
 
     print(f"the pivot is {pivot_value}")
 
-    # iterat up to but not including the pivot:
+    # iterate up to but not including the pivot:
     for j in range(left, right):
         # if a value is less then the pivot, swap it
         # so that it is on the left side of 'items'
@@ -29,7 +29,7 @@ def quicksort(items: list[int], left: None | int = None, right: None | int = Non
     # put the pivot on the left side of 'items'
     items[i], items[right] = items[right], items[i]
 
-    # endd of partitioning!!!
+    # end of partitioning!!!
 
     print(f"after swapping the range is: {items[left:right+1]}")
     print(f"recursively calling quicksort on {items[left:i]} and {items[i+1:right+1]}")

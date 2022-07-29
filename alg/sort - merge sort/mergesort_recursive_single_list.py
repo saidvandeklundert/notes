@@ -21,7 +21,7 @@ def mergesort(items: list[int]):
     # at this point, left should be sorted and right
     # should be sorted. We can merge them into
     # a single sorted list.
-
+    print(f"............ left {left} right {right} len(items) {len(items)}")
     sorted_result = []
     ileft = 0
     iright = 0
