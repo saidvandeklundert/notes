@@ -117,7 +117,7 @@ In-order traversal:
 - Process the nodes in the left subtree with a recursive call
 - Process the root
 - Process the nodes in the right subtree with a recursive call
-- traverse the keft child node, then access the node data and then traverse the right child
+- traverse the left child node, then access the node data and then traverse the right child
 
 Post-order traversal:
 - Process the nodes in the left subtree with a recursive call

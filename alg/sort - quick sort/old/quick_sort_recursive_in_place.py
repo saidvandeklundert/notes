@@ -1,6 +1,6 @@
 import copy
 import time
-
+from random import randint
 import random
 from typing import Callable
 
@@ -59,7 +59,12 @@ def partition_begin(array, begin, end):
 def partition_end(array: list[int], begin: int, end: int) -> int:
     """
 
-    Quicksort partitioning for end partition:
+    Quicksort partitioning:
+    1: set pivot
+    2: sort the array into values lower, equal and higher then the pivot.
+    3: return the pivot index
+
+    Detailed:
     1: set pivot to the end
     2: sort the array into values lower then the pivot, equal to the pivot and higher then the pivot
       - 1: check every value against the pivot
@@ -98,7 +103,7 @@ def quicksort_in_place(array) -> Callable:
     return _quicksort(array, begin, end)
 
 
-def quicksort_in_place_end_partition(array) -> Callable:
+def quicksort_in_place_end_partition(array):
     """
     This version of quicksort is performing everything 'in-place'.
 
@@ -119,11 +124,41 @@ def quicksort_in_place_end_partition(array) -> Callable:
     return _quicksort(array, begin, end)
 
 
+def quicksort_compact(array):
+    # If the input array contains fewer than two elements,
+    # then return it as the result of the function
+
+    if len(array) < 2:
+        return array
+
+    low, same, high = [], [], []
+
+    # Select your `pivot` element randomly
+    pivot = array[randint(0, len(array) - 1)]
+
+    for item in array:
+        # Elements that are smaller than the `pivot` go to
+        # the `low` list. Elements that are larger than
+        # `pivot` go to the `high` list. Elements that are
+        # equal to `pivot` go to the `same` list.
+        if item < pivot:
+            low.append(item)
+        elif item == pivot:
+            same.append(item)
+        elif item > pivot:
+            high.append(item)
+
+    # The final result combines the sorted `low` list
+    # with the `same` list and the sorted `high` list
+    return quicksort_compact(low) + same + quicksort_compact(high)
+
+
 if __name__ == "__main__":
 
     in_place_arr = copy.copy(tests[0])
     in_place_arr_end_partition = copy.copy(tests[0])
     not_in_place_arr = copy.copy(tests[0])
+    quicksort_compact_arr = copy.copy(tests[0])
     print(f"quicksort_in_place")
     t1_start = time.time()
 
@@ -140,7 +175,19 @@ if __name__ == "__main__":
     t3_start = time.time()
     not_in_place_result = quicksort_not_in_place(not_in_place_arr)
     t3_finish = time.time()
+
+    print(f"quicksort_compact")
+    t4_start = time.time()
+    not_in_place_result = quicksort_compact(quicksort_compact_arr)
+    t4_finish = time.time()
+
     print("quicksort_in_place:", t1_finish - t1_start)
     print("quicksort_in_place_end_partition:", t2_finish - t2_start)
     print("quicksort_not_in_place:", t3_finish - t3_start)
-    assert not_in_place_result == in_place_arr == in_place_arr_end_partition
+    print("quicksort_compact:", t4_finish - t4_start)
+    assert (
+        not_in_place_result
+        == in_place_arr
+        == in_place_arr_end_partition
+        == not_in_place_result
+    )
