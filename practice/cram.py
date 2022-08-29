@@ -1,5 +1,11 @@
 """
-python -m pytest check.py
+To reset the test:
+
+    python reset
+
+To check the results:
+
+    python -m pytest check.py
 """
 ##########
 # sorting:
@@ -16,31 +22,25 @@ def mergesort(alist: list[int]) -> list[int]:
     return newlist
 
 
-def merging(left: list[int], right: list[int]) -> list[int]:
-    new_list = []
-    while min(len(left), len(right)) > 0:
-        if left[0] > right[0]:
-            to_insert = right.pop(0)
-            new_list.append(to_insert)
-        elif left[0] <= right[0]:
-            to_insert = left.pop(0)
-            new_list.append(to_insert)
-    if len(left) > 0:
-        for i in left:
-            new_list.append(i)
-    if len(right) > 0:
-        for i in right:
-            new_list.append(i)
+# python -m pytest check.py::test_merging
+def merging():
 
-    return new_list
+    return ...
 
 
 # quicksort.py
 # python -m pytest check.py::test_quick_sort
-def quick_sort():
+def quick_sort(nums, start=0, end=None):
+    if end is None:
+        end = len(nums) - 1
+
+    if end <= start:
+        return
     # base case
-    pivot = partitioning()
+    pivot = partitioning(nums, start, end)
     # recursive case
+    quick_sort(nums, start, pivot - 1)
+    quick_sort(nums, pivot + 1, end)
 
 
 # python -m pytest check.py::test_quick_sort_partitioning
@@ -65,4 +65,15 @@ def partitioning(nums, left, right):
 def binary_search(array: list[int], target: int) -> int:
     """implmenet binary search here."""
 
-    return ...
+    left = 0
+    right = len(array) - 1
+    while left <= right:
+        middle = (left + right) // 2
+        if array[middle] == target:
+            return middle
+        elif array[middle] > target:
+            right = middle - 1
+        else:
+            left = middle + 1
+
+    return -1

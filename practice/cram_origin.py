@@ -1,5 +1,11 @@
 """
-python -m pytest check.py
+To reset the test:
+
+    python reset
+
+To check the results:
+
+    python -m pytest check.py
 """
 ##########
 # sorting:
@@ -24,7 +30,7 @@ def merging():
 
 # quicksort.py
 # python -m pytest check.py::test_quick_sort
-def quick_sort():
+def quick_sort(nums, start=0, end=None):
     # base case
     pivot = partitioning()
     # recursive case
@@ -32,15 +38,7 @@ def quick_sort():
 
 # python -m pytest check.py::test_quick_sort_partitioning
 def partitioning(nums, left, right):
-    pivot = nums[right]
-    start = left - 1
-    for j in range(left, right):
-        if nums[j] <= pivot:
-            start += 1
-            nums[start], nums[j] = nums[j], nums[start]
-    nums[start + 1], nums[right] = nums[right], nums[start + 1]
-
-    return start + 1
+    return ...
 
 
 ############
