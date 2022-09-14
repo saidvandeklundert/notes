@@ -28,7 +28,7 @@ async def main():
 
         # create a list of coroutines
         tasks = [get_page(session, url) for url in read_urls()]
-        # schudule the coroutines to run:
+        # schedule the coroutines to run:
         results = await asyncio.gather(*tasks, return_exceptions=True)
         # filter the successes and the exceptions:
         exceptions = [result for result in results if isinstance(result, Exception)]

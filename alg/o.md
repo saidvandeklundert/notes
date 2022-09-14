@@ -106,6 +106,12 @@ In computer science, we always asume `log₂`. This can be seen as `halfing` of 
 
 Recursion, quick sort, binary search, fast Fourier transform, and merge sort are good examples of divide and conquer algorithms. Performance is sometimes an issue in the case of recursion. On multiprocessor machines, these algorithms can be executed on different processors after breaking them down into sub-problems.
 
+## Important takeways for Big O
+
+1. Growth is with respect to input
+2. Constants are dropped
+3. Worst case is usually the way we measure
+
 ## videos
 
 Good video on logarithm is [here](https://www.youtube.com/watch?v=M4ubFru2O80).

@@ -12,3 +12,7 @@ class Human:
 
 marie = Human(name="marie")
 print(marie.name)
+
+
+marie = Human(name="marie")
+print(marie.name)

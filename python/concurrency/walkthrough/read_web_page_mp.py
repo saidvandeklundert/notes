@@ -31,7 +31,7 @@ def main():
         for url in urls:
             fut.append(executor.submit(get_page, url))
 
-    print("All threads are done.")
+    print("All processes are done.")
 
     # focus on the requests that succeeded:
     for future in fut:
