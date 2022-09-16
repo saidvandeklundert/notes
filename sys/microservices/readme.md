@@ -261,15 +261,190 @@ When things get overly nested, use JSON pointers:
 
 
 
+## API authorization and authentication
+
+Authentication: verify the identity of a user
+
+Authorization: determine what resources a user is allowed to access.
+
+### Authentication
+
+2 important options:
+- OAuth (Open Authorization): standard protocol for access delegation
+- OpenID Connect (OIDC)
 
 
 
+#### OAuth
+
+OAuth allows a user to grant 3rd party apps access to protected resources they own in another website without sharing credentials.
+
+Typically the access is granted by issuing a token wich the third party application uses to access the user's information.
+
+#### OpenID Connect (OIDC)
+
+
+OIDC is an identity verification protocol that allows users to bring their identity from one website (the identity provider) to another. OIDC is built on top of OAuth and we can use the same flows defined by OAuth to authenticate users.
+
+When we authenticate using the OIDC protocol, we distinguish two types of tokens:
+- `ID tokens`: identify the user, and they contain information such as the user’s name, their email, and other personal details. You must use ID tokens only to verify the user identity, and never to determine whether a user has access to an API. 
+- `Access tokens`: validates API access. Typically does not contain user information and instead contain a set of claims about the access rights of the user.
+
+In short: 
+- an `id token`:
+  - carries an identity
+  - the audience of the ID token is the autorization server
+- an `access token`:
+  -  carries claims about user's right to access the API
+  - the audience is the API you build
+
+## Jason Web Tokens (JWT)
+
+In OAuth and OpenID Connect, user access is verified by means of a token known as JSON Web Token or JWT.
+
+A JWT is a token that represents a JSON document. The JSON document contains claims, such as who issued the token, what the audience of the token is or when the token expires. The JSON document is typically encoded as a Base64 string. JWTs are normally signed with a private secret or a cryptographic key.
+
+Example of a JWT:
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2F1dGguY29mZmVlbWVzaC5pby8iLCJzdWIiOiJlYzdiYmNjZi1jYTg5LTRhZjMtODJhYy1iNDFlNDgzMWE5NjIiLCJhdWQiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvb3JkZXJzIiwiaWF0IjoxNjM4MjI4NDg2LjE1OTg4MSwiZXhwIjoxNjM4MzE0ODg2LjE1OTg4MSwic2NvcGUiOiJvcGVuaWQifQ.oblJ5wV9GqrhIDzNSzcClrpEQTMK8hZGzn1S707tDtQE__OCDsP9J2Wa70aBua6X81-zrvWBfzrcX--nSyT-A9uQxL5j3RHHycToqSVi87I9H6jgP4FEKH6ClwZfabVwzNIy52Zs7zRdcSI4WRz1OpHoCM-2hNtZ67dMJQgBVIlrXcwKAeKQWP8SxSDgFbwnyRTZJt6zijRnCJQqV4KrK_M4pv2UQYqf9tQpj2uflTsVcZq6XsrFLAgqvAg-YsIarYw9d63rs4H_I2aB3_T_1dGPY6ic2R8WDT1_AXzi-crjoWq9A51SN-kMaTLhE_v2MSBB3A0zrjbdC4ZvuszAqQ
+```
+
+If you look closely at the above example, you’ll see the string contains two periods. The periods act as delimiters which separate each component of the JSON Web Token. A JSON Web Token document has three sections:
+- `Header`: identifies the type of token, as well as the algorithm and the key that were used sign the token. We use this information to apply the right algorithm to verify the token’s signature.
+- `Payload`: contains the document’s set of claims. The JWT specification includes a list of reserved claims which identify the issuer of the token (the authorization server), the token’s audience or intended recipient (our API server), and its expiry date, among other details. In addition to JWT’s standard claims, a payload can also include custom claims. We use this information to determine whether the user has access to the API.
+- `Signature`: a string representing the token’s signature.
+
+
+### JWT header:
+
+JSON Web Tokens contain a header which describes the type of token, as well as the algorithm and the key that that were used to sign the token. 
+
+Example of a header:
+```json
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "kid": "ZweIFRR4l1dJlVPHOoZqf"
+}
+```
+What does this mean?
+- alg: tells us that the token was signed using the RS256 algorithm.
+- typ: tells us that this is a JWT token.
+- kid: tell us that the key used to sign the token has the ID ZweIFRR4l1dJlVPHOoZqf.
+
+### JWT payload
+
+Example:
+```json
+{
+  "iss": "https://auth.coffeemesh.io/",
+  "sub": "ec7bbccf-ca89-4af3-82ac-b41e4831a962",
+  "aud": "http://127.0.0.1:8000/orders",
+  "iat": 1667155816,
+  "exp": 1667238616,
+  "azp": "7c2773a4-3943-4711-8997-70570d9b099c",
+  "scope": "openid"
+}
+```
+
+- `iss` tells us that the token has been issued by the https://auth.coffeemesh.io server identity service.
+- `sub` tell us that the user has the identifier ec7bbccf-ca89-4af3-82ac-b41e4831a962. The value of this identifier is owned by the identity service. Our APIs can use this value to control access to the resources owned by this user in an opaque way. We say this ID is opaque because it doesn’t disclose any personal information about the user.
+- `aud` tells us that this token has been issued to grant access to the orders API. If the value of this field is a different URL, the orders will reject the request.
+- `iat` tells us that the token was issued on the 30th of October of 2022 at 6:50pm.
+- `exp` tells us that the token expires on the 31st of October of 2022 at 5:50pm.
+- `azp` tells us that the token has been requested by an application with identifier 7c2773a4-3943-4711-8997-70570d9b099c. This is typically a frontend application. This claim is common in tokens that have been issued using the OpenID Connect protocol.
+- The `scope` field tells us that this token was issued using the OpenID Connect protocol.
+
+### Producing a JWT
+
+To form the final JSON Web Token, we encode the header, the payload, and the signature using base64url encoding. The header, payload, and signature are then concatenated using periods as separators. Libraries like PyJWT take care of the heavy lifting of producing a JSON Web Token.
 
 
 
+To produce a signed token with this payload, we use PyJWT’s encode() function, passing in the token, the key to sign the token, and the algorithm we want to use to sign the token:
 
 
+```python
+>>> import jwt
+>>> jwt.encode(payload=payload, key='secret', algorithm=’HS256')
+'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2F1dGguY29mZmVlbWVzaC5pby8iLCJzdWIiOiJlYzdiYmNjZi1jYTg5LTRhZjMtODJhYy1iNDFlNDgzMWE5NjIiLCJhdWQiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvb3JkZXJzIiwiaWF0IjoxNjY3MTU1ODE2LCJleHAiOjE2NjcyMzg2MTYsImF6cCI6IjdjMjc3M2E0LTM5NDMtNDcxMS04OTk3LTcwNTcwZDliMDk5YyIsInNjb3BlIjoib3BlbmlkIn0.sZEXZVitCv0iVrbxGN54GJr8QecZfHA_pdvfEMzT1dI'
+```
 
+For a more secure encryption, we use a private/public key pair to sign the token with the RS256 algorithm. To sign JWTs, we typically use keys that follow the X.509 standard, which allows us to bind an identity to a public key. To generate a private/public key pair, run the following command from your terminal:
+```
+$ openssl req -x509 -nodes -newkey rsa:2048 -keyout private_key.pem -out public_key.pem -subj "/CN=coffeemesh"
+```
+The minimum input for a X.509 certificate is the subject’s common name (CN), which in this case we set coffeemesh. If you omit the -subj flag, you’ll be prompted with a series of questions about the identity you want to bind the certificate to. This command produces a private key under a file named private_key.pem, and the corresponding public key under a file named public_key.pem. 
+
+
+Example:
+```python
+# file: jwt_generator.py
+from datetime import datetime, timedelta
+from pathlib import Path
+import jwt
+from cryptography.hazmat.primitives import serialization
+def generate_jwt():
+    now = datetime.utcnow()
+    payload = {
+        "iss": "https://auth.coffeemesh.io/",
+        "sub": "ec7bbccf-ca89-4af3-82ac-b41e4831a962",
+        "aud": "http://127.0.0.1:8000/orders",
+        "iat": now.timestamp(),
+        "exp": (now + timedelta(hours=24)).timestamp(),
+        "scope": "openid",
+    }
+    private_key_text = Path("private_key.pem").read_text()
+    private_key = serialization.load_pem_private_key(
+        private_key_text.encode(),
+        password=None,
+    )
+    return jwt.encode(payload=payload, key=private_key, algorithm="RS256")
+print(generate_jwt())
+```
+
+
+You can use https://jwt.io to inspect a JWT. ALternaticely, use the following Python:
+```python
+>>> import base64
+>>> base64.decodebytes('eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9'.encode())
+b'{"alg":"RS256","typ":"JWT",}'
+```
+
+### Validating a JWT
+
+
+You must:
+- validate the JWT's signature
+- validate that it's claims are correct
+
+Users must send a JWT in each request and the API server must validate the token on each request. JWTs are designed for stateless communication between client and server and must be validated properly. Though, sometimes you'll see caching being used.
+
+Tokens can be signed with a secret key or with a private/public key pair. 
+
+To validate a token in code, we first load the public key:
+```python
+>>> from cryptography.x509 import load_pem_x509_certificate
+>>> from pathlib import Path
+>>> public_key_text = Path('public_key.pem').read_text()
+>>> public_key = load_pem_x509_certificate(public_key_text.encode('utf-8')).public_key()
+```
+
+Now that we have the public key, we use it to validate a token:
+```python
+>>> import jwt
+>>> access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ..."
+>>> jwt.decode(token, key=public_key, algorithms=['RS256'], audience=["http://127.0.0.1:8000/orders"])
+{'iss': 'https://auth.coffeemesh.io/', 'sub': 'ec7bbccf-ca89-4af3-82ac-b41e4831a962', 'aud': 'http://127.0.0.1:8000/orders', 'iat': 1638114196.49375, 'exp': 1638200596.49375, 'scope': 'openid'}
+```
+
+### Adding authorization
+
+There are 2 major strategies for handling authorization:
+1. handling validation in an API Gateway
+2. handling validation in each service
+
+This describes the second strategy.
 
 
 

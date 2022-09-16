@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+alembic = "*"
+black = "*"
+
+[packages]
+sqlalchemy = "*"
+fastapi = "*"
+uvicorn = "*"
+requests = "*"
+pyyaml = "*"
+cryptography = "*"
+pyjwt = "*"
+
+[requires]
+python_version = "3.10"
