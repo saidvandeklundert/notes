@@ -15,8 +15,9 @@ class NetworkService:
     def list_devices(self) -> list[Device]:
         return self.network_repo.list()
 
-    def update_device(self, device_id: UUID, device: Device) -> Device:
+    def update_device(self, device_id: str, device: Device) -> Device:
         return self.network_repo.update(device_id, device)
 
-    def delete_device(self, device_id: UUID) -> Device:
+    def delete_device(self, device_id: str) -> Device:
+        print("delete", device_id)
         return self.network_repo.delete(device_id)

@@ -3,12 +3,12 @@
 ### Install the app:
 
 ```
-# create venv for python 3:
-python -m pipenv --three 
+python -m pipenv pipenv install
 python -m pipenv check
 python -m pipenv update
 python -m pipenv shell
 python -m pipenv run
+python -m pytest .\test\
 ```
 
 ### start the app:

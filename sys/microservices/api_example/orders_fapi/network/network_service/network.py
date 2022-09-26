@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError, validator
 import uuid
 
 
@@ -18,10 +18,21 @@ class Vendor(str, Enum):
 
 
 class Device(BaseModel):
-    id: uuid.UUID = uuid.uuid4()
+    """
+    >>> import uuid
+    >>> from network.network_service.network import Device
+    >>> Device(**{'id': 'ac591eeb-c963-435f-9e22-08242dbb53d6', 'name': 'r10', 'os': Os.JUNOS,'vendor': Vendor.JUNIPER})
+    """
+
+    id: str = str(uuid.uuid4())
     name: str
     os: Os
     vendor: Vendor
+
+    @validator("id")
+    def username_alphanumeric(cls, v):
+        assert isinstance(uuid.UUID(v), uuid.UUID), "must be a valid UUID"
+        return v
 
 
 class Devices(BaseModel):

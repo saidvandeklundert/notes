@@ -7,17 +7,25 @@ from starlette import status
 from starlette.responses import Response
 
 from web.app import app
+import os
 
-
-from network.network_service.network import Device, Os, Vendor, Devices
+from network.network_service.network import Device, Devices
 from network.network_service.exceptions import DeviceNotFoundError
 from network.network_service.network_service import NetworkService
-from network.repository.network_repository import InMemmoryCache
+from network.repository.network_repository import (
+    InMemmoryCache,
+    DynamoDBRepository,
+    SqlLiteRepo,
+)
+from ezaws import Region, DynamoDB
 
-devices: list[Device] = []
-devices.append(Device(id=uuid.uuid4(), name="r1", os=Os.JUNOS, vendor=Vendor.JUNIPER))
 
-REPO = InMemmoryCache()
+REPO = DynamoDBRepository(
+    ddb_client=DynamoDB(region=Region.eu_central_1), table_name="Devices"
+)
+
+# REPO = InMemmoryCache()
+# REPO = SqlLiteRepo()
 
 
 @app.get("/devices", response_model=Devices)
@@ -43,7 +51,9 @@ def update_device(device_id: UUID, device_update: Device):
     All fields for the device need to be provided."""
     network_service = NetworkService(REPO)
     try:
-        network_service.delete_device(device_id=device_id)
+        return network_service.update_device(
+            device_id=str(device_id), device=device_update
+        )
     except DeviceNotFoundError:
         raise HTTPException(
             status_code=404, detail=f"Device with ID {device_id} not found"
@@ -55,10 +65,10 @@ def update_device(device_id: UUID, device_update: Device):
     status_code=status.HTTP_204_NO_CONTENT,
     response_class=Response,
 )
-def delete_order(device_id: UUID):
+def delete_device(device_id: UUID) -> bool:
     network_service = NetworkService(REPO)
     try:
-        network_service.delete_device(device_id=device_id)
+        network_service.delete_device(device_id=str(device_id))
     except DeviceNotFoundError:
         raise HTTPException(
             status_code=404, detail=f"Device with ID {device_id} not found"
