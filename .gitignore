@@ -54,3 +54,10 @@ private
 *.obj
 #
 **/pyO3_examples/.env
+
+node_modules
+./ligma.config.js
+dist
+stats.json
+
+
