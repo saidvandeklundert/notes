@@ -6,7 +6,6 @@ d = {"x": [1, 2, 3], "y": np.array([2, 4, 8]), "z": 100}
 df = pd.DataFrame(d, index=[100, 200, 300], columns=["z", "y", "x"])
 print(df)
 
-
 lst = [
     {"x": 1, "y": 2, "z": 100},
     {"x": 2, "y": 4, "z": 100},

@@ -1,4 +1,4 @@
-from .queue_interface import Queue
+from queue_interface import Queue
 import collections
 
 
@@ -10,13 +10,19 @@ class LinkedQueue(Queue):
         self.items.append(item)
 
     def dequeue(self):
-        return self.items.popleft()
+        if self.items:
+            return self.items.popleft()
+        return None
 
     def front(self):
-        return self.items[0]
+        if self.items:
+            return self.items[0]
+        return None
 
     def rear(self):
-        return self.items[-1]
+        if self.items:
+            return self.items[-1]
+        return None
 
     def is_empty(self):
         nr_of_items = len(self.items)
@@ -28,4 +34,4 @@ class LinkedQueue(Queue):
         return len(self.items)
 
     def peek(self):
-        return self.items[0]
+        return self.front()

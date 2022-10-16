@@ -1,52 +1,48 @@
-"""
-- queueu(): create a new queue
-- enqueue O(1): add element to the queue
-- dequeue O(1): remove an element from the queue
-- front O(1): return the first element 
-- rear O(1): return the last element
-- is_empty O(1): check if the queue is empty
-- size(): return the size of the queue
-- peek(): look at the first item in the queue without removing it
-"""
 from __future__ import annotations
+from queue_interface import Queue
 from typing import TypeVar
+from heapq import heappop, heappush
+
 
 T = TypeVar("T")
-from abc import ABC, abstractmethod
 
 
-class Queue(ABC):
-    @abstractmethod
+class PriorityQueue(Queue):
+    def __init__(
+        self,
+    ):
+        self.items = list()
+
     def enqueue(self, item: T) -> None:
         """add element to the the queue"""
-        ...
+        heappush(self.items, item)
 
-    @abstractmethod
     def dequeue(self) -> T | None:
         """remove an element from the queue"""
-        ...
+        try:
+            return heappop(self.items)
+        except IndexError:
+            return None
 
-    @abstractmethod
     def front(self) -> T | None:
         """return the first element without removing it"""
-        ...
+        return self.items[0]
 
-    @abstractmethod
     def rear(self) -> T | None:
         """return the last element without removing it"""
-        ...
+        return self.items[-1]
 
-    @abstractmethod
     def is_empty(self) -> bool:
         """check if the queue is empty"""
-        ...
+        length = len(self.items)
+        if length == 0:
+            return True
+        return False
 
-    @abstractmethod
     def size(self) -> int:
         """return the size of the queue"""
-        ...
+        return len(self.items)
 
-    @abstractmethod
     def peek(self) -> T | None:
         """Look at the first item in the queue without removing it"""
-        ...
+        return self.items[0]

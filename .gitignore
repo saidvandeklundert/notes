@@ -54,10 +54,14 @@ private
 *.obj
 #
 **/pyO3_examples/.env
-
+# venv
+.env
 node_modules
 ./ligma.config.js
 dist
 stats.json
 
+# CDK asset staging directory
+.cdk.staging
+cdk.out
 
