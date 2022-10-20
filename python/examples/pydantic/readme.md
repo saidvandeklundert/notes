@@ -1,3 +1,5 @@
+Awesome site: https://jsontopydantic.com/
+
 Great docs: https://pydantic-docs.helpmanual.io/
 
 What they say Pydantic is:

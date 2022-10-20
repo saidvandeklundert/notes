@@ -18,3 +18,4 @@ lst2 = [[1, 2, 100], [2, 4, 100], [3, 8, 100]]
 arr = np.array([[1, 2, 100], [2, 4, 100], [3, 8, 100]])
 df = pd.DataFrame(arr, columns=["x", "y", "z"], copy=True)  # pass by value
 print(df)
+copy_of_df = df.copy()
