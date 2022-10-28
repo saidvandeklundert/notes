@@ -65,3 +65,9 @@ stats.json
 .cdk.staging
 cdk.out
 
+# java
+*.class
+
+# kotlin
+kotlin/.idea
+*/META-INF/*

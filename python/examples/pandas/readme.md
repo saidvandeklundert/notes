@@ -12,3 +12,5 @@ object: string
 
 [pandas excercises](https://github.com/guipsamora/pandas_exercises)
 [learn pandas by doing videos](https://www.youtube.com/watch?v=pu3IpU937xs&list=PLgJhDSE2ZLxaY_DigHeiIDC1cD09rXgJv)
+
+[storing data](https://berthub.eu/articles/posts/big-data-storage/)

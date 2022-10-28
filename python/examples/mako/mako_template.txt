@@ -1,0 +1,9 @@
+This is a template.
+More stuff at https://www.makotemplates.org/
+
+Docs at https://docs.makotemplates.org/en/latest/
+
+<%def name="hello()">
+    hello world
+</%def>
+Call a func: ${hello()}

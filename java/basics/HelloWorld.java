@@ -1,4 +1,5 @@
-// javac hello_world.java
+//package helloworld;
+// javac HelloWorld.java
 // java HelloWorld
 
 class HelloWorld{
