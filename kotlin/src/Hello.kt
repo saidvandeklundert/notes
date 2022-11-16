@@ -1,3 +1,4 @@
+package basics
 fun main(args: Array<String>) {
     println("Hello world!")
     val jan = Human("Jan",7)
@@ -7,6 +8,10 @@ fun main(args: Array<String>) {
     println(multiply(2,2))
     println(another_multiply(2,2))
     println(another_multiply_with_type_inference(2,2))
+    callLoopy()
+    iterateMap()
+    iterateCollection()
+    exceptor()
 }
 
 

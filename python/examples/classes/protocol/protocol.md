@@ -1,4 +1,4 @@
-A protocol is like a Rust trait or Go interface.
+A protocol is kind of like a Rust trait or Go interface without it being so strictly enforced.
 
 Before 3.8, you could do something similar with ABCs. However, in that case, you had to inherit the abstract base class.
 

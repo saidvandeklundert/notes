@@ -45,6 +45,8 @@ df[bool_array_1 | bool_array_2]
 df["py-score"] > 80
 df["py-score"].between(60, 90)
 
+less_then_80 = df["py-score"] > 80
+df[less_then_80]
 
 # divide into the 2 genders and then sum the py-score column
 # for the genders (makes no sense, but think product categories here!)
@@ -52,3 +54,8 @@ df.groupby("gender")["py-score"].sum()
 df.groupby("gender")["py-score"].sum().sort_values(ascending=False)
 # averge m and f score:
 df.groupby("gender")["py-score"].mean()
+
+
+# contains
+contains_an = df.name.str.lower().str.contains("an")
+df[contains_an]
