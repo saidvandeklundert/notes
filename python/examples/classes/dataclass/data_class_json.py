@@ -24,5 +24,8 @@ class Human:
 
 if __name__ == "__main__":
     jan = Human(name="Jan", age=6)
-    print(jan)
-    print(jan.to_json())
+    jan
+    jan.to_json()
+    jan.to_dict()
+    # Can also construct from dict, excess fields are ignored:
+    marie = Human.from_dict({"name": "marie", "age": 4, "child": True})

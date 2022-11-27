@@ -1,0 +1,1 @@
+Functional programming is a programming paradigm, a style of programming, where we mainly use immutable data structures. We try to avoid side effects by doing all of our computation using the evaluation of (mathematical) functions.

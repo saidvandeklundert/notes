@@ -29,4 +29,4 @@ Has an interest in Rust, will he replace the core of Pydantic with Rust? Would b
 5. model_configuration.py (also check the link)
 6. enum_choices.py
 7. aliasing_field_names.py
-8. validator_simply.py
+8. validator_simple.py

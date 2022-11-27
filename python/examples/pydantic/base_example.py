@@ -19,3 +19,5 @@ jan = Human(name="Jan", age=6)
 >>> jan.dict(include={"name"}) 
 {'name': 'Jan'}
 """
+# can construct from dict, will ignore unspecified fields:
+marie = Human.parse_obj({"name": "marie", "age": 4, "child": True})

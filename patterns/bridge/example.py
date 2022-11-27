@@ -10,6 +10,12 @@ independently of each other.
          Aa      Ab        ===>        /     \     / \
         / \     /  \                 Aa(N) Ab(N)  1   2
       Aa1 Aa2  Ab1 Ab2
+
+
+
+            Exchanges abstraction <-  bridge -> Tradingbot abstraction
+    Binance                                         AggroBot
+    Coinbase                                        SafeBot
 """
 from __future__ import annotations
 from abc import ABC, abstractmethod

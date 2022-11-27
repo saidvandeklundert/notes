@@ -1,0 +1,1 @@
+https://mkennedy.codes/posts/python-gc-settings-change-this-and-make-your-app-go-20pc-faster/

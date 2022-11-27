@@ -15,6 +15,7 @@ class Humandantic(BaseModel):
 
 if __name__ == "__main__":
     anita = Human(name="Anita", age=[0])
+    anita.age
     human_1_1 = Human(name="Jan", age=6)
     human_1_1.age
 
