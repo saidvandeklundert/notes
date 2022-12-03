@@ -1,21 +1,12 @@
+# python -m mypy 09_generics.py
 """
-python -m mypy .
-python -m mypy generics_example.py
+For example, when you want to create a type that can take in 1
+ other type, but you want to leave the decision as to what type
+ that is to the user of the class.
 """
-from typing import Dict, Generic, TypeVar
+from typing import Generic, TypeVar
 
 T = TypeVar("T")
-
-
-class Registry(Generic[T]):
-    def __init__(self) -> None:
-        self._store: Dict[str, T] = {}
-
-    def set_item(self, k: str, v: T) -> None:
-        self._store[k] = v
-
-    def get_item(self, k: str) -> T:
-        return self._store[k]
 
 
 class Barrel(Generic[T]):

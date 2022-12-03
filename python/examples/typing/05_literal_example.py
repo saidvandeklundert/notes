@@ -1,4 +1,4 @@
-# mypy.exe .\example.py
+# python -m mypy .\05_literal_example.py
 from dataclasses import dataclass
 from typing import Literal
 
@@ -10,3 +10,5 @@ class Router:
 
 
 r1 = Router(name="r1", vendor="Arista")
+
+r2 = Router(name="r2", vendor="juniper")

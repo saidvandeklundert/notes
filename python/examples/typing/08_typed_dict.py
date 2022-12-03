@@ -1,4 +1,5 @@
-# python -m mypy .\typed_dict.py
+# python -m mypy .\08_typed_dict.py
+# starting 3.8
 from typing import TypedDict
 
 
@@ -26,8 +27,8 @@ sales = sales_summary["sales"]
 print(type(sales_summary))  # this is still 'just' a dict
 
 """
->>> python -m mypy .\typed_dict.py
-typed_dict.py:21: error: TypedDict "SalesSummary" has no key "saldes"  [typeddict-item]
-typed_dict.py:21: note: Did you mean "sales"?
+>>>  python -m mypy .\08_typed_dict.py
+08_typed_dict.py:22: error: TypedDict "SalesSummary" has no key "saldes"  [typeddict-item]
+08_typed_dict.py:22: note: Did you mean "sales"?
 Found 1 error in 1 file (checked 1 source file)
 """
