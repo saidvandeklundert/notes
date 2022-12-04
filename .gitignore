@@ -70,4 +70,4 @@ cdk.out
 
 # kotlin
 kotlin/.idea
-*/META-INF/*
+**/META-INF/
