@@ -1,0 +1,41 @@
+from functools import wraps
+import logging
+
+import logging
+
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+logger = logging.getLogger(__name__)
+
+
+def trace_decorator_without(function):
+    def wrapped(*args, **kwargs):
+        logger.info("running %s", function.__qualname__)
+        logger.info("__annotations__ %s", function.__annotations__)
+        return function(*args, **kwargs)
+
+    return wrapped
+
+
+def trace_decorator(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        logger.info("running %s", function.__qualname__)
+        logger.info("__annotations__ %s", function.__annotations__)
+
+        return function(*args, **kwargs)
+
+    return wrapped
+
+
+@trace_decorator
+def multiply_numbers_with(a: int, b: int) -> int:
+    return a * b
+
+
+@trace_decorator_without
+def multiply_numbers_without(a: int, b: int) -> int:
+    return a * b
+
+
+result = multiply_numbers_with(4, 4)
+result = multiply_numbers_without(4, 4)

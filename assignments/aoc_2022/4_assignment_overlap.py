@@ -36,7 +36,7 @@ def is_contained(series: tuple[int, int, int, int]) -> bool:
     return False
 
 
-def overlap_count(input_data: str) -> None:
+def overlap_count(input_data: str) -> int:
     """number of instance where either of the two number
     ranges is fully contained in the other.
 
@@ -52,6 +52,7 @@ def overlap_count(input_data: str) -> None:
             # print(item)
             pass
     print(f"the times there is overlap is {overlap_count}")
+    return overlap_count
 
 
 overlap_count(sample)
@@ -74,14 +75,16 @@ def partialy_contained(series: tuple[int, int, int, int]) -> bool:
     return False
 
 
-def partial_overlap_count(input_data: str) -> None:
+def partial_overlap_count(input_data: str) -> int:
     partial_overlap_count = 0
     sanitized_data = sanitize_input(input_data)
     for series in sanitized_data:
         if partialy_contained(series):
             partial_overlap_count += 1
     print(f"the times there is overlap is {partial_overlap_count}")
+    return partial_overlap_count
 
 
 partial_overlap_count(sample)
+
 partial_overlap_count(full_input)
