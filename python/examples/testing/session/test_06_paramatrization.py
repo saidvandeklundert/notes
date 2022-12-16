@@ -9,6 +9,7 @@ def test_multiply():
     assert multiply(10, 10) == 100
 
 
+# also nice is to zip a list to paramatrize 2 lists
 @pytest.mark.parametrize(
     "x, y, ret",
     [
