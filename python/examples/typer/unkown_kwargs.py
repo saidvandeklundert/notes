@@ -7,7 +7,7 @@ app = typer.Typer()
 @app.command(
     context_settings={"allow_extra_args": True, "ignore_unknown_options": True}
 )
-def main(ctx: typer.Context):
+def main(ctx: typer.Context, device: str):
     kwargs = {}
     for extra_arg in ctx.args:
         print(f"Got extra arg: {extra_arg}")
@@ -22,6 +22,7 @@ def main(ctx: typer.Context):
         else:
             raise Exception(f"failed to parse {ctx.args}")
     print(kwargs)
+    print(device)
 
 
 if __name__ == "__main__":

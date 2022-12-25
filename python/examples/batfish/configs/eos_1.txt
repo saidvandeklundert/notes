@@ -1,0 +1,71 @@
+! Command: show running-config
+! device: router-1 (vEOS-lab, EOS-4.27.0F)
+no aaa root
+!
+username yolo privilege 15 role network-admin secret sha512 $6$
+username colo privilege 15 role network-admin secret sha512 $6$
+!
+!
+service routing protocols model ribd
+!
+hostname router-1
+!
+spanning-tree mode mstp
+!
+vrf instance MGMT
+!
+management api http-commands
+   no shutdown
+   !
+   vrf MGMT
+      no shutdown
+!
+interface Ethernet1
+   description somedescription
+   no switchport
+   ip address 10.0.12.1/24
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback1
+   ip address 10.1.1.1/32
+   ip ospf area 0.0.0.0
+!
+interface Management1
+   description management
+   vrf MGMT
+   ip address 192.168.1.1/24
+!
+ip routing
+no ip routing vrf MGMT
+!
+ip route vrf MGMT 0.0.0.0/0 192.168.1.254
+!
+router bgp 65001
+   router-id 10.1.1.1
+   timers bgp 10 30
+   neighbor 10.1.1.4 remote-as 65004
+   neighbor 10.1.1.4 update-source Loopback1
+   neighbor 10.1.1.4 ebgp-multihop 3
+!
+router ospf 1
+   router-id 10.1.1.1
+   passive-interface Ethernet2
+   passive-interface Loopback1
+   max-lsa 12000
+!
+end

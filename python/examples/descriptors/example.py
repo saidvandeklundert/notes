@@ -11,6 +11,7 @@ class DescriptorClass:
         logger.info(
             "Call: %s.__get__(%r, %r)", self.__class__.__name__, instance, owner
         )
+        print(type(self), type(instance), type(owner))
         return instance
 
 
