@@ -14,6 +14,14 @@ ipython
 
 # copy the example config from the example dir:
 
+Starting it up a second time:
+
+docker start batfish
+docker exec -it batfish bash
+
+Pull stuff from container:
+docker cp batfish:bgp_peer_configuration.csv bgp_peer_configuration.csv
+docker cp batfish:bgp_process_configuration.csv bgp_process_configuration.csv
 """
 import pandas as pd
 from pybatfish.client.session import Session
@@ -23,7 +31,7 @@ from pybatfish.datamodel.flow import *
 
 # setup session with the batfish service:
 bf = Session(host="localhost")
-SNAPSHOT_DIR = "/var/tmp/"
+SNAPSHOT_DIR = "example/"
 SNAP_SHOT_NAME = "example_snap_new"
 SNAP_SHOT_NETWORK_NAME = "example_dc"
 
@@ -64,6 +72,10 @@ df.iloc[0:5][
 List undefined values:
 """
 bf.q.undefinedReferences().answer().frame()
+
+"""
+List issues with the current configuration:
+"""
 issues_answer = bf.q.initIssues().answer().frame()
 issues_answer.iloc[0]
 issues_answer.iloc[1]
@@ -72,6 +84,7 @@ Interfaces
 """
 bf.q.interfaceProperties().answer().frame()  # everything
 df = bf.q.interfaceProperties().answer().frame()  # store everything in df
+df.to_csv()
 df.columns  # check data available for interfaces
 # set standard MTU and display deviating MTU ( ~ is not)
 mtu_std = df["MTU"] == 1500
@@ -83,7 +96,10 @@ df[small_mtu | big_mtu].values
 # find all interfaces with MTU of 1800:
 mtu_1800 = df["MTU"] == 1800
 df[mtu_1800]
-
+# store data for post processing or to upload them to other tools:
+df.to_json(orient="split")
+result = df.to_json(orient="table")
+df.to_csv()
 # Sift through data:
 df = (
     bf.q.interfaceProperties(

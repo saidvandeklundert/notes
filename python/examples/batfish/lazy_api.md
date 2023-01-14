@@ -1,17 +1,63 @@
 
 
-### Install the app:
+### Install the requirements from the Pipfile:
 
 ```
-python -m pipenv pipenv install
 python -m pipenv check
 python -m pipenv update
 python -m pipenv shell
-python -m pipenv run
-python -m pytest .\test\
 ```
 
 To leave the pipenv environment, enter 'exit'.
+
+### Start the container:
+
+```
+docker start batfish
+docker exec -it batfish bash
+```
+
+
+
+
+
+## Play with the allinone container:
+
+```
+docker pull batfish/allinone
+docker run --name batfish -v batfish-data:/data -p 8888:8888 -p 9997:9997 -p 9996:9996 batfish/allinone
+docker cp example/. batfish:/var/tmp
+docker exec -it batfish bash
+apt-get update
+apt-get install vim
+ipython
+```
+
+Now you are in the repl and you can run the below code by pasting it in
+
+
+Copy the example config from the example dir:
+
+docker cp example batfish:var/tmp/config
+
+
+Pulling files stuff from the container:
+```
+docker cp batfish:<filename> <filename>
+docker cp batfish:bgp_process_configuration.csv bgp_process_configuration.csv
+```
+
+
+
+
+
+
+```
+python -m pipenv pipenv install
+
+python -m pipenv run
+python -m pytest .\test\
+```
 
 ### start the app:
 
