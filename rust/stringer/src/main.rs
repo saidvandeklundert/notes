@@ -4,7 +4,8 @@ fn main() {
     let input_str = "Sushi is the best!";
     let res = stringer::reverse_words(input_str);
     println!("{}\n{}", input_str, res);
-    let res_2 = stringer::count_char(input_str, 'e');
+    let res_2 = Stringer::count_char(input_str, 'e');
+
     println!("{}", res_2);
     let res_2 = stringer::count_char_case_sensitive(input_str, 'e');
     println!("{}", res_2);
