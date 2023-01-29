@@ -1,9 +1,11 @@
 use clap::{App, Arg};
 use std::error::Error;
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
 
 type MyResult<T> = Result<T, Box<dyn Error>>;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Config {
     files: Vec<String>,
     number_lines: bool,
@@ -47,6 +49,46 @@ pub fn get_args() -> MyResult<Config> {
 }
 
 pub fn run(config: Config) -> MyResult<()> {
-    dbg!(config);
+    for filename in config.files {
+        match open(&filename) {
+            Err(e) => eprintln!("{}: {}", filename, e),
+            Ok(file) => {
+                let mut last_num = 0;
+                for (line_num, line_result) in file.lines().enumerate() {
+                    let line = line_result?;
+                    if config.number_lines {
+                        println!("{:6}\t{}", line_num + 1, line);
+                    } else if config.number_nonblank_lines {
+                        if !line.is_empty() {
+                            last_num += 1;
+                            println!("{:6}\t{}", last_num, line);
+                        } else {
+                            println!();
+                        }
+                    } else {
+                        println!("{}", line);
+                    }
+                }
+            }
+        }
+    }
     Ok(())
+}
+
+// Reads from a heap allocated buffer.
+fn read_buffer(buf: Box<dyn BufRead>) {
+    for line in buf.lines() {
+        let line_text = line.unwrap();
+        println!("{}", line_text)
+    }
+}
+
+// Use of Box is required because the size cannot be known at compile time
+// For that reason, the compiler cannot put it on the stack
+// and we MUST put it on the heap
+fn open(filename: &str) -> MyResult<Box<dyn BufRead>> {
+    match filename {
+        "-" => Ok(Box::new(BufReader::new(io::stdin()))),
+        _ => Ok(Box::new(BufReader::new(File::open(filename)?))),
+    }
 }
