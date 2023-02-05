@@ -1,4 +1,8 @@
 package patterns
+// Singleton
+
+// Ensuring there is only 1 instance of a certain type.
+
 
 // We use the keyword object to implement the singleton patter
 object SingletonLogger{

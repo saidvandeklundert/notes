@@ -128,3 +128,19 @@ fun simpleArray(){
     println(people.joinToString(", "))
     println(arrayOfNumber.joinToString(", "))
 }
+
+fun casts(AnyValue:Any){
+    // unsafe cast:
+    val port: Int = AnyValue as Int
+    // When an unsafe cast fails, the program will crash
+    // safe cast:
+    val safePort:Int? = AnyValue as? Int
+
+    // When a safe cast fails, the cast returns 'null'
+
+    // smart cast is better, cast only if it is possible:
+    if (AnyValue is Int){
+        val inForSure :Int = AnyValue
+
+    }
+}
