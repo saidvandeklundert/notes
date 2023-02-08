@@ -17,11 +17,11 @@ class TestSequence(ABC):
         self.context = context
 
     @abstractmethod
-    def get_steps(self) -> List[Test]:
+    def get_tests(self) -> List[Test]:
         ...
 
-    def execute_steps(self):
-        for step in self.get_steps():
+    def execute_tests(self):
+        for step in self.get_tests():
             step.run_tests()
 
 
@@ -32,4 +32,4 @@ class TestContext:
 
     @functools.cached_property
     def configuration_lines(self) -> List[str]:
-        return [line.strip() for line in self.configuration]
+        return [line.strip() for line in self.configuration.splitlines()]

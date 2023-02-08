@@ -6,6 +6,8 @@ from __future__ import annotations
 
 from typing import List
 import tests_cisco_system
+import tests_cisco_lisp
+import tests_cisco_security
 from interfaces import Test, TestSequence, TestContext
 
 
@@ -18,15 +20,40 @@ class TestSystem(Test):
         tests_cisco_system.test_hostname(
             self.context.configuration_lines, self.context.hostname
         )
+        tests_cisco_system.test_ntp_loopback(self.context.configuration_lines)
+
+
+class TestLISP(Test):
+    def __init__(self, context: TestContext):
+        self.context = context
+
+    def run_tests(self) -> None:
+
+        tests_cisco_lisp.test_lisp_activated(
+            self.context.configuration_lines,
+        )
+
+
+class TestSecurity(Test):
+    def __init__(self, context: TestContext):
+        self.context = context
+
+    def run_tests(self) -> None:
+
+        tests_cisco_security.test_cpp_policy(
+            self.context.configuration_lines,
+        )
 
 
 class CiscoTestSequence(TestSequence):
     def __init__(self, context: TestContext):
         self.context = context
 
-    def get_steps(self) -> List[Test]:
+    def get_tests(self) -> List[Test]:
         return [
             TestSystem(context=self.context),
+            TestLISP(context=self.context),
+            TestSecurity(context=self.context),
         ]
 
 
@@ -35,4 +62,4 @@ if __name__ == "__main__":
         cisco_config = f.read()
     context = TestContext(hostname="den4-fc-dis-r-2-1", configuration=cisco_config)
     wf = CiscoTestSequence(context)
-    wf.execute_steps()
+    wf.execute_tests()

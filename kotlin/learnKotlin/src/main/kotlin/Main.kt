@@ -39,4 +39,10 @@ fun main(args: Array<String>) {
     patterns.StrategySimple()
     basics.interfaces_main()
     interfaces.restaurantExample()
+    interfaces.mainAnimals()
+    interfaces.mainCar()
+    classes.classesCompanion()
+    interfaces.coffeeExample()
+    classes.main_constructor_examples()
+    classes.mainGettersAndSetters()
 }
