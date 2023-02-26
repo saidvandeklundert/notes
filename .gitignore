@@ -75,3 +75,5 @@ kotlin/.idea
 .gradle
 .idea
 .gradle/
+private.csv
+private_**.csv

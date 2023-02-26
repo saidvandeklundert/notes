@@ -16,6 +16,8 @@ df["name"]
 # name and py-score column (returns new df):
 df[["name", "py-score"]]
 
+# also determine what colums are selected:
+df[:, ["name", "py-score"]]
 
 # reset index:
 df.reset_index(inplace=True)

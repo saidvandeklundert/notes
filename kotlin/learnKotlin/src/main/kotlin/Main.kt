@@ -45,4 +45,5 @@ fun main(args: Array<String>) {
     interfaces.coffeeExample()
     classes.main_constructor_examples()
     classes.mainGettersAndSetters()
+    classes.mainThis()
 }
