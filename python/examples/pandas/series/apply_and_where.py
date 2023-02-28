@@ -21,7 +21,7 @@ Out[35]: 136
 """
 
 # where is used to filter a series based on a condition.
-# when 'where' is used it will return a boolean array.
+# 'where' takes a boolean array as a parameter.
 
 
 # for every 'True' in the boolean array, the value from the series will be used.

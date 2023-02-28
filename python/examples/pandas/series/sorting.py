@@ -24,3 +24,6 @@ for i in range(len(sorted_city_mpg)):
 
 # we can also sort the index values:
 sorted_city_mpg.sort_index()
+
+
+sorted_city_mpg.sort_values(kind="quicksort")
