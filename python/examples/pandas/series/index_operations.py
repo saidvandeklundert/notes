@@ -128,3 +128,9 @@ that are the same and you want to have the index of the other
 s1 = pd.Series([10, 20, 30, 40], index=["a", "b", "c", "d"])
 s2 = pd.Series([15, 25, 35], index=["b", "c", "d"])
 s2.reindex(s1.index)
+
+
+# store without index in CSV:
+df.to_csv("siena2018-pres.csv", index=False)
+# read CSV and use column 0 as index:
+df = pd.read_csv("siena2018-pres.csv", index_col=0)

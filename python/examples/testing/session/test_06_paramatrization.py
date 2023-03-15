@@ -24,11 +24,11 @@ def test_multiply_using_paramatrization(x, y, ret):
 
 # importing data under test:
 @pytest.mark.parametrize(
-    "x, y, ret",
+    "x, y, expected",
     TEST_DATA,
 )
-def test_multiply_using_paramatrization_data(x, y, ret):
-    assert multiply(x, y) == ret
+def test_multiply_using_paramatrization_data(x, y, expected):
+    assert multiply(x, y) == expected
 
 
 # stacking paramatrization decorator:
