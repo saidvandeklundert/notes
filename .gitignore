@@ -58,7 +58,7 @@ private
 .env
 node_modules
 ./ligma.config.js
-dist
+#dist
 stats.json
 
 # CDK asset staging directory

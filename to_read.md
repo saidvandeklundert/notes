@@ -1,3 +1,5 @@
+https://www.nand2tetris.org/
+https://teachyourselfcs.com/
 
 Datastructures and algorithms:
 - graps
