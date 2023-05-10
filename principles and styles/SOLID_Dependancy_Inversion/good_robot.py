@@ -13,7 +13,7 @@ from abc import ABC, abstractmethod
 @dataclass
 class Robot:
     serial: str
-    weapon: Laser
+    weapon: Weapon
 
 
 """

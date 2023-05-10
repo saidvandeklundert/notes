@@ -28,7 +28,7 @@ fun bigNumber(someNumber:Int):Boolean{
 
 fun bigNumberOneIf(someNumber:Int):Boolean{
     var result = false
-    if (someNumber >10){
+    if (someNumber > 10){
         result = true
     }
     return true

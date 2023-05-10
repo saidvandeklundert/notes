@@ -1,5 +1,5 @@
 """
-In this case, we neglact the Single Responsibility Principle.
+In this case, we neglect the Single Responsibility Principle.
 
 There is a class Human with a 'write_to_db' method.
 

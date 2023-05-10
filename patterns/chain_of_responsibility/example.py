@@ -1,6 +1,6 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 
 class Handler(ABC):
@@ -17,7 +17,7 @@ class AbstractHandler(Handler):
     """Default chaining behavior can be implemented inside a base
     handler class."""
 
-    _next_handler: Handler = None
+    _next_handler: Union[Handler, None] = None
 
     def set_next(self, handler: Handler) -> Handler:
         self._next_handler = handler

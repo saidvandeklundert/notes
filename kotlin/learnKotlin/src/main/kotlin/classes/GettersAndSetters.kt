@@ -5,6 +5,9 @@ fun mainGettersAndSetters(){
     jan.age = 7
     println(jan.name)
     println(jan.age)
+
+    var said = ValidatedPersonData(name="Said")
+    println(said.name)
 }
 
 class Person()
@@ -27,3 +30,4 @@ class Person()
         }
 
 }
+

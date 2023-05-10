@@ -25,7 +25,7 @@ fun someKotlinTypes(){
     simpleSet()
     simpleMap()
     treeMapExample()
-    simpleArray()
+    arrays()
 }
 
 
@@ -56,6 +56,7 @@ fun simpleList(){
     for (name in someList){
         println("Mutable list name: $name")
     }
+    mutableList.removeAt(0)
 }
 
 fun simpleSet(){
@@ -122,11 +123,16 @@ fun treeMapExample(){
 }
 
 
-fun simpleArray(){
+fun arrays(){
     val people: Array<String> = arrayOf("Dave", "David",   "Desiree")
     val arrayOfNumber = listOf(1, 2, 3, 5).toTypedArray()
     println(people.joinToString(", "))
     println(arrayOfNumber.joinToString(", "))
+
+    var anotherArray: Array<Int> = listOf(1,2,3,4,5).toTypedArray()
+    print(anotherArray)
+    val arr = arrayOfNulls<String>(5)
+    println(arr)
 }
 
 fun casts(AnyValue:Any){
