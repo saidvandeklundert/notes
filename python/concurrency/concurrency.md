@@ -1,4 +1,20 @@
+## Asyncio
 
+Asynchronous programming refers to running routines and not blocking to wait for their completion. The `io` in `asyncio` refers to dealing with non-blocking IO. 
+
+A coroutine is a function that can be suspended and resumed. With coroutines, users have control over when the coroutine suspends the execution.
+
+Coroutines are used to enable concurrent execution of tasks. Many coroutines can be created at the same time. Coroutines are sometimes referred to as cooperative multitasking because the user chooses when a task is suspended. Preemptive multitasking, used in multithreading, is the opposite. Here, the operating system determines when a thread is suspended and resumed. 
+
+Coroutines are more lightweight then a thread. Many coroutines can be run in a single process with a single thread.
+
+With `async def`, you create coroutine function. Coroutines can use couritine-specific expressions:
+- await: suspend the calling corouting and schedule the specified coroutine to execute. The caller will not resume untill the specified coroutine is done.
+- async for
+- async with
+
+
+Coroutines run on the event loop.
 ## Multithreading
 
 Every program runs in a process and has at least one thread that executes the program, the main thread. We can create additional threads to run things concurrently within the same process. In Python, this can be done using the `Thread` class.
@@ -37,6 +53,7 @@ Future objects: a future object is a handle on a task that is executed asynchron
 - running
 - done
 
+When a task is cancelled, it will be put into the done state.
 
 
 Methods to wait for futures to complete:
@@ -45,3 +62,21 @@ Methods to wait for futures to complete:
   - all the futures to complete (default)
   - return upon the first exception
   - return when the first future completes
+
+
+
+### Get the result from a future object
+
+
+We retrieve the result from a task by calling `result()` on a Future. This will return the result from the task or None if the task did not return a value.
+
+When we call `result()` on a future, the function call is blocking untill the tasks completes and a result can be retrieved. If the task has already been completed, the result is retrieved immediately.
+
+
+
+
+
+## Notes and gotchas:
+
+
+You can get the results up untill the first exception when using `map` on the `ThreadpoolExecutor`. The map method returns a generator which allows to iterate through the results once ready. Unfortunately, it is not possible to resume a generator after an exception occurs. 

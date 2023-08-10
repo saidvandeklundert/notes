@@ -35,7 +35,7 @@ if not pg.image.get_extended():
 
 
 # game constants
-MAX_SHOTS = 40  # most player bullets onscreen
+MAX_SHOTS = 3  # most player bullets onscreen
 ALIEN_ODDS = 22  # chances a new alien appears
 BOMB_ODDS = 60  # chances a new bomb will drop
 ALIEN_RELOAD = 12  # frames between new aliens
@@ -111,8 +111,8 @@ class Player(pg.sprite.Sprite):
 class Alien(pg.sprite.Sprite):
     """An alien space ship. That slowly moves down the screen."""
 
-    speed = 13
-    animcycle = 12
+    speed = 1
+    animcycle = 1
     images = []
 
     def __init__(self):
@@ -249,7 +249,9 @@ def main(winstyle=0):
     Player.images = [img, pg.transform.flip(img, 1, 0)]
     img = load_image("explosion1.gif")
     Explosion.images = [img, pg.transform.flip(img, 1, 1)]
-    Alien.images = [load_image(im) for im in ("alien1.gif", "alien2.gif", "me.jpg")]
+    Alien.images = [
+        load_image(im) for im in ("me.jpg", "me.jpg", "me.jpg")
+    ]  # "alien1.gif", "alien2.gif"
     Bomb.images = [load_image("bomb.gif")]
     Shot.images = [load_image("shot.gif")]
 
@@ -304,7 +306,6 @@ def main(winstyle=0):
 
     # Run our main loop whilst the player is alive.
     while player.alive():
-
         # get input
         for event in pg.event.get():
             if event.type == pg.QUIT:

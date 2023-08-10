@@ -37,14 +37,14 @@ def timer(func):
 @timer
 def some_task(num_times):
     for num in range(num_times):
-        sum([i ** 2 for i in range(10000)])
+        sum([i**2 for i in range(10000)])
         print(num)
 
 
 @timer
 def some_other_task(num_times):
     for num in range(num_times):
-        sum([i ** 2 for i in range(10000)])
+        sum([i**2 for i in range(10000)])
         print(num)
 
 
@@ -52,3 +52,10 @@ some_task(2)
 some_other_task(3)
 
 some_task(2)
+
+
+try:
+    0 / 0
+except Exception as e:
+    print(e)
+    print(str(e))

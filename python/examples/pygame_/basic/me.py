@@ -3,7 +3,7 @@ from pygame.locals import *
 import random
 
 
-class Me:
+class Papa:
     def __init__(self, window, windowWidth, windowHeight):
         self.window = window  # remember the window, so we can draw later
         self.windowWidth = windowWidth
@@ -25,7 +25,7 @@ class Me:
 
         # Choose a random speed between -4 and 4, but not zero
         # in both the x and y directions
-        speedsList = [5]
+        speedsList = [0]
         self.xSpeed = random.choice(speedsList)
         self.ySpeed = random.choice(speedsList)
 
@@ -67,7 +67,7 @@ class Jan:
 
         # Choose a random speed between -4 and 4, but not zero
         # in both the x and y directions
-        speedsList = [50]
+        speedsList = [10]
         self.xSpeed = random.choice(speedsList)
         self.ySpeed = random.choice(speedsList)
 
@@ -109,7 +109,7 @@ class Henk:
 
         # Choose a random speed between -4 and 4, but not zero
         # in both the x and y directions
-        speedsList = [19]
+        speedsList = [11]
         self.xSpeed = random.choice(speedsList)
         self.ySpeed = random.choice(speedsList)
 

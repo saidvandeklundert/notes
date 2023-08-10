@@ -1,16 +1,18 @@
-# pygame demo 6(b) - using the Ball class, bounce many balls
+"""
+python .\ze_bouncing_heads.py
+"""
 
 # 1 - Import packages
 import pygame
 from pygame.locals import *
 import sys
-from me import Me, Jan, Henk
+from me import Papa, Jan, Henk
 
 # 2 - Define constants
 BLACK = (0, 0, 0)
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 960
-FRAMES_PER_SECOND = 30
+FRAMES_PER_SECOND = 40
 N_BALLS = 2
 
 # 3 - Initialize the world
@@ -24,15 +26,14 @@ clock = pygame.time.Clock()
 me_list = []
 for _ in range(0, N_BALLS):
     # Each time through the loop, create a Ball object
-    me = Me(window, WINDOW_WIDTH, WINDOW_HEIGHT)
+    papa = Papa(window, WINDOW_WIDTH, WINDOW_HEIGHT)
     jan = Jan(window, WINDOW_WIDTH, WINDOW_HEIGHT)
     henk = Henk(window, WINDOW_WIDTH, WINDOW_HEIGHT)
-    me_list.append(me)
+    me_list.append(papa)
     me_list.append(jan)
     me_list.append(henk)
 # 6 - Loop forever
 while True:
-
     # 7 - Check for and handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
