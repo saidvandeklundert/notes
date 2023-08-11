@@ -24,3 +24,7 @@ z = some_function(x, y)
 dis.dis(source_code)
 
 pprint.pprint(ast.dump(ast.parse(source_code)))
+
+
+code_object = compile("a, b = 1000, 1000", filename="whatever.py", mode="single")
+code_object.co_consts
