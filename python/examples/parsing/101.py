@@ -1,5 +1,10 @@
 import ast
 from pprint import pprint
+import inspect
+
+# import some_lib.bgp as bgp
+# source = inspect.getsource(bgp)
+# pprint(ast.dump(ast.parse(source)))
 
 tree = ast.parse(
     """
