@@ -17,6 +17,8 @@ class Role(Enum):
 
 
 
+
+
 class Interface(BaseModel):
     description: str
     address: Union[ipaddress.IPv4Interface, ipaddress.IPv6Interface]
@@ -32,6 +34,7 @@ class Router(BaseModel):
     
     class Config:  
         use_enum_values = True 
+
 if __name__ == "__main__":
     print("yolo")
     r1 = Router(hostname="cr.sjc.01", vendor=Os.JUNOS, role=Role.CORE_ROUTER,interfaces=[Interface(description="some description",address="1.1.1.1/24")])
@@ -67,6 +70,7 @@ if __name__ == "__main__":
   ],
   "role": "TOR"
 }"""))
+    r2.json
     
     Router(**json.loads("""
 {

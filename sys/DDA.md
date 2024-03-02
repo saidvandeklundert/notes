@@ -1,3 +1,24 @@
+[Great preso](https://docs.google.com/presentation/d/1UMDZtvgYUksip_Jx1nzAuDYAPeaoB4heYZr6gbyjvb8/edit#slide=id.g865b75ec1e_0_103)
+
+
+
+OLTP: Online Transaction Processing database.
+- mySQL, Oracle
+
+OLAP: Online Analytical Processing database
+- Hbase, Hive, Spark
+
+Row-store:
++ easy to add/modify record
+- might read unnecessary data
+
+Column-store:
++ only read relevant data
+- tuples writes requires multiple access
+
+
+# Datbase types:
+
 Key value:
   - data partitioning
   - simple data model  
